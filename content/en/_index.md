@@ -29,59 +29,17 @@ to language, framework, or service.
 
 ## Structure
 
-### Region Tags
+### Region tags
+ 
+Each code snippet should have a region tag to define which parts of the snippet
+are displayed from the documentation. Each region tag should be:
+* Globally unique
+* Consistent across the same snippets in different languages
+* Begins with the product's region tag prefix
+* In snake case
 
-Each snippet should be be contained in its own file, with region tags including
-all imports used in the sample.
-
-{{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}
-    // Region tags should start after the package, but before imports. 
-    // [START product_example]
-    import com.example.resource;
-
-    public class exampleSnippet {
-    // Snippet methods ...
-    }
-    // [END product_example]
-{{< /tab >}}
-{{< tab header="Python" >}}
-   # [START product_example]
-   import com.example.resource
-
-   def example_snippet():
-        # Snippet Content ...
-   
-   # [END product_example]
-{{< /tab >}}
-{{< /tabpane >}}
-
-### Region Tags 2
-
-Each snippet should be be contained in its own file, with region tags including
-all imports used in the sample.
-
-{{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}
-    // Region tags should start after the package, but before imports. 
-    // [START product_example]
-    import com.example.resource;
-
-    public class exampleSnippet {
-    // Snippet methods ...
-    }
-    // [END product_example]
-{{< /tab >}}
-{{< tab header="Python" >}}
-   # [START product_example]
-   import com.example.resource
-
-   def example_snippet():
-        # Snippet Content ...
-   
-   # [END product_example]
-{{< /tab >}}
-{{< /tabpane >}}
+Region tags should show as much of the sample as possible, so that a user can
+easily copy and pase the sample into their own environment to run it. 
 
 ## Code 
 

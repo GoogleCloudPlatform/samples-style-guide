@@ -70,6 +70,22 @@ samples should be structured as such unless their is a compelling reason not to.
  {{< /tab >}}
 {{< /tabpane >}}
 
+### Sample description
+ 
+Each code snippet file should have a top-level comment that succinctly describes
+what the snippet does, including any setup (such as resources) required to make
+the sample work:
+ 
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+   /**
+   * Moves a persistent disk from one zone to another.
+   *
+   * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+   */
+ {{< /tab >}}
+{{< /tabpane >}}
+
 
 ## Code 
 

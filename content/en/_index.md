@@ -41,6 +41,36 @@ are displayed from the documentation. Each region tag should be:
 Region tags should show as much of the sample as possible, so that a user can
 easily copy and pase the sample into their own environment to run it. 
 
+### Imports
+ 
+Samples should include any imports used in the sample.
+ 
+This is easiest to enforce/detect when the samples are in their own file, so
+samples should be structured as such unless their is a compelling reason not to.
+ 
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+   // Region tags should start after the package, but before imports.
+   // [START product_example]
+   import com.example.resource;
+ 
+   public class exampleSnippet {
+   // Snippet methods ...
+   }
+   // [END product_example]
+ {{< /tab >}}
+ {{< tab header="Python" >}}
+  # [START product_example]
+  import com.example.resource
+ 
+  def example_snippet():
+       # Snippet Content ...
+ 
+  # [END product_example]
+ {{< /tab >}}
+{{< /tabpane >}}
+
+
 ## Code 
 
 // TODO

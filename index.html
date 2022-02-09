@@ -182,7 +182,78 @@ Java
  </code></pre></div></div>
 </div>
 <h2 id=code>Code</h2>
-<p>// TODO</p>
+<h3 id=useful-comments>Useful comments</h3>
+<p>Comments should be used as needed, and should follow the following guidelines:</p>
+<ul>
+<li>Comments should add context not otherwise obvious from the code.</li>
+<li>Comments should be readable and grammatically correct.</li>
+<li>For values that the user may wish to configure, provide links to
+documentation that lists available options (and when to use them).</li>
+</ul>
+<h3 id=method-structure>Method Structure</h3>
+<p>Method arguments should be limited to what is absolutely required for testing.
+In most cases, this is project specific information or the path to an external
+file. For example, project specific information (such as <code>projectId</code>) or a
+<code>filePath</code> for an external file is acceptable, while an argument for the type of
+a file or a specific action is not.</p>
+<p>Any declared function arguments should include a no-arg, main method with
+examples for how the user can initialize the method arguments and call the
+entrypoint for the snippet. If the values for these variables need to be
+replaced by the user, be explicit that they are example values only.</p>
+<p>Methods should avoid a return type whenever possible. Instead, show the user how
+to interact with a returned object programmatically by printing some example
+attributes to the console.</p>
+<ul class="nav nav-tabs" id=tabs-3 role=tablist><li class=nav-item>
+<a class="nav-link active tab-Java" id=tabs-3-0-tab data-toggle=tab href=#tabs-3-0 role=tab onclick='handleClick("Java")' aria-controls=tabs-3-0 aria-selected=true>
+Java
+</a>
+</li></ul>
+<div class=tab-content id=tabs-3-content>
+<div class="tab-pane fade show active" id=tabs-3-0 role=tabpanel aria-labelled-by=tabs-3-0-tab><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java>    <span style=color:#204a87;font-weight:700>public</span> <span style=color:#204a87;font-weight:700>static</span> <span style=color:#204a87;font-weight:700>void</span> <span style=color:#000>main</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#000>String</span><span style=color:#ce5c00;font-weight:700>[]</span> <span style=color:#000>args</span><span style=color:#ce5c00;font-weight:700>)</span> <span style=color:#ce5c00;font-weight:700>{</span>
+        <span style=color:#8f5902;font-style:italic>// TODO(developer): Replace these variables before running the sample.
+</span><span style=color:#8f5902;font-style:italic></span>        <span style=color:#000>String</span> <span style=color:#000>projectId</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#4e9a06>&#34;my-project-id&#34;</span><span style=color:#ce5c00;font-weight:700>;</span>
+        <span style=color:#000>String</span> <span style=color:#000>filePath</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#4e9a06>&#34;path/to/image.png&#34;</span><span style=color:#ce5c00;font-weight:700>;</span>
+        <span style=color:#000>inspectImageFile</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#000>projectId</span><span style=color:#ce5c00;font-weight:700>,</span> <span style=color:#000>filePath</span><span style=color:#ce5c00;font-weight:700>);</span>
+    <span style=color:#ce5c00;font-weight:700>}</span>
+
+    <span style=color:#8f5902;font-style:italic>// This is an example snippet for showing best practices.
+</span><span style=color:#8f5902;font-style:italic></span>    <span style=color:#204a87;font-weight:700>public</span> <span style=color:#204a87;font-weight:700>static</span> <span style=color:#204a87;font-weight:700>void</span> <span style=color:#000>exampleSnippet</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#000>String</span> <span style=color:#000>projectId</span><span style=color:#ce5c00;font-weight:700>,</span> <span style=color:#000>String</span> <span style=color:#000>filePath</span><span style=color:#ce5c00;font-weight:700>)</span> <span style=color:#ce5c00;font-weight:700>{</span>
+        <span style=color:#8f5902;font-style:italic>// Snippet content ...
+</span><span style=color:#8f5902;font-style:italic></span>    <span style=color:#ce5c00;font-weight:700>}</span></code></pre></div></div>
+</div>
+<h3 id=authentication>Authentication</h3>
+<p>Samples should use authenticate using <a href=(https://cloud.google.com/docs/authentication/production)>Application Default Credentials</a>.</p>
+<p>If the code snippet is platform specific, explicitly show how to use that
+platform&rsquo;s credentials.</p>
+<ul class="nav nav-tabs" id=tabs-4 role=tablist><li class=nav-item>
+<a class="nav-link active tab-Java" id=tabs-4-0-tab data-toggle=tab href=#tabs-4-0 role=tab onclick='handleClick("Java")' aria-controls=tabs-4-0 aria-selected=true>
+Java
+</a>
+</li></ul>
+<div class=tab-content id=tabs-4-content>
+<div class="tab-pane fade show active" id=tabs-4-0 role=tabpanel aria-labelled-by=tabs-4-0-tab><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java>   <span style=color:#8f5902;font-style:italic>// Most clients use ADC by default. However, if your application needs to showcase a specific
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#8f5902;font-style:italic>// credential source, show users how to do that explicitly.
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#000>GoogleCredentials</span> <span style=color:#000>credentials</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>GoogleCredentials</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>fromStream</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#204a87;font-weight:700>new</span> <span style=color:#000>FileInputStream</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#4e9a06>&#34;/path/to/credentials.json&#34;</span><span style=color:#ce5c00;font-weight:700>));</span></code></pre></div></div>
+</div>
+<h3 id=initializing-clients>Initializing Clients</h3>
+<p>Code snippets should show users how to initialize (and clean up, if necessary)
+clients used by the user. Additionally, clients should contain a comment
+clarifying proper usage (such as if clients should be reused for multiple
+requests or if they are thread-safe).</p>
+<ul class="nav nav-tabs" id=tabs-5 role=tablist><li class=nav-item>
+<a class="nav-link active tab-Java" id=tabs-5-0-tab data-toggle=tab href=#tabs-5-0 role=tab onclick='handleClick("Java")' aria-controls=tabs-5-0 aria-selected=true>
+Java
+</a>
+</li></ul>
+<div class=tab-content id=tabs-5-content>
+<div class="tab-pane fade show active" id=tabs-5-0 role=tabpanel aria-labelled-by=tabs-5-0-tab><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java>   <span style=color:#8f5902;font-style:italic>// Initialize client that will be used to send requests. This client only needs to be created
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#8f5902;font-style:italic>// once, and can be reused for multiple requests. After completing all of your requests, call
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#8f5902;font-style:italic>// the &#34;close&#34; method on the client to safely clean up any remaining background resources,
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#8f5902;font-style:italic>// or use &#34;try-with-close&#34; statement to do this automatically.
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#204a87;font-weight:700>try</span> <span style=color:#ce5c00;font-weight:700>(</span><span style=color:#000>CloudClient</span> <span style=color:#000>dlp</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>CloudClient</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>create</span><span style=color:#ce5c00;font-weight:700>())</span> <span style=color:#ce5c00;font-weight:700>{</span>
+     <span style=color:#8f5902;font-style:italic>// make a request with the client
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#ce5c00;font-weight:700>}</span></code></pre></div></div>
+</div>
 <h2 id=testing>Testing</h2>
 <p>// TODO</p>
 <h2 id=additional-best-practices>Additional best practices</h2>

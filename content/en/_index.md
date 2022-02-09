@@ -138,10 +138,10 @@ more approachable to beginners:
 
 ### Useful comments
 Comments should be used as needed, and should follow the following guidelines:
-* Comments should add context not otherwise obvious from the code
-* Comments should be readable and grammatically correct
+* Comments should add context not otherwise obvious from the code.
+* Comments should be readable and grammatically correct.
 * For values that the user may wish to configure, provide links to
- documentation that lists available options (and when to use them)
+ documentation that lists available options (and when to use them).
 
 ### Authentication
  

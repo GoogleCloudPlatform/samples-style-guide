@@ -1,5 +1,9 @@
 {
-  "devDependencies": {
+  "name": "samples-style-guide",
+  "description": "Guidelines on Google Cloud Samples creation.",
+  "license": "Apache-2.0",
+  "private": "true",
+  "dependencies": {
     "autoprefixer": "10.4.2",
     "postcss": "8.4.4",
     "postcss-cli": "8.3.1"

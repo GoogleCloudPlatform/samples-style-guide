@@ -142,6 +142,39 @@ Comments should be used as needed, and should follow the following guidelines:
 * Comments should be readable and grammatically correct.
 * For values that the user may wish to configure, provide links to
  documentation that lists available options (and when to use them).
+ 
+### Method Structure
+Method arguments should be limited to what is absolutely required for testing.
+In most cases, this is project specific information or the path to an external
+file. For example, project specific information (such as `projectId`) or a
+`filePath` for an external file is acceptable, while an argument for the type of
+a file or a specific action is not.
+ 
+Any declared function arguments should include a no-arg, main method with
+examples for how the user can initialize the method arguments and call the
+entrypoint for the snippet. If the values for these variables need to be
+replaced by the user, be explicit that they are example values only.
+
+Methods should avoid a return type whenever possible. Instead, show the user how
+to interact with a returned object programmatically by printing some example
+attributes to the console.
+
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+    public static void main(String[] args) {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectId = "my-project-id";
+        String filePath = "path/to/image.png";
+        inspectImageFile(projectId, filePath);
+    }
+
+    // This is an example snippet for showing best practices.
+    public static void exampleSnippet(String projectId, String filePath) {
+        // Snippet content ...
+    }
+{{< /tab >}}
+{{< /tabpane >}}
+
 
 ### Authentication
  

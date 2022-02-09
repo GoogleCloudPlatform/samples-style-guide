@@ -136,7 +136,81 @@ more approachable to beginners:
 
 ## Code 
 
-// TODO
+### Useful comments
+Comments should be used as needed, and should follow the following guidelines:
+* Comments should add context not otherwise obvious from the code.
+* Comments should be readable and grammatically correct.
+* For values that the user may wish to configure, provide links to
+ documentation that lists available options (and when to use them).
+ 
+### Method Structure
+Method arguments should be limited to what is absolutely required for testing.
+In most cases, this is project specific information or the path to an external
+file. For example, project specific information (such as `projectId`) or a
+`filePath` for an external file is acceptable, while an argument for the type of
+a file or a specific action is not.
+ 
+Any declared function arguments should include a no-arg, main method with
+examples for how the user can initialize the method arguments and call the
+entrypoint for the snippet. If the values for these variables need to be
+replaced by the user, be explicit that they are example values only.
+
+Methods should avoid a return type whenever possible. Instead, show the user how
+to interact with a returned object programmatically by printing some example
+attributes to the console.
+
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+    public static void main(String[] args) {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectId = "my-project-id";
+        String filePath = "path/to/image.png";
+        inspectImageFile(projectId, filePath);
+    }
+
+    // This is an example snippet for showing best practices.
+    public static void exampleSnippet(String projectId, String filePath) {
+        // Snippet content ...
+    }
+{{< /tab >}}
+{{< /tabpane >}}
+
+
+### Authentication
+ 
+Samples should use authenticate using [Application Default Credentials][ADC].
+ 
+If the code snippet is platform specific, explicitly show how to use that
+platform's credentials.
+ 
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+   // Most clients use ADC by default. However, if your application needs to showcase a specific
+   // credential source, show users how to do that explicitly.
+   GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
+{{< /tab >}}
+{{< /tabpane >}}
+ 
+[ADC]: (https://cloud.google.com/docs/authentication/production)
+
+### Initializing Clients
+ 
+Code snippets should show users how to initialize (and clean up, if necessary)
+clients used by the user. Additionally, clients should contain a comment
+clarifying proper usage (such as if clients should be reused for multiple
+requests or if they are thread-safe).
+ 
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+   // Initialize client that will be used to send requests. This client only needs to be created
+   // once, and can be reused for multiple requests. After completing all of your requests, call
+   // the "close" method on the client to safely clean up any remaining background resources,
+   // or use "try-with-close" statement to do this automatically.
+   try (CloudClient dlp = CloudClient.create()) {
+     // make a request with the client
+   }
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## Testing
 

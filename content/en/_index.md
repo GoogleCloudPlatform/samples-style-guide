@@ -86,6 +86,53 @@ the sample work:
  {{< /tab >}}
 {{< /tabpane >}}
 
+### Arrange, Act, Assert
+
+Generally, most samples should follow the "Arrange, Act, Assert" pattern as
+closely as possible. Composing samples into these discrete steps can make them
+more approachable to beginners:
+
+1. **Arrange** - Create and configure the components for the request. Avoid
+ nesting these components beyond 2-3 levels, as it can make parsing and
+ understanding the samples more confusing.
+1. **Act** - Send the request to the service and receive a response.
+1. **Assert** - Verify that the call was successful and that a response was
+ return as expected. This is typically done by printing some aspects of the
+ response to stdout.
+
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+ // Lists the types of sensitive information the DLP API supports.
+ public static void listInfoTypes() throws IOException {
+   // Initialize client that will be used to send requests. This client only needs to be created
+   // once, and can be reused for multiple requests. After completing all of your requests, call
+   // the "close" method on the client to safely clean up any remaining background resources.
+   try (DlpServiceClient dlpClient = DlpServiceClient.create()) {
+
+     // Construct the request to be sent by the client
+     ListInfoTypesRequest listInfoTypesRequest =
+         ListInfoTypesRequest.newBuilder()
+             // Only return infoTypes supported by certain parts of the API.
+             // Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+             // Defaults to "supported_by=INSPECT"
+             .setFilter("supported_by=INSPECT")
+             // BCP-47 language code for localized infoType friendly names.
+             // Defaults to "en_US"
+             .setLanguageCode("en-US")
+             .build();
+
+     // Use the client to send the API request.
+     ListInfoTypesResponse response = dlpClient.listInfoTypes(listInfoTypesRequest);
+
+     // Parse the response and process the results
+     System.out.println("Infotypes found:");
+     for (InfoTypeDescription infoTypeDescription : response.getInfoTypesList()) {
+       System.out.println("Name : " + infoTypeDescription.getName());
+       System.out.println("Display name : " + infoTypeDescription.getDisplayName());
+     }
+   }
+ {{< /tab >}}
+{{< /tabpane >}}
 
 ## Code 
 

@@ -86,6 +86,38 @@ the sample work:
  {{< /tab >}}
 {{< /tabpane >}}
 
+### Method Structure
+Method arguments should be limited to what is absolutely required for testing.
+In most cases, this is project specific information or the path to an external
+file. For example, project specific information (such as `projectId`) or a
+`filePath` for an external file is acceptable, while an argument for the type of
+a file or a specific action is not.
+ 
+Any declared function arguments should include a no-arg, main method with
+examples for how the user can initialize the method arguments and call the
+entrypoint for the snippet. If the values for these variables need to be
+replaced by the user, be explicit that they are example values only.
+
+Methods should avoid a return type whenever possible. Instead, show the user how
+to interact with a returned object programmatically by printing some example
+attributes to the console.
+
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+    public static void main(String[] args) {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectId = "my-project-id";
+        String filePath = "path/to/image.png";
+        inspectImageFile(projectId, filePath);
+    }
+
+    // This is an example snippet for showing best practices.
+    public static void exampleSnippet(String projectId, String filePath) {
+        // Snippet content ...
+    }
+{{< /tab >}}
+{{< /tabpane >}}
+
 ### Arrange, Act, Assert
 
 Generally, most samples should follow the "Arrange, Act, Assert" pattern as
@@ -134,6 +166,13 @@ more approachable to beginners:
  {{< /tab >}}
 {{< /tabpane >}}
 
+### No CLIs
+
+Do not include CLIs for running your sample. We expect that most developers will
+copy and pase code directly from cloud.google.com into their own enviroment.
+Adding CLIs has historically been expensive to maintain in the past, and
+detracts from the purpose of the snippet itself.
+
 ## Code 
 
 ### Useful comments
@@ -143,39 +182,6 @@ Comments should be used as needed, and should follow the following guidelines:
 * For values that the user may wish to configure, provide links to
  documentation that lists available options (and when to use them).
  
-### Method Structure
-Method arguments should be limited to what is absolutely required for testing.
-In most cases, this is project specific information or the path to an external
-file. For example, project specific information (such as `projectId`) or a
-`filePath` for an external file is acceptable, while an argument for the type of
-a file or a specific action is not.
- 
-Any declared function arguments should include a no-arg, main method with
-examples for how the user can initialize the method arguments and call the
-entrypoint for the snippet. If the values for these variables need to be
-replaced by the user, be explicit that they are example values only.
-
-Methods should avoid a return type whenever possible. Instead, show the user how
-to interact with a returned object programmatically by printing some example
-attributes to the console.
-
-{{< tabpane langEqualsHeader=true >}}
- {{< tab header="Java" >}}
-    public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String projectId = "my-project-id";
-        String filePath = "path/to/image.png";
-        inspectImageFile(projectId, filePath);
-    }
-
-    // This is an example snippet for showing best practices.
-    public static void exampleSnippet(String projectId, String filePath) {
-        // Snippet content ...
-    }
-{{< /tab >}}
-{{< /tabpane >}}
-
-
 ### Authentication
  
 Samples should use authenticate using [Application Default Credentials][ADC].
@@ -212,10 +218,77 @@ requests or if they are thread-safe).
 {{< /tab >}}
 {{< /tabpane >}}
 
+### Cyclomatic Complexity
+
+Cyclomatic complexity is the measure of possible code paths. The more code
+paths, the more complext the code snippet, and the hard to understand and test.
+The presences of conditionals (if/else) is an exmaple of cyclomatic complexicy.
+Code snippets should always have a single path demonstrating it's purpose with
+no extranous code.
+
+### Error Handling
+
+Samples should include examples and details of how to catch and handle common
+errors that are the result of improper interactions with the client or service. 
+
+If there is no solution (or if the solution is too verbose to resolve in a
+sample). it is accetable ot either log or leave a comment clearly explaining how
+the user should correct the situation.
+
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+    // Follow the Google Java style guide and catch the most specific type of Exception, instead of a more general one.
+    try {
+      // Do something
+    } catch (IllegalArgumentException ok) {
+      // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+    }
+{{< /tab >}}
+{{< /tabpane >}}
+
+### Linting
+
+Our code snippets should adhere toa. stlye used by the language communities. We
+should prefer using standard linters that are popular in the community to
+enforce style.
+
+### Portability
+
+Each of the major operating systems are well-represented among GCP users. To
+provide a good experience for most GCP users, our code snippets need to work on
+multiple operating systems. In addition, our code snippets may be executed in
+multiple hosting environments, such as GCF, GAE, GKE, GCE, AWS, and local
+machines.
+
+Where possible, code snippets should work across environments and hosting
+platforms. Code snippets should point out any differences between platforms via
+code comments and use platform-agnostic libraries and code constructs.
+
+For example, a code snippet that:
+
+* Uses the language’s standard path library to construct file paths
+* Does not directly rely on POSIX system calls
+* Handles code-sensitivity differences
+* Avoids platform-specific APIs
+
 ## Testing
 
-// TODO
+### Coverage
+Code snippets should have reasonable test coverage and all critical code paths
+should have integration tests that test against the production service. 
 
 ## Additional best practices
 
-// TODO: Language specific? 
+### Adhere to language idioms
+
+Code snippets should use preferred code patterns that are idiomatic to the
+particular language (e.g. promises, futures, static API calls from singletons,
+builders, etc).
+
+Aside: Note that in being idiomatic we can end up creating code snippets that
+are radically different from language-to-language. Err on the side of what is
+idiomatic to the language, though cross-language consistency does not hurt.
+
+Use features that work in all GCP-supported versions of a language and use
+language idioms that the community understands. Generally, do things “the way
+the community does it”.

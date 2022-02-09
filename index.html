@@ -131,6 +131,56 @@ Java
 </span><span style=color:#8f5902;font-style:italic>   */</span>
  </code></pre></div></div>
 </div>
+<h3 id=arrange-act-assert>Arrange, Act, Assert</h3>
+<p>Generally, most samples should follow the &ldquo;Arrange, Act, Assert&rdquo; pattern as
+closely as possible. Composing samples into these discrete steps can make them
+more approachable to beginners:</p>
+<ol>
+<li><strong>Arrange</strong> - Create and configure the components for the request. Avoid
+nesting these components beyond 2-3 levels, as it can make parsing and
+understanding the samples more confusing.</li>
+<li><strong>Act</strong> - Send the request to the service and receive a response.</li>
+<li><strong>Assert</strong> - Verify that the call was successful and that a response was
+return as expected. This is typically done by printing some aspects of the
+response to stdout.</li>
+</ol>
+<ul class="nav nav-tabs" id=tabs-2 role=tablist><li class=nav-item>
+<a class="nav-link active tab-Java" id=tabs-2-0-tab data-toggle=tab href=#tabs-2-0 role=tab onclick='handleClick("Java")' aria-controls=tabs-2-0 aria-selected=true>
+Java
+</a>
+</li></ul>
+<div class=tab-content id=tabs-2-content>
+<div class="tab-pane fade show active" id=tabs-2-0 role=tabpanel aria-labelled-by=tabs-2-0-tab><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java> <span style=color:#8f5902;font-style:italic>// Lists the types of sensitive information the DLP API supports.
+</span><span style=color:#8f5902;font-style:italic></span> <span style=color:#204a87;font-weight:700>public</span> <span style=color:#204a87;font-weight:700>static</span> <span style=color:#204a87;font-weight:700>void</span> <span style=color:#000>listInfoTypes</span><span style=color:#ce5c00;font-weight:700>()</span> <span style=color:#204a87;font-weight:700>throws</span> <span style=color:#000>IOException</span> <span style=color:#ce5c00;font-weight:700>{</span>
+   <span style=color:#8f5902;font-style:italic>// Initialize client that will be used to send requests. This client only needs to be created
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#8f5902;font-style:italic>// once, and can be reused for multiple requests. After completing all of your requests, call
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#8f5902;font-style:italic>// the &#34;close&#34; method on the client to safely clean up any remaining background resources.
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#204a87;font-weight:700>try</span> <span style=color:#ce5c00;font-weight:700>(</span><span style=color:#000>DlpServiceClient</span> <span style=color:#000>dlpClient</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>DlpServiceClient</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>create</span><span style=color:#ce5c00;font-weight:700>())</span> <span style=color:#ce5c00;font-weight:700>{</span>
+
+     <span style=color:#8f5902;font-style:italic>// Construct the request to be sent by the client
+</span><span style=color:#8f5902;font-style:italic></span>     <span style=color:#000>ListInfoTypesRequest</span> <span style=color:#000>listInfoTypesRequest</span> <span style=color:#ce5c00;font-weight:700>=</span>
+         <span style=color:#000>ListInfoTypesRequest</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>newBuilder</span><span style=color:#ce5c00;font-weight:700>()</span>
+             <span style=color:#8f5902;font-style:italic>// Only return infoTypes supported by certain parts of the API.
+</span><span style=color:#8f5902;font-style:italic></span>             <span style=color:#8f5902;font-style:italic>// Supported filters are &#34;supported_by=INSPECT&#34; and &#34;supported_by=RISK_ANALYSIS&#34;
+</span><span style=color:#8f5902;font-style:italic></span>             <span style=color:#8f5902;font-style:italic>// Defaults to &#34;supported_by=INSPECT&#34;
+</span><span style=color:#8f5902;font-style:italic></span>             <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>setFilter</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#4e9a06>&#34;supported_by=INSPECT&#34;</span><span style=color:#ce5c00;font-weight:700>)</span>
+             <span style=color:#8f5902;font-style:italic>// BCP-47 language code for localized infoType friendly names.
+</span><span style=color:#8f5902;font-style:italic></span>             <span style=color:#8f5902;font-style:italic>// Defaults to &#34;en_US&#34;
+</span><span style=color:#8f5902;font-style:italic></span>             <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>setLanguageCode</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#4e9a06>&#34;en-US&#34;</span><span style=color:#ce5c00;font-weight:700>)</span>
+             <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>build</span><span style=color:#ce5c00;font-weight:700>();</span>
+
+     <span style=color:#8f5902;font-style:italic>// Use the client to send the API request.
+</span><span style=color:#8f5902;font-style:italic></span>     <span style=color:#000>ListInfoTypesResponse</span> <span style=color:#000>response</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>dlpClient</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>listInfoTypes</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#000>listInfoTypesRequest</span><span style=color:#ce5c00;font-weight:700>);</span>
+
+     <span style=color:#8f5902;font-style:italic>// Parse the response and process the results
+</span><span style=color:#8f5902;font-style:italic></span>     <span style=color:#000>System</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>out</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>println</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#4e9a06>&#34;Infotypes found:&#34;</span><span style=color:#ce5c00;font-weight:700>);</span>
+     <span style=color:#204a87;font-weight:700>for</span> <span style=color:#ce5c00;font-weight:700>(</span><span style=color:#000>InfoTypeDescription</span> <span style=color:#000>infoTypeDescription</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#000>response</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>getInfoTypesList</span><span style=color:#ce5c00;font-weight:700>())</span> <span style=color:#ce5c00;font-weight:700>{</span>
+       <span style=color:#000>System</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>out</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>println</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#4e9a06>&#34;Name : &#34;</span> <span style=color:#ce5c00;font-weight:700>+</span> <span style=color:#000>infoTypeDescription</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>getName</span><span style=color:#ce5c00;font-weight:700>());</span>
+       <span style=color:#000>System</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>out</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>println</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#4e9a06>&#34;Display name : &#34;</span> <span style=color:#ce5c00;font-weight:700>+</span> <span style=color:#000>infoTypeDescription</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#c4a000>getDisplayName</span><span style=color:#ce5c00;font-weight:700>());</span>
+     <span style=color:#ce5c00;font-weight:700>}</span>
+   <span style=color:#ce5c00;font-weight:700>}</span>
+ </code></pre></div></div>
+</div>
 <h2 id=code>Code</h2>
 <p>// TODO</p>
 <h2 id=testing>Testing</h2>

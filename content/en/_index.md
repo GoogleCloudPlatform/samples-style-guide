@@ -136,7 +136,48 @@ more approachable to beginners:
 
 ## Code 
 
-// TODO
+### Useful comments
+Comments should be used as needed, and should follow the following guidelines:
+* Comments should add context not otherwise obvious from the code
+* Comments should be readable and grammatically correct
+* For values that the user may wish to configure, provide links to
+ documentation that lists available options (and when to use them)
+
+### Authentication
+ 
+Samples should use authenticate using [Application Default Credentials][ADC].
+ 
+If the code snippet is platform specific, explicitly show how to use that
+platform's credentials.
+ 
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+   // Most clients use ADC by default. However, if your application needs to showcase a specific
+   // credential source, show users how to do that explicitly.
+   GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
+{{< /tab >}}
+{{< /tabpane >}}
+ 
+[ADC]: (https://cloud.google.com/docs/authentication/production)
+
+### Initializing Clients
+ 
+Code snippets should show users how to initialize (and clean up, if necessary)
+clients used by the user. Additionally, clients should contain a comment
+clarifying proper usage (such as if clients should be reused for multiple
+requests or if they are thread-safe).
+ 
+{{< tabpane langEqualsHeader=true >}}
+ {{< tab header="Java" >}}
+   // Initialize client that will be used to send requests. This client only needs to be created
+   // once, and can be reused for multiple requests. After completing all of your requests, call
+   // the "close" method on the client to safely clean up any remaining background resources,
+   // or use "try-with-close" statement to do this automatically.
+   try (CloudClient dlp = CloudClient.create()) {
+     // make a request with the client
+   }
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## Testing
 

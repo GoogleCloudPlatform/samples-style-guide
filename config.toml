@@ -1,4 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://googlecloudplatform.github.io/samples-style-guide/'
 languageCode = 'en-us'
 title = 'Samples Style Guide'
 theme = "docsy"

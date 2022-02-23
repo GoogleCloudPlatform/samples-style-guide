@@ -168,10 +168,10 @@ more approachable to beginners:
 
 ### No CLIs
 
-Do not include CLIs for running your sample. We expect that most developers will
-copy and pase code directly from cloud.google.com into their own enviroment.
-Adding CLIs has historically been expensive to maintain in the past, and
-detracts from the purpose of the snippet itself.
+Do not include CLIs for running your sample. We expect developers to copy and
+paste code directly from cloud.google.com into their own environment. Adding
+CLIs has historically been expensive to maintain in the past, and detracts from
+the purpose of the snippet itself.
 
 ## Code 
 
@@ -275,10 +275,12 @@ requests or if they are thread-safe).
 ### Cyclomatic Complexity
 
 Cyclomatic complexity is the measure of possible code paths. The more code
-paths, the more complext the code snippet, and the hard to understand and test.
-The presences of conditionals (if/else) is an exmaple of cyclomatic complexicy.
-Code snippets should always have a single path demonstrating it's purpose with
-no extranous code.
+paths, the more complex the code snippet, and the harder to understand and test.
+Flow control statements like conditionals (if/else), switches, and loops are
+examples of code that increases cyclomatic complexity.
+	
+Code snippets should have a single path demonstrating their purpose with no
+extra code.
 
 ### Error Handling
 
@@ -286,8 +288,8 @@ Samples should include examples and details of how to catch and handle common
 errors that are the result of improper interactions with the client or service. 
 
 If there is no solution (or if the solution is too verbose to resolve in a
-sample). it is accetable ot either log or leave a comment clearly explaining how
-the user should correct the situation.
+sample) it is acceptable to either log or leave a comment explaining what the
+developer should do.
 
 {{< tabpane langEqualsHeader=true >}}
  {{< tab header="Java" >}}
@@ -302,7 +304,7 @@ the user should correct the situation.
 
 ### Linting
 
-Our code snippets should adhere toa. stlye used by the language communities. We
+Our code snippets should adhere to a style used by the language communities. We
 should prefer using standard linters that are popular in the community to
 enforce style.
 

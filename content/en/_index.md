@@ -28,6 +28,20 @@ with our services.
 * **Idiomatic** - Samples should encourage idiomatic and best practices specific
 to language, framework, or service.
 
+### Principles
+
+Where the guidelines below are insufficient, these principles apply in
+descending order of priority:
+1. **Clarity**: The code's purpose and rationale is clear to the reader
+2. **Idiomaticity**: The code should be written using idiomatic,
+   community-driven coding practices
+3. **Consistency**: The code has the same implementation from language to
+   language
+4. **Simplicity**: The code accomplishes its goal in the simplest way possible
+5. **Portability**: The code should be able to run locally or in the Cloud
+6. **Maintainability**: The code is written such that it can be easily
+   maintained
+
 ## Structure
 
 ### Region tags

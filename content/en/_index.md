@@ -133,7 +133,6 @@ def main():
     project_id = "my-project-id"
     file_path = "path/to/image.png"
     inspect_image_file(project_id, file_path)
-}
 {{< /tab >}}
 {{< /tabpane >}}
 

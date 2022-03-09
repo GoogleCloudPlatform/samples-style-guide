@@ -1,14 +1,22 @@
 baseURL = 'https://googlecloudplatform.github.io/samples-style-guide/'
-languageCode = 'en-us'
 title = 'Samples Style Guide'
-theme = "docsy"
+theme = ["docsy"]
+languageCode = 'en-us'
 
-# Language settings
-contentDir = "content/en"
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
-# Useful when translating.
-enableMissingTranslationPlaceholders = true
+[[menu.main]]
+    name = "GitHub"
+    weight = 50
+    url = "https://github.com/GoogleCloudPlatform/samples-style-guide"
+    pre = "<i class='fab fa-github'></i>"
+
+enableGitInfo = true
+github_repo = "https://github.com/GoogleCloudPlatform/samples-style-guide"
+github_project_repo = "https://github.com/GoogleCloudPlatform/samples-style-guide"
+
+[module]
+[[module.mounts]]
+  source = 'content/en'
+  target = 'content'
 
 [markup]
   [markup.goldmark]

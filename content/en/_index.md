@@ -85,6 +85,13 @@ the sample work:
 * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 */
 {{< /tab >}}
+{{< tab header="Python" >}}
+"""
+Moves a persistent disk from one zone to another.
+
+See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+"""
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Method Structure
@@ -113,8 +120,19 @@ public static void main(String[] args) {
 }
 
 // This is an example snippet for showing best practices.
-public static void exampleSnippet(String projectId, String filePath) {
+public static void inspectImageFile(String projectId, String filePath) {
     // Snippet content ...
+}
+{{< /tab >}}
+{{< tab header="Python" >}}
+def inspect_image_file(project_id: str, file_path: str):
+    # Snippet content ...
+
+def main():
+    # TODO(developer): Replace these variables before running the sample.
+    project_id = "my-project-id"
+    file_path = "path/to/image.png"
+    inspect_image_file(project_id, file_path)
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -166,6 +184,42 @@ public static void listInfoTypes() throws IOException {
   }
 }
 {{< /tab >}}
+{{< tab header="Python" >}}
+def list_info_type(
+    language_code: Optional[str] = "en-US",
+    result_filter: Optional[str] = "supported_by=INSPECT",
+):
+    """List types of sensitive information within a category.
+
+    Args:
+        language_code (str): The BCP-47 language code to use, e.g. 'en-US'.
+        filter (str): An optional filter to only return info types supported
+            by certain parts of the API. Supported filters are 
+            "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS". Defaults
+            to "supported_by=INSPECT".
+    """
+    # Initialize client that will be used to send requests. This client only
+    # needs to be created once, and can be reused for multiple requests. After
+    # completing all of your requests, call the "__exit__" method on the client to
+    # safely clean up any remaining background resources. Alternatively, use the
+    # client as a context amnager.
+    dlp_client = dlp_v2.DlpServiceClient()
+
+    # Construct the request to be sent by the client
+    request = dlp_v2.ListInfoTypesRequest(
+        filter=result_filter,
+        language_code=language_code,
+    )
+
+    # Use the client to send the API request
+    info_types = dlp_client.list_info_types(request)
+
+    # Parse the response and process the results
+    print("Infotypes found:")
+    for info_type in info_types:
+        print(f"Name: {info_type.name}")
+        print(f"Display name: {info_type.display_name}")
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs
@@ -202,6 +256,13 @@ public static void main(String[] args) {
     exampleSnippet(projectId, filePath);
 }
 {{< /tab >}}
+{{< tab header="Python" >}}
+def main():
+    # TODO(developer): Replace these variables before running the sample.
+    project_id = "my-project-id"
+    file_path = "path/to/image.png"
+    example_snippet(project_id, file_path)
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments
@@ -219,6 +280,11 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Python" >}}
+# This is an example snippet for showing best practices.
+def example_snipet(project_id: str, file_path: str):
+    # Snippet content ...
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result
@@ -235,6 +301,11 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Python" >}}
+# This is an example snippet for showing best practices.
+def example_snippet(project_id: str, file_path: str):
+    # Snippet content ...
+{{< /tab >}}
 {{< /tabpane >}}
 
 
@@ -250,6 +321,15 @@ platform's credentials.
 // Most clients use ADC by default. However, if your application needs to showcase a specific
 // credential source, show users how to do that explicitly.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
+{{< /tab >}}
+{{< tab header="Python" >}}
+# Most clients use ADC by default. However, if your application needs to
+# showcase a specific credential source, show users how to do that explicitly.
+from google.oauth2 import service_account
+
+credentials = service_account.Credentials.from_service_account_file(
+  "/path/to/credentials.json"
+)
 {{< /tab >}}
 {{< /tabpane >}}
  
@@ -271,6 +351,15 @@ requests or if they are thread-safe).
 try (CloudClient dlp = CloudClient.create()) {
   // make a request with the client
 }
+{{< /tab >}}
+{{< tab header="Python" >}}
+# Initialize client that will be used to send requests. This client only
+# needs to be created once, and can be reused for multiple requests. After
+# completing all of your requests, call the "__exit__" method on the client to
+# safely clean up any remaining background resources. Alternatively, use the
+# client as a context amnager.
+with dlp_v2.DlpServiceClient() as dlp_client:
+    # make a request with the client
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -301,6 +390,14 @@ try {
 } catch (IllegalArgumentException ok) {
   // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
 }
+{{< /tab >}}
+{{< tab header="Python" >}}
+# Follow the Google Python style guide and catch the most specific type of
+# Exception, instead of a more general one.
+try:
+  # Delete resource
+except google.api_core.exceptions.NotFound:
+  pass  # Resource has already been deleted, okay to ignore
 {{< /tab >}}
 {{< /tabpane >}}
 

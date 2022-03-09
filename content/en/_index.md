@@ -50,25 +50,25 @@ This is easiest to enforce/detect when the samples are in their own file, so
 samples should be structured as such unless their is a compelling reason not to.
  
 {{< tabpane langEqualsHeader=true >}}
- {{< tab header="Java" >}}
-   // Region tags should start after the package, but before imports.
-   // [START product_example]
-   import com.example.resource;
- 
-   public class exampleSnippet {
-   // Snippet methods ...
-   }
-   // [END product_example]
- {{< /tab >}}
- {{< tab header="Python" >}}
-  # [START product_example]
-  import com.example.resource
- 
-  def example_snippet():
-       # Snippet Content ...
- 
-  # [END product_example]
- {{< /tab >}}
+{{< tab header="Java" >}}
+// Region tags should start after the package, but before imports.
+// [START product_example]
+import com.example.resource;
+
+public class exampleSnippet {
+// Snippet methods ...
+}
+// [END product_example]
+{{< /tab >}}
+{{< tab header="Python" >}}
+# [START product_example]
+import com.example.resource
+
+def example_snippet():
+      # Snippet Content ...
+
+# [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description
@@ -78,13 +78,13 @@ what the snippet does, including any setup (such as resources) required to make
 the sample work:
  
 {{< tabpane langEqualsHeader=true >}}
- {{< tab header="Java" >}}
-   /**
-   * Moves a persistent disk from one zone to another.
-   *
-   * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
-   */
- {{< /tab >}}
+{{< tab header="Java" >}}
+/**
+* Moves a persistent disk from one zone to another.
+*
+* See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+*/
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Method Structure
@@ -104,18 +104,18 @@ to interact with a returned object programmatically by printing some example
 attributes to the console.
 
 {{< tabpane langEqualsHeader=true >}}
- {{< tab header="Java" >}}
-    public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String projectId = "my-project-id";
-        String filePath = "path/to/image.png";
-        inspectImageFile(projectId, filePath);
-    }
+{{< tab header="Java" >}}
+public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "my-project-id";
+    String filePath = "path/to/image.png";
+    inspectImageFile(projectId, filePath);
+}
 
-    // This is an example snippet for showing best practices.
-    public static void exampleSnippet(String projectId, String filePath) {
-        // Snippet content ...
-    }
+// This is an example snippet for showing best practices.
+public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -134,37 +134,38 @@ more approachable to beginners:
  response to stdout.
 
 {{< tabpane langEqualsHeader=true >}}
- {{< tab header="Java" >}}
- // Lists the types of sensitive information the DLP API supports.
- public static void listInfoTypes() throws IOException {
-   // Initialize client that will be used to send requests. This client only needs to be created
-   // once, and can be reused for multiple requests. After completing all of your requests, call
-   // the "close" method on the client to safely clean up any remaining background resources.
-   try (DlpServiceClient dlpClient = DlpServiceClient.create()) {
+{{< tab header="Java" >}}
+// Lists the types of sensitive information the DLP API supports.
+public static void listInfoTypes() throws IOException {
+  // Initialize client that will be used to send requests. This client only needs to be created
+  // once, and can be reused for multiple requests. After completing all of your requests, call
+  // the "close" method on the client to safely clean up any remaining background resources.
+  try (DlpServiceClient dlpClient = DlpServiceClient.create()) {
 
-     // Construct the request to be sent by the client
-     ListInfoTypesRequest listInfoTypesRequest =
-         ListInfoTypesRequest.newBuilder()
-             // Only return infoTypes supported by certain parts of the API.
-             // Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
-             // Defaults to "supported_by=INSPECT"
-             .setFilter("supported_by=INSPECT")
-             // BCP-47 language code for localized infoType friendly names.
-             // Defaults to "en_US"
-             .setLanguageCode("en-US")
-             .build();
+    // Construct the request to be sent by the client
+    ListInfoTypesRequest listInfoTypesRequest =
+        ListInfoTypesRequest.newBuilder()
+            // Only return infoTypes supported by certain parts of the API.
+            // Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+            // Defaults to "supported_by=INSPECT"
+            .setFilter("supported_by=INSPECT")
+            // BCP-47 language code for localized infoType friendly names.
+            // Defaults to "en_US"
+            .setLanguageCode("en-US")
+            .build();
 
-     // Use the client to send the API request.
-     ListInfoTypesResponse response = dlpClient.listInfoTypes(listInfoTypesRequest);
+    // Use the client to send the API request.
+    ListInfoTypesResponse response = dlpClient.listInfoTypes(listInfoTypesRequest);
 
-     // Parse the response and process the results
-     System.out.println("Infotypes found:");
-     for (InfoTypeDescription infoTypeDescription : response.getInfoTypesList()) {
-       System.out.println("Name : " + infoTypeDescription.getName());
-       System.out.println("Display name : " + infoTypeDescription.getDisplayName());
-     }
-   }
- {{< /tab >}}
+    // Parse the response and process the results
+    System.out.println("Infotypes found:");
+    for (InfoTypeDescription infoTypeDescription : response.getInfoTypesList()) {
+      System.out.println("Name : " + infoTypeDescription.getName());
+      System.out.println("Display name : " + infoTypeDescription.getDisplayName());
+    }
+  }
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs
@@ -193,14 +194,14 @@ replaced by the user, be explicit that they are example values only. Wherever
 possible, provide a link to documentation that enumartes the options.
 
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}
-    public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String projectId = "my-project-id";
-        String filePath = "path/to/image.png";
-        exampleSnippet(projectId, filePath);
-    }
-  {{< /tab >}}
+{{< tab header="Java" >}}
+public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "my-project-id";
+    String filePath = "path/to/image.png";
+    exampleSnippet(projectId, filePath);
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments
@@ -212,12 +213,12 @@ file. For example, project specific information (such as `projectId`) or a
 a file or a specific action is not.
  
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}
-    // This is an example snippet for showing best practices.
-    public static void exampleSnippet(String projectId, String filePath) {
-        // Snippet content ...
-    }
-  {{< /tab >}}
+{{< tab header="Java" >}}
+// This is an example snippet for showing best practices.
+public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result
@@ -228,12 +229,12 @@ attributes to the console. Tests should use the output of the function to
 ensure that it works.
 
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab header="Java" >}}
-    // This is an example snippet for showing best practices.
-    public static void exampleSnippet(String projectId, String filePath) {
-        // Snippet content ...
-    }
-  {{< /tab >}}
+{{< tab header="Java" >}}
+// This is an example snippet for showing best practices.
+public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 
@@ -245,10 +246,10 @@ If the code snippet is platform specific, explicitly show how to use that
 platform's credentials.
  
 {{< tabpane langEqualsHeader=true >}}
- {{< tab header="Java" >}}
-   // Most clients use ADC by default. However, if your application needs to showcase a specific
-   // credential source, show users how to do that explicitly.
-   GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
+{{< tab header="Java" >}}
+// Most clients use ADC by default. However, if your application needs to showcase a specific
+// credential source, show users how to do that explicitly.
+GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
 {{< /tab >}}
 {{< /tabpane >}}
  
@@ -262,14 +263,14 @@ clarifying proper usage (such as if clients should be reused for multiple
 requests or if they are thread-safe).
  
 {{< tabpane langEqualsHeader=true >}}
- {{< tab header="Java" >}}
-   // Initialize client that will be used to send requests. This client only needs to be created
-   // once, and can be reused for multiple requests. After completing all of your requests, call
-   // the "close" method on the client to safely clean up any remaining background resources,
-   // or use "try-with-close" statement to do this automatically.
-   try (CloudClient dlp = CloudClient.create()) {
-     // make a request with the client
-   }
+{{< tab header="Java" >}}
+// Initialize client that will be used to send requests. This client only needs to be created
+// once, and can be reused for multiple requests. After completing all of your requests, call
+// the "close" method on the client to safely clean up any remaining background resources,
+// or use "try-with-close" statement to do this automatically.
+try (CloudClient dlp = CloudClient.create()) {
+  // make a request with the client
+}
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -293,13 +294,13 @@ sample) it is acceptable to either log or leave a comment explaining what the
 developer should do.
 
 {{< tabpane langEqualsHeader=true >}}
- {{< tab header="Java" >}}
-    // Follow the Google Java style guide and catch the most specific type of Exception, instead of a more general one.
-    try {
-      // Do something
-    } catch (IllegalArgumentException ok) {
-      // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
-    }
+{{< tab header="Java" >}}
+// Follow the Google Java style guide and catch the most specific type of Exception, instead of a more general one.
+try {
+  // Do something
+} catch (IllegalArgumentException ok) {
+  // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+}
 {{< /tab >}}
 {{< /tabpane >}}
 

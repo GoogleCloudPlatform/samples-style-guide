@@ -300,10 +300,10 @@ public static void exampleSnippet(String projectId, String filePath) {
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-    def example_snippet project_id:, file_path: 
-      # Snippet content ...
-      response = client.example_action example_action_request
-      puts "Got the following response #{response.details}"
+  def example_snippet project_id:, file_path: 
+    # Snippet content ...
+    response = client.example_action example_action_request
+    puts "Got the following response #{response.details}"
   end
 {{< /tab >}}
 {{< /tabpane >}}

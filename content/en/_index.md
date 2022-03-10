@@ -47,25 +47,35 @@ This is easiest to enforce/detect when the samples are in their own file, so
 samples should be structured as such unless their is a compelling reason not to.
  
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-// Region tags should start after the package, but before imports.
-// [START product_example]
-import com.example.resource;
-
-public class exampleSnippet {
-// Snippet methods ...
-}
-// [END product_example]
-{{< /tab >}}
-{{< tab header="Python" >}}
-# [START product_example]
-import com.example.resource
-
-def example_snippet():
-      # Snippet Content ...
-
-# [END product_example]
-{{< /tab >}}
+ {{< tab header="Java" >}}
+   // Region tags should start after the package, but before imports.
+   // [START product_example]
+   import com.example.resource;
+ 
+   public class exampleSnippet {
+   // Snippet methods ...
+   }
+   // [END product_example]
+ {{< /tab >}}
+ {{< tab header="Python" >}}
+  # [START product_example]
+  import com.example.resource
+ 
+  def example_snippet():
+       # Snippet Content ...
+ 
+  # [END product_example]
+ {{< /tab >}}
+ {{< tab header="Ruby" >}}
+  # [START product_example]
+  require "example/resource"
+ 
+  def example_snippet
+       # Snippet Content ...
+  end     
+ 
+  # [END product_example]
+ {{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description
@@ -75,13 +85,19 @@ what the snippet does, including any setup (such as resources) required to make
 the sample work:
  
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-/**
-* Moves a persistent disk from one zone to another.
-*
-* See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
-*/
-{{< /tab >}}
+ {{< tab header="Java" >}}
+   /**
+   * Moves a persistent disk from one zone to another.
+   *
+   * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+   */
+ {{< /tab >}}
+ {{< tab header="Ruby" >}}
+   
+   # Moves a persistent disk from one zone to another.
+   #
+   # See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+ {{< /tab >}}
 {{< /tabpane >}}
 
 ### Method Structure
@@ -91,7 +107,7 @@ file. For example, project specific information (such as `projectId`) or a
 `filePath` for an external file is acceptable, while an argument for the type of
 a file or a specific action is not.
  
-Any declared function arguments should iqnclude a no-arg, main method with
+Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the
 entrypoint for the snippet. If the values for these variables need to be
 replaced by the user, be explicit that they are example values only.
@@ -101,18 +117,36 @@ to interact with a returned object programmatically by printing some example
 attributes to the console.
 
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-public static void main(String[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "my-project-id";
-    String filePath = "path/to/image.png";
-    inspectImageFile(projectId, filePath);
-}
+ {{< tab header="Java" >}}
+    public static void main(String[] args) {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectId = "my-project-id";
+        String filePath = "path/to/image.png";
+        inspectImageFile(projectId, filePath);
+    }
 
-// This is an example snippet for showing best practices.
-public static void exampleSnippet(String projectId, String filePath) {
-    // Snippet content ...
-}
+    // This is an example snippet for showing best practices.
+    public static void exampleSnippet(String projectId, String filePath) {
+        // Snippet content ...
+    }
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+  # [START product_example]
+  require "example/resource"
+ 
+  def example_snippet project_id:, file_path:
+      # Snippet content ...
+  end     
+  # [END product_example]
+
+  def main
+    # TODO(developer): Replace these variables before running the sample.
+    project_id = "my-project-id"
+    file_path = "path/to/image.png"
+    example_snippet project_id: project_id, file_path: file_path
+  end
+
+  main if $PROGRAM_NAME == __FILE__
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -131,38 +165,58 @@ more approachable to beginners:
  response to stdout.
 
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-// Lists the types of sensitive information the DLP API supports.
-public static void listInfoTypes() throws IOException {
-  // Initialize client that will be used to send requests. This client only needs to be created
-  // once, and can be reused for multiple requests. After completing all of your requests, call
-  // the "close" method on the client to safely clean up any remaining background resources.
-  try (DlpServiceClient dlpClient = DlpServiceClient.create()) {
+ {{< tab header="Java" >}}
+ // Lists the types of sensitive information the DLP API supports.
+ public static void listInfoTypes() throws IOException {
+   // Initialize client that will be used to send requests. This client only needs to be created
+   // once, and can be reused for multiple requests. After completing all of your requests, call
+   // the "close" method on the client to safely clean up any remaining background resources.
+   try (DlpServiceClient dlpClient = DlpServiceClient.create()) {
 
-    // Construct the request to be sent by the client
-    ListInfoTypesRequest listInfoTypesRequest =
-        ListInfoTypesRequest.newBuilder()
-            // Only return infoTypes supported by certain parts of the API.
-            // Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
-            // Defaults to "supported_by=INSPECT"
-            .setFilter("supported_by=INSPECT")
-            // BCP-47 language code for localized infoType friendly names.
-            // Defaults to "en_US"
-            .setLanguageCode("en-US")
-            .build();
+     // Construct the request to be sent by the client
+     ListInfoTypesRequest listInfoTypesRequest =
+         ListInfoTypesRequest.newBuilder()
+             // Only return infoTypes supported by certain parts of the API.
+             // Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+             // Defaults to "supported_by=INSPECT"
+             .setFilter("supported_by=INSPECT")
+             // BCP-47 language code for localized infoType friendly names.
+             // Defaults to "en_US"
+             .setLanguageCode("en-US")
+             .build();
 
-    // Use the client to send the API request.
-    ListInfoTypesResponse response = dlpClient.listInfoTypes(listInfoTypesRequest);
+     // Use the client to send the API request.
+     ListInfoTypesResponse response = dlpClient.listInfoTypes(listInfoTypesRequest);
 
-    // Parse the response and process the results
-    System.out.println("Infotypes found:");
-    for (InfoTypeDescription infoTypeDescription : response.getInfoTypesList()) {
-      System.out.println("Name : " + infoTypeDescription.getName());
-      System.out.println("Display name : " + infoTypeDescription.getDisplayName());
-    }
-  }
-}
-{{< /tab >}}
+     // Parse the response and process the results
+     System.out.println("Info types found:");
+     for (InfoTypeDescription infoTypeDescription : response.getInfoTypesList()) {
+       System.out.println("Name : " + infoTypeDescription.getName());
+       System.out.println("Display name : " + infoTypeDescription.getDisplayName());
+     }
+   }
+ {{< /tab >}}
+ {{< tab header="Ruby" >}}
+  # [START storage_list_bucket_notifications]
+  require "google/cloud/storage"
+
+  # Lists the notifications configured for the given bucket.
+  def list_bucket_notifications bucket_name:
+    # The ID of your GCS bucket
+    # bucket_name = "your-unique-bucket-name"
+    # Arrange by creating client and request hashes if any
+    storage = Google::Cloud::Storage.new
+
+    # Act by calling the respective action
+    bucket  = storage.bucket bucket_name
+ 
+    # Assert by parsing the response and processing the result
+    bucket.notifications.each do |notification|
+      puts "Notification ID: #{notification.id}"
+    end
+  end
+  # [END storage_list_bucket_notifications]
+ {{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs
@@ -188,17 +242,27 @@ Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the
 entrypoint for the snippet. If the values for these variables need to be
 replaced by the user, be explicit that they are example values only. Wherever
-possible, provide a link to documentation that enumartes the options.
+possible, provide a link to documentation that enumerates the options.
 
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-public static void main(String[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "my-project-id";
-    String filePath = "path/to/image.png";
-    exampleSnippet(projectId, filePath);
-}
-{{< /tab >}}
+  {{< tab header="Java" >}}
+    public static void main(String[] args) {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectId = "my-project-id";
+        String filePath = "path/to/image.png";
+        exampleSnippet(projectId, filePath);
+    }
+  {{< /tab >}}
+  {{< tab header="Ruby" >}}
+    def main
+      # TODO(developer): Replace these variables before running the sample.
+      project_id = "my-project-id"
+      file_path = "path/to/image.png"
+      example_snippet project_id: project_id, file_path: file_path
+    end
+
+    main if $PROGRAM_NAME == __FILE__
+  {{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments
@@ -210,12 +274,18 @@ file. For example, project specific information (such as `projectId`) or a
 a file or a specific action is not.
  
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-// This is an example snippet for showing best practices.
-public static void exampleSnippet(String projectId, String filePath) {
-    // Snippet content ...
-}
-{{< /tab >}}
+  {{< tab header="Java" >}}
+    // This is an example snippet for showing best practices.
+    public static void exampleSnippet(String projectId, String filePath) {
+        // Snippet content ...
+    }
+  {{< /tab >}}
+  {{< tab header="Ruby" >}}
+    # This is an example snippet for showing best practices.
+    def exampleSnippet project_id:, file_path: 
+        # Snippet content ...
+    end
+  {{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result
@@ -226,12 +296,19 @@ attributes to the console. Tests should use the output of the function to
 ensure that it works.
 
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-// This is an example snippet for showing best practices.
-public static void exampleSnippet(String projectId, String filePath) {
-    // Snippet content ...
-}
-{{< /tab >}}
+  {{< tab header="Java" >}}
+    // This is an example snippet for showing best practices.
+    public static void exampleSnippet(String projectId, String filePath) {
+        // Snippet content ...
+    }
+  {{< /tab >}}
+  {{< tab header="Ruby" >}}
+     def example_snippet project_id:, file_path: 
+        # Snippet content ...
+        response = client.example_action example_action_request
+        puts "Got the following response #{response.details}"
+    end
+  {{< /tab >}}
 {{< /tabpane >}}
 
 
@@ -243,10 +320,22 @@ If the code snippet is platform specific, explicitly show how to use that
 platform's credentials.
  
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-// Most clients use ADC by default. However, if your application needs to showcase a specific
-// credential source, show users how to do that explicitly.
-GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
+ {{< tab header="Java" >}}
+   // Most clients use ADC by default. However, if your application needs to showcase a specific
+   // credential source, show users how to do that explicitly.
+   GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+    # Most clients use ADC by default. However, if your application needs to showcase a specific
+    # credential source, show users how to do that explicitly.
+    require "google/cloud/spanner"
+
+    Google::Cloud::Spanner.configure do |config|
+      config.project_id  = "my-project-id"
+      config.credentials = "path/to/keyfile.json"
+    end
+
+    client = Google::Cloud::Spanner.new
 {{< /tab >}}
 {{< /tabpane >}}
  
@@ -260,14 +349,21 @@ clarifying proper usage (such as if clients should be reused for multiple
 requests or if they are thread-safe).
  
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-// Initialize client that will be used to send requests. This client only needs to be created
-// once, and can be reused for multiple requests. After completing all of your requests, call
-// the "close" method on the client to safely clean up any remaining background resources,
-// or use "try-with-close" statement to do this automatically.
-try (CloudClient dlp = CloudClient.create()) {
-  // make a request with the client
-}
+ {{< tab header="Java" >}}
+   // Initialize client that will be used to send requests. This client only needs to be created
+   // once, and can be reused for multiple requests. After completing all of your requests, call
+   // the "close" method on the client to safely clean up any remaining background resources,
+   // or use "try-with-close" statement to do this automatically.
+   try (CloudClient dlp = CloudClient.create()) {
+     // make a request with the client
+   }
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+    # Initialize client that will be used to send requests. This client only needs to be created
+    # once, and can be reused for multiple requests. After completing all of your requests, call
+    # the "close" method on the client to safely clean up any remaining background resources,
+    require "google/cloud/spanner"
+    client = Google::Cloud::Spanner.new
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -291,13 +387,21 @@ sample) it is acceptable to either log or leave a comment explaining what the
 developer should do.
 
 {{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-// Follow the Google Java style guide and catch the most specific type of Exception, instead of a more general one.
-try {
-  // Do something
-} catch (IllegalArgumentException ok) {
-  // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
-}
+ {{< tab header="Java" >}}
+    // Follow the Google Java style guide and catch the most specific type of Exception, instead of a more general one.
+    try {
+      // Do something
+    } catch (IllegalArgumentException ok) {
+      // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+    }
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+    # Follow the Google Ruby style guide and catch the most specific type of Exception, instead of a more general one.
+    begin
+        # Do something
+    rescue Google::Cloud::AlreadyExistsError
+        # Do nothing if it already exists
+    end
 {{< /tab >}}
 {{< /tabpane >}}
 

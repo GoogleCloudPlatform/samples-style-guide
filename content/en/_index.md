@@ -137,7 +137,6 @@ attributes to the console.
   def example_snippet project_id:, file_path:
       # Snippet content ...
   end     
-  # [END product_example]
 
   def main
     # TODO(developer): Replace these variables before running the sample.
@@ -147,6 +146,7 @@ attributes to the console.
   end
 
   main if $PROGRAM_NAME == __FILE__
+  # [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -197,9 +197,6 @@ more approachable to beginners:
    }
  {{< /tab >}}
  {{< tab header="Ruby" >}}
-  # [START storage_list_bucket_notifications]
-  require "google/cloud/storage"
-
   # Lists the notifications configured for the given bucket.
   def list_bucket_notifications bucket_name:
     # The ID of your GCS bucket
@@ -215,7 +212,6 @@ more approachable to beginners:
       puts "Notification ID: #{notification.id}"
     end
   end
-  # [END storage_list_bucket_notifications]
  {{< /tab >}}
 {{< /tabpane >}}
 

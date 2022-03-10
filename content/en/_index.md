@@ -3,9 +3,6 @@ title: "Samples Style Guide"
 linkTitle: "Samples Style Guide"
 type: docs
 weight: 20
-menu:
-  main:
-    weight: 20
 ---
  
 ## Introduction

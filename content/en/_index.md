@@ -80,6 +80,15 @@ def example_snippet():
 
 # [END product_example]
 {{< /tab >}}
+{{< tab header="PHP" >}}
+// [START product_example]
+use Example\Resource
+
+function example_snippet() {
+    // Snippet Content ...
+}
+// [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description
@@ -95,6 +104,14 @@ the sample work:
 *
 * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 */
+{{< /tab >}}
+{{< tab header="PHP" >}}
+/**
+ * Moves a persistent disk from one zone to another.
+ *
+ * See https://cloud.google.com/compute/docs/quickstart-client-libraries
+ * before running the code snippet.
+ */
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -115,6 +132,17 @@ public static void main(String[] args) {
     exampleSnippet(projectId, filePath);
 }
 {{< /tab >}}
+{{< tab header="PHP" >}}
+/**
+ * PHP has evolved separate from the guidelines on Method Structure & No CLIs.
+ *
+ * TODO(main runner): Should PHP samples start using the main runner concept?
+ * TODO(no cli clarification): Related, PHP is doing CLIs https://github.com/GoogleCloudPlatform/php-docs-samples/blob/master/testing/sample_helpers.php
+ * TODO(parameters): There are two models of documenting parameters:
+ * - Docblock comment: https://github.com/GoogleCloudPlatform/php-docs-samples/blob/master/media/transcoder/src/list_job_templates.php#L30
+ * - Commented out variables in global scope: https://github.com/GoogleCloudPlatform/php-docs-samples/blob/master/bigquery/api/src/browse_table.php#L36
+ */
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments
@@ -132,6 +160,12 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="PHP" >}}
+// This is an example snippet for showing best practices.
+function example_snippet($projectId, $filePath) {
+    // Snippet content ...
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result
@@ -146,6 +180,17 @@ ensure that it works.
 // This is an example snippet for showing best practices.
 public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
+}
+{{< /tab >}}
+{{< tab header="PHP" >}}
+// This is an example snippet for showing best practices.
+function example_snippet($projectId, $filePath) {
+    // Snippet content ...
+    printf(
+      'Response values: %s, %s',
+      $response->getExampleName(),
+      $response->getExampleValue()
+    );
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -197,6 +242,38 @@ public static void listInfoTypes() throws IOException {
   }
 }
 {{< /tab >}}
+{{< tab header="PHP" >}}
+/**
+ * Lists all Info Types for the Data Loss Prevention (DLP) API.
+ */
+use Google\Cloud\Dlp\V2\DlpServiceClient;
+
+/** Uncomment and populate these variables in your code */
+// $filter = ''; // (Optional) filter to use, empty for ''.
+// $languageCode = ''; // (Optional) language code, empty for 'en-US'.
+
+// Arrange: Instantiate a client.
+$dlp = new DlpServiceClient();
+
+// Arrange: Prepare request parameters.
+$params = [
+    'languageCode' => $languageCode,
+    'filter' => $filter,
+]
+
+// Act: Run the request.
+$response = $dlp->listInfoTypes($params);
+
+// Assert: Print the results.
+print('Info Types:' . PHP_EOL);
+foreach ($response->getInfoTypes() as $infoType) {
+    printf(
+        '  %s (%s)' . PHP_EOL,
+        $infoType->getDisplayName(),
+        $infoType->getName()
+    );
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs
@@ -222,16 +299,25 @@ Samples should use authenticate using [Application Default Credentials][ADC].
  
 If the code snippet is platform specific, explicitly show how to use that
 platform's credentials.
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // Most clients use ADC by default. However, if your application needs to showcase a specific
 // credential source, show users how to do that explicitly.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
 {{< /tab >}}
+{{< tab header="PHP" >}}
+// Most clients use ADC by default. However, if your application needs to showcase a specific
+// credential source, show users how to do that explicitly.
+$config = [
+    'keyFilePath' => '/path/to/credentials.json',
+    'projectId' => $projectId,
+];
+$storage = new StorageClient($config);
+{{< /tab >}}
 {{< /tabpane >}}
  
-[ADC]: (https://cloud.google.com/docs/authentication/production)
+[ADC]: https://cloud.google.com/docs/authentication/production
 
 ### Initializing Clients
  
@@ -250,6 +336,12 @@ try (CloudClient dlp = CloudClient.create()) {
   // make a request with the client
 }
 {{< /tab >}}
+{{< tab header="PHP" >}}
+// Initialize client that will be used to send requests.
+// This client only needs to be created once, reuse it for multiple requests.
+
+$dlp = new DlpServiceClient();
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Cyclomatic Complexity
@@ -265,7 +357,7 @@ extra code.
 ### Error Handling
 
 Samples should include examples and details of how to catch and handle common
-errors that are the result of improper interactions with the client or service. 
+errors that are the result of improper interactions between the client and service.
 
 If there is no solution (or if the solution is too verbose to resolve in a
 sample) it is acceptable to either log or leave a comment explaining what the
@@ -278,6 +370,14 @@ try {
   // Do something
 } catch (IllegalArgumentException ok) {
   // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+}
+{{< /tab >}}
+{{< tab header="PHP" >}}
+// Catch the most specific type of Exception, instead of a more general one.
+try {
+    // Do something.
+} catch (InvalidArgumentException $e) {
+    // IllegalArgumentException's are thrown when an invalid argument has been passed to a function.
 }
 {{< /tab >}}
 {{< /tabpane >}}

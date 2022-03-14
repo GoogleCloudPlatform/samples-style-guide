@@ -1,6 +1,8 @@
 # Samples Style Guide
 
-This is the prototype for the samples style guide. 
+This is the **future home** of the Samples Style Guide.
+
+You can [read the guide](https://googlecloudplatform.github.io/samples-style-guide/) and open issues for feedback.
 
 ## Building the site
 
@@ -13,17 +15,19 @@ Follow these steps to build the site.
 path.
 
 3. Install [Docsy dependencies](https://www.docsy.dev/docs/getting-started/#install-postcss):
-    ```
-    npm install -D --save autoprefixer
-    npm install -D --save postcss-cli
+
+    ```sh
+    npm install
     ```
 
-4. Get local copies of the theme's submodules:
-    ```
+4. Install the site theme as git submodules:
+
+    ```sh
     git submodule update --init --recursive
     ```
 
-5. Now run the following command from this project's root directory:
-    ```
+5. Run the local development server with the hugo CLI from the repository's root directory:
+
+    ```sh
     hugo serve
     ```

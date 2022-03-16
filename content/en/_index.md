@@ -134,18 +134,22 @@ public static void exampleSnippet(String projectId, String filePath) {
 # [START product_example]
 require "example/resource"
 
-def example_snippet project_id:, file_path:
-    # Snippet content ...
-end     
-
-def main
+def run_example_snippet:
   # TODO(developer): Replace these variables before running the sample.
   project_id = "my-project-id"
   file_path = "path/to/image.png"
   example_snippet project_id: project_id, file_path: file_path
 end
+ 
+def example_snippet project_id:, file_path:
+  # Snippet content ...
+end     
 
-main if $PROGRAM_NAME == __FILE__
+
+if $PROGRAM_NAME == __FILE__   
+    run_example_snippet
+end
+
 # [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
@@ -198,19 +202,27 @@ public static void listInfoTypes() throws IOException {
 }  
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-# Lists the notifications configured for the given bucket.
-def list_bucket_notifications bucket_name:
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-  # Arrange by creating client and request hashes if any
-  storage = Google::Cloud::Storage.new
+# Lists the types of sensitive information the DLP API supports.
+def listInfoTypes
 
-  # Act by calling the respective action
-  bucket  = storage.bucket bucket_name
+  # Initialize client that will be used to send requests.
+  dlp_client = Google::Cloud::Dlp.dlp_service
 
-  # Assert by parsing the response and processing the result
-  bucket.notifications.each do |notification|
-    puts "Notification ID: #{notification.id}"
+  # Construct the request to be sent by the client
+  # Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+  # Defaults to "supported_by=INSPECT"
+  # BCP-47 language code for localized info_type friendly names.
+  # Defaults to "en_US"
+  list_info_types_request = { parent: "en-US", filter: "supported_by=INSPECT" }
+
+  # Use the client to send the API request.
+  list_info_types_response = dlp_client.list_info_types request
+
+  # Parse the response and process the results
+  puts "Info types found:"
+  list_info_types_response.info_types.each do |info_type|
+    puts "Name : #{info_type.name}"
+    puts "Display name: #{info_type.display_name}"
   end
 end
 {{< /tab >}}
@@ -251,14 +263,16 @@ public static void main(String[] args) {
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-  def main
-    # TODO(developer): Replace these variables before running the sample.
-    project_id = "my-project-id"
-    file_path = "path/to/image.png"
-    example_snippet project_id: project_id, file_path: file_path
-  end
+def run_example_snippet:
+  # TODO(developer): Replace these variables before running the sample.
+  project_id = "my-project-id"
+  file_path = "path/to/image.png"
+  example_snippet project_id: project_id, file_path: file_path
+end
 
-  main if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  run_example_snippet 
+end
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -393,7 +407,7 @@ try {
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-    # Follow the Google Ruby style guide and catch the most specific type of Exception, instead of a more general one.
+    # Catch the most specific type of Exception, instead of a more general one.
     begin
         # Do something
     rescue Google::Cloud::AlreadyExistsError

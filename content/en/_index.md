@@ -25,6 +25,20 @@ with our services.
 * **Idiomatic** - Samples should encourage idiomatic and best practices specific
 to language, framework, or service.
 
+### Principles
+
+Where the guidelines below are insufficient, these principles apply in
+descending order of priority:
+1. **Clarity**: The code's purpose and rationale is clear to the reader
+2. **Idiomaticity**: The code should be written using idiomatic,
+   community-driven coding practices
+3. **Consistency**: The code has the same implementation from language to
+   language
+4. **Simplicity**: The code accomplishes its goal in the simplest way possible
+5. **Portability**: The code should be able to run locally or in the Cloud
+6. **Maintainability**: The code is written such that it can be easily
+   maintained
+
 ## Structure
 
 ### Region tags
@@ -100,21 +114,13 @@ the sample work:
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Method Structure
-Method arguments should be limited to what is absolutely required for testing.
-In most cases, this is project specific information or the path to an external
-file. For example, project specific information (such as `projectId`) or a
-`filePath` for an external file is acceptable, while an argument for the type of
-a file or a specific action is not.
- 
+### Main runner
+
 Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the
 entrypoint for the snippet. If the values for these variables need to be
-replaced by the user, be explicit that they are example values only.
-
-Methods should avoid a return type whenever possible. Instead, show the user how
-to interact with a returned object programmatically by printing some example
-attributes to the console.
+replaced by the user, be explicit that they are example values only. Wherever
+possible, provide a link to documentation that enumartes the options.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -122,9 +128,43 @@ public static void main(String[] args) {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "my-project-id";
     String filePath = "path/to/image.png";
-    inspectImageFile(projectId, filePath);
+    exampleSnippet(projectId, filePath);
 }
+{{< /tab >}}
+{{< /tabpane >}}
 
+### Minimal arguments
+
+Method arguments should be limited to what is absolutely required for testing.
+In most cases, this is project specific information or the path to an external
+file. For example, project specific information (such as `projectId`) or a
+`filePath` for an external file is acceptable, while an argument for the type of
+a file or a specific action is not.
+ 
+{{< tabpane langEqualsHeader=true >}}
+{{< tab header="Java" >}}
+// This is an example snippet for showing best practices.
+public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# This is an example snippet for showing best practices.
+def exampleSnippet projectId:, filePath:
+    # Snippet content ...
+end    
+{{< /tab >}}
+{{< /tabpane >}}
+
+### Process the result
+
+Methods should avoid a return type whenever possible. Instead, show the user how
+to interact with a returned object programmatically by printing some example
+attributes to the console. Tests should use the output of the function to
+ensure that it works.
+
+{{< tabpane langEqualsHeader=true >}}
+{{< tab header="Java" >}}
 // This is an example snippet for showing best practices.
 public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...

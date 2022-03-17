@@ -131,6 +131,27 @@ public static void main(String[] args) {
     exampleSnippet(projectId, filePath);
 }
 {{< /tab >}}
+{{< tab header="Ruby">}}
+# [START product_example]
+require "example/resource"
+
+def run_example_snippet:
+  # TODO(developer): Replace these variables before running the sample.
+  project_id = "my-project-id"
+  file_path = "path/to/image.png"
+  example_snippet project_id: project_id, file_path: file_path
+end
+ 
+def example_snippet project_id:, file_path:
+  # Snippet content ...
+end     
+
+if $PROGRAM_NAME == __FILE__   
+    run_example_snippet
+end
+
+# [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments
@@ -171,26 +192,11 @@ public static void exampleSnippet(String projectId, String filePath) {
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-# [START product_example]
-require "example/resource"
-
-def run_example_snippet:
-  # TODO(developer): Replace these variables before running the sample.
-  project_id = "my-project-id"
-  file_path = "path/to/image.png"
-  example_snippet project_id: project_id, file_path: file_path
-end
- 
-def example_snippet project_id:, file_path:
+def example_snippet project_id:, file_path: 
   # Snippet content ...
-end     
-
-
-if $PROGRAM_NAME == __FILE__   
-    run_example_snippet
+  response = client.example_action example_action_request
+  puts "Got the following response #{response.details}"
 end
-
-# [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -249,11 +255,16 @@ def listInfoTypes
   dlp_client = Google::Cloud::Dlp.dlp_service
 
   # Construct the request to be sent by the client
-  # Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
-  # Defaults to "supported_by=INSPECT"
-  # BCP-47 language code for localized info_type friendly names.
-  # Defaults to "en_US"
-  list_info_types_request = { parent: "en-US", filter: "supported_by=INSPECT" }
+  
+  list_info_types_request = { 
+    # BCP-47 language code for localized info_type friendly names.
+    # Defaults to "en_US"
+    parent: "en-US", 
+    
+    # Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+    # Defaults to "supported_by=INSPECT"
+    filter: "supported_by=INSPECT" 
+  }
 
   # Use the client to send the API request.
   list_info_types_response = dlp_client.list_info_types request
@@ -299,9 +310,10 @@ platform's credentials.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
 {{< /tab >}}
 {{< tab header="Ruby" >}}
+    require "google/cloud/spanner"
+    
     # Most clients use ADC by default. However, if your application needs to showcase a specific
     # credential source, show users how to do that explicitly.
-    require "google/cloud/spanner"
 
     Google::Cloud::Spanner.configure do |config|
       config.project_id  = "my-project-id"
@@ -332,10 +344,11 @@ try (CloudClient dlp = CloudClient.create()) {
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}
+    require "google/cloud/spanner"
+    
     # Initialize client that will be used to send requests. This client only needs to be created
     # once, and can be reused for multiple requests. After completing all of your requests, call
     # the "close" method on the client to safely clean up any remaining background resources,
-    require "google/cloud/spanner"
     client = Google::Cloud::Spanner.new
 {{< /tab >}}
 {{< /tabpane >}}

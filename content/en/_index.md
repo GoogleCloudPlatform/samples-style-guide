@@ -4,24 +4,24 @@ linkTitle: "Samples Style Guide"
 type: docs
 weight: 20
 ---
- 
+
 ## Introduction
- 
+
 This document serves as a definition of our samples standards for both
 standalone snippets and sample applications. It is intended to help encourage
 consistency and best practices when authoring code intended to teach others.
- 
+
 Even if not specifically mentioned in the guide, all samples should make
 best-efforts to achieve the following goals wherever possible:
- 
+
 * **Copy-paste-runnable** - Users should be able to copy, paste, and run the
 code into their environment with as few changes as possible. Samples should be
 easy as possible for a user to run.
- 
+
 * **Teach through code** - Samples should teach users both how and _why_
 specific best practices should be implemented and performed when interacting
 with our services.
- 
+
 * **Idiomatic** - Samples should encourage idiomatic and best practices specific
 to language, framework, or service.
 
@@ -42,7 +42,7 @@ descending order of priority:
 ## Structure
 
 ### Region tags
- 
+
 Each code snippet should have a region tag to define which parts of the snippet
 are displayed from the documentation. Each region tag should be:
 * Globally unique
@@ -51,15 +51,15 @@ are displayed from the documentation. Each region tag should be:
 * In snake case
 
 Region tags should show as much of the sample as possible, so that a user can
-easily copy and pase the sample into their own environment to run it. 
+easily copy and pase the sample into their own environment to run it.
 
 ### Imports
- 
+
 Samples should include any imports used in the sample.
- 
+
 This is easiest to enforce/detect when the samples are in their own file, so
 samples should be structured as such unless their is a compelling reason not to.
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // Region tags should start after the package, but before imports.
@@ -80,14 +80,24 @@ def example_snippet():
 
 # [END product_example]
 {{< /tab >}}
+{{<tab header="Go">}}
+# [START product_example]
+import "example.com/resource"
+
+func exampleSnippet() {
+    // Snippet Content ...
+}
+
+# [END product_example]
+{{< /tab >}}}}
 {{< /tabpane >}}
 
 ### Sample description
- 
+
 Each code snippet file should have a top-level comment that succinctly describes
 what the snippet does, including any setup (such as resources) required to make
 the sample work:
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 /**
@@ -95,6 +105,13 @@ the sample work:
 *
 * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 */
+{{< /tab >}}
+{{< tab header="Go" >}}
+// exampleSnippet moves a persistent disk from one zone to another.
+//
+// Comments should follow the best practices describe in
+// https://golang.org/doc/effective_go.html#commentary.
+// before running the code snippet.
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -115,6 +132,14 @@ public static void main(String[] args) {
     exampleSnippet(projectId, filePath);
 }
 {{< /tab >}}
+{{< tab header="Go" >}}
+func main() {
+    // TODO(developer): Replace these variables before running the sample.
+    projectId := "my-project-id"
+    filePath := "path/to/image.png"
+    exampleSnippet(projectId, filePath)
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments
@@ -124,11 +149,17 @@ In most cases, this is project specific information or the path to an external
 file. For example, project specific information (such as `projectId`) or a
 `filePath` for an external file is acceptable, while an argument for the type of
 a file or a specific action is not.
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // This is an example snippet for showing best practices.
 public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
+{{< /tab >}}
+{{< tab header="Go" >}}
+// exampleSnippet demonstrates best practices.
+func exampleSnippet(projectId, filePath string) error {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -145,6 +176,14 @@ ensure that it works.
 {{< tab header="Java" >}}
 // This is an example snippet for showing best practices.
 public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
+{{< /tab >}}
+{{< tab header="Go" >}}
+// exampleSnippet demonstrates best practices.
+// The function prints to an io.Writer for testing purposes. Do not print to
+// stdout or stderr. Use the io.Writer instead.
+func exampleSnippet(w io.Writer, projectId, filePath string) error {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -197,6 +236,50 @@ public static void listInfoTypes() throws IOException {
   }
 }
 {{< /tab >}}
+{{< tab header="Go" >}}
+import (
+	"context"
+	"fmt"
+
+	dlp "cloud.google.com/go/dlp/apiv2"
+	dlppb "google.golang.org/genproto/googleapis/privacy/dlp/v2"
+)
+
+// listInfoTypes lists the types of sensitive information the DLP API supports.
+func listInfoTypes() error {
+	ctx := context.Background()
+	// Initialize client that will be used to send requests. This client only
+	// needs to be created once, and can be reused for multiple requests. After
+	// completing all of your requests, call the "Close" method on the client to
+	// safely clean up any remaining background resources.
+	c, err := dlp.NewClient(ctx)
+	if err != nil {
+		// TODO: Handle error.
+	}
+	defer c.Close()
+
+	// Construct the request to be sent by the client
+	req := &dlppb.ListInfoTypesRequest{
+		// Only return infoTypes supported by certain parts of the API.
+		// Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+		// Defaults to "supported_by=INSPECT"
+		Filter: "supported_by=INSPECT",
+		// BCP-47 language code for localized infoType friendly names.
+		// Defaults to "en_US"
+		LanguageCode: "en-US",
+	}
+
+	resp, err := c.ListInfoTypes(ctx, req)
+	if err != nil {
+		// TODO: Handle error.
+	}
+	fmt.Println("Infotypes found:")
+	for _, t := range resp.InfoTypes {
+		fmt.Printf("Name: %s\n", t.Name)
+		fmt.Printf("Display name: %s\n", t.DisplayName)
+	}
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs
@@ -206,7 +289,7 @@ paste code directly from cloud.google.com into their own environment. Adding
 CLIs has historically been expensive to maintain in the past, and detracts from
 the purpose of the snippet itself.
 
-## Code 
+## Code
 
 ### Useful comments
 
@@ -217,29 +300,35 @@ Comments should be used as needed, and should follow the following guidelines:
  documentation that lists available options (and when to use them).
 
 ### Authentication
- 
+
 Samples should use authenticate using [Application Default Credentials][ADC].
- 
+
 If the code snippet is platform specific, explicitly show how to use that
 platform's credentials.
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // Most clients use ADC by default. However, if your application needs to showcase a specific
 // credential source, show users how to do that explicitly.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
 {{< /tab >}}
+{{< tab header="Go" >}}
+// Most clients use ADC by default. However, if your application needs to
+// showcase a specific Go credential source, show users how to do that
+// explicitly.
+_ = option.WithCredentialsFile("/path/to/credentials.json")
+{{< /tab >}}
 {{< /tabpane >}}
- 
+
 [ADC]: (https://cloud.google.com/docs/authentication/production)
 
 ### Initializing Clients
- 
+
 Code snippets should show users how to initialize (and clean up, if necessary)
 clients used by the user. Additionally, clients should contain a comment
 clarifying proper usage (such as if clients should be reused for multiple
 requests or if they are thread-safe).
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // Initialize client that will be used to send requests. This client only needs to be created
@@ -250,6 +339,12 @@ try (CloudClient dlp = CloudClient.create()) {
   // make a request with the client
 }
 {{< /tab >}}
+{{< tab header="Go" >}}
+// Don't initialize one client for the entire set of samples and pass it as an
+// argument. Each sample should initialize its own client/service.
+ctx := context.Background()
+c, err := foo.NewClient(ctx)
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Cyclomatic Complexity
@@ -258,14 +353,14 @@ Cyclomatic complexity is the measure of possible code paths. The more code
 paths, the more complex the code snippet, and the harder to understand and test.
 Flow control statements like conditionals (if/else), switches, and loops are
 examples of code that increases cyclomatic complexity.
-	
+
 Code snippets should have a single path demonstrating their purpose with no
 extra code.
 
 ### Error Handling
 
 Samples should include examples and details of how to catch and handle common
-errors that are the result of improper interactions with the client or service. 
+errors that are the result of improper interactions with the client or service.
 
 If there is no solution (or if the solution is too verbose to resolve in a
 sample) it is acceptable to either log or leave a comment explaining what the
@@ -278,6 +373,13 @@ try {
   // Do something
 } catch (IllegalArgumentException ok) {
   // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+}
+{{< /tab >}}
+{{< tab header="Go" >}}
+// If the sample can run into errors, return the errors with additional context.
+// Don't call log.Fatal or friends.
+if err != nil {
+    return fmt.Errorf("foo.NewClient: %v", err)
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -311,7 +413,7 @@ For example, a code snippet that:
 
 ### Coverage
 Code snippets should have reasonable test coverage and all critical code paths
-should have integration tests that test against the production service. 
+should have integration tests that test against the production service.
 
 ## Additional best practices
 

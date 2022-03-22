@@ -51,7 +51,7 @@ are displayed from the documentation. Each region tag should be:
 * In snake case
 
 Region tags should show as much of the sample as possible, so that a user can
-easily copy and pase the sample into their own environment to run it.
+easily copy and paste the sample into their own environment to run it.
 
 ### Imports
 
@@ -112,9 +112,8 @@ the sample work:
 {{< tab header="Go" >}}
 // exampleSnippet moves a persistent disk from one zone to another.
 //
-// Comments should follow the best practices describe in
+// Comments should follow the best practices described in
 // https://golang.org/doc/effective_go.html#commentary.
-// before running the code snippet.
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -124,7 +123,7 @@ Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the
 entrypoint for the snippet. If the values for these variables need to be
 replaced by the user, be explicit that they are example values only. Wherever
-possible, provide a link to documentation that enumartes the options.
+possible, provide a link to documentation that enumerates the options.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}

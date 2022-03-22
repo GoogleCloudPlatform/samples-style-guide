@@ -122,14 +122,18 @@ public static void inspectImageFile(String projectId, String filePath) {
 }
 {{< /tab >}}
 {{< tab header="Python" >}}
-def inspect_image_file(project_id: str, file_path: str):
-    # Snippet content ...
 
 def main():
     # TODO(developer): Replace these variables before running the sample.
     project_id = "my-project-id"
     file_path = "path/to/image.png"
     inspect_image_file(project_id, file_path)
+
+def inspect_image_file(project_id: str, file_path: str):
+    # Snippet content ...
+
+if __name__ == "__main__":
+    main()
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -198,7 +202,8 @@ def list_info_type(
     # needs to be created once, and can be reused for multiple requests. After
     # completing all of your requests, call the "__exit__" method on the client to
     # safely clean up any remaining background resources. Alternatively, use the
-    # client as a context amnager.
+    # client as a context amnager. A single client can be shared across multiple threads.
+    # In multiprocessing# scenarios, create client instances after forking.
     dlp_client = dlp_v2.DlpServiceClient()
 
     # Construct the request to be sent by the client
@@ -278,7 +283,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="Python" >}}
 # This is an example snippet for showing best practices.
-def example_snipet(project_id: str, file_path: str):
+def example_snippet(project_id: str, file_path: str):
     # Snippet content ...
 {{< /tab >}}
 {{< /tabpane >}}
@@ -353,7 +358,8 @@ try (CloudClient dlp = CloudClient.create()) {
 # needs to be created once, and can be reused for multiple requests. After
 # completing all of your requests, call the "__exit__" method on the client to
 # safely clean up any remaining background resources. Alternatively, use the
-# client as a context amnager.
+# client as a context amnager. A single client can be shared across multiple threads.
+# In multiprocessing scenarios, create client instances after forking.
 with dlp_v2.DlpServiceClient() as dlp_client:
     # make a request with the client
 {{< /tab >}}

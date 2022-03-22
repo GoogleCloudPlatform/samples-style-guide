@@ -380,10 +380,11 @@ try {
 }
 {{< /tab >}}
 {{< tab header="Go" >}}
-// If the sample can run into errors, return the errors with additional context.
-// Don't call log.Fatal or friends.
+// If the sample can run into errors, write the error message to the provided
+// io.Writer. Don't call log.Fatal or friends.
 if err != nil {
-    return fmt.Errorf("foo.NewClient: %v", err)
+    fmt.Fprintf("foo.NewClient: %v", err)
+    return
 }
 {{< /tab >}}
 {{< /tabpane >}}

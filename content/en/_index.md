@@ -81,6 +81,9 @@ def example_snippet():
 # [END product_example]
 {{< /tab >}}
 {{<tab header="Go">}}
+package example
+
+// Region tags should start after the package, but before imports.
 # [START product_example]
 import "example.com/resource"
 
@@ -159,7 +162,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="Go" >}}
 // exampleSnippet demonstrates best practices.
-func exampleSnippet(projectId, filePath string) error {
+func exampleSnippet(projectId, filePath string) {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -183,7 +186,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 // exampleSnippet demonstrates best practices.
 // The function prints to an io.Writer for testing purposes. Do not print to
 // stdout or stderr. Use the io.Writer instead.
-func exampleSnippet(w io.Writer, projectId, filePath string) error {
+func exampleSnippet(w io.Writer, projectId, filePath string) {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -246,7 +249,7 @@ import (
 )
 
 // listInfoTypes lists the types of sensitive information the DLP API supports.
-func listInfoTypes() error {
+func listInfoTypes(w io.Writer) {
 	ctx := context.Background()
 	// Initialize client that will be used to send requests. This client only
 	// needs to be created once, and can be reused for multiple requests. After
@@ -273,10 +276,10 @@ func listInfoTypes() error {
 	if err != nil {
 		// TODO: Handle error.
 	}
-	fmt.Println("Infotypes found:")
+	fmt.Fprintln(w, "Infotypes found:")
 	for _, t := range resp.InfoTypes {
-		fmt.Printf("Name: %s\n", t.Name)
-		fmt.Printf("Display name: %s\n", t.DisplayName)
+		fmt.Fprintf(w, "Name: %s\n", t.Name)
+		fmt.Fprintf(w, "Display name: %s\n", t.DisplayName)
 	}
 }
 {{< /tab >}}
@@ -340,8 +343,10 @@ try (CloudClient dlp = CloudClient.create()) {
 }
 {{< /tab >}}
 {{< tab header="Go" >}}
-// Don't initialize one client for the entire set of samples and pass it as an
-// argument. Each sample should initialize its own client/service.
+// Initialize client that will be used to send requests. This client only needs
+// to be created once, and can be reused for multiple requests. After completing
+// all of your requests, call the "Close" method on the client to safely clean
+// up any remaining background resources.
 ctx := context.Background()
 c, err := foo.NewClient(ctx)
 {{< /tab >}}

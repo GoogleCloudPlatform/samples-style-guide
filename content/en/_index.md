@@ -85,7 +85,7 @@ def example_snippet():
 require "example/resource"
 
 def example_snippet
-      # Snippet Content ...
+  # Snippet Content ...
 end     
 
 # [END product_example]
@@ -147,7 +147,7 @@ def example_snippet project_id:, file_path:
 end     
 
 if $PROGRAM_NAME == __FILE__   
-    run_example_snippet
+  run_example_snippet
 end
 
 # [END product_example]
@@ -171,9 +171,9 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="Ruby" >}}
 # This is an example snippet for showing best practices.
-def exampleSnippet projectId:, filePath:
-    # Snippet content ...
-end    
+def example_snippet project_id:, file_path:
+  # Snippet content ...
+end
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -249,13 +249,12 @@ public static void listInfoTypes() throws IOException {
 {{< /tab >}}
 {{< tab header="Ruby" >}}
 # Lists the types of sensitive information the DLP API supports.
-def listInfoTypes
+def list_info_types
 
   # Initialize client that will be used to send requests.
   dlp_client = Google::Cloud::Dlp.dlp_service
 
-  # Construct the request to be sent by the client
-  
+  # Construct the request to be sent by the client 
   list_info_types_request = { 
     # BCP-47 language code for localized info_type friendly names.
     # Defaults to "en_US"
@@ -295,7 +294,7 @@ Comments should be used as needed, and should follow the following guidelines:
 * Comments should be readable and grammatically correct.
 * For values that the user may wish to configure, provide links to
  documentation that lists available options (and when to use them).
- 
+
 ### Authentication
  
 Samples should use authenticate using [Application Default Credentials][ADC].
@@ -314,7 +313,6 @@ GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream
     
     # Most clients use ADC by default. However, if your application needs to showcase a specific
     # credential source, show users how to do that explicitly.
-
     Google::Cloud::Spanner.configure do |config|
       config.project_id  = "my-project-id"
       config.credentials = "path/to/keyfile.json"
@@ -348,8 +346,10 @@ try (CloudClient dlp = CloudClient.create()) {
     
     # Initialize client that will be used to send requests. This client only needs to be created
     # once, and can be reused for multiple requests. After completing all of your requests, call
-    # the "close" method on the client to safely clean up any remaining background resources,
-    client = Google::Cloud::Spanner.new
+    # the "close" method on the client to safely clean up any remaining background resources.
+    spanner = Google::Cloud::Spanner.new
+    spanner_client = spanner.client spanner_instance_id, spanner_database_id
+    spanner_client.close
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -384,9 +384,9 @@ try {
 {{< tab header="Ruby" >}}
     # Catch the most specific type of Exception, instead of a more general one.
     begin
-        # Do something
+      # Do something
     rescue Google::Cloud::AlreadyExistsError
-        # Do nothing if it already exists
+      # Do nothing if it already exists
     end
 {{< /tab >}}
 {{< /tabpane >}}

@@ -237,16 +237,24 @@ public static void listInfoTypes() throws IOException {
 }
 {{< /tab >}}
 {{< tab header="C#" >}}
+// Lists the types of sensitive information the DLP API supports.
 public static ListInfoTypesResponse ListInfoTypes(string languageCode, string filter)
 {
-    var dlp = DlpServiceClient.Create();
+    // Initialize client that will be used to send requests. This client only needs to be created
+    // once, and can be reused for multiple requests. By leveraging a "using" declaration the
+    // client will be safely disposed when execution falls outside the enclosing statement block,
+    // cleaning up any remaining background resources.
+    using var dlp = DlpServiceClient.Create();
+    // Use the client to send the API request.
     var response = dlp.ListInfoTypes(
+        // Construct the request to be sent by the client
         new ListInfoTypesRequest
         {
             LanguageCode = languageCode,
             Filter = filter
         });
 
+    // Parse the response and process the results.
     Console.WriteLine("Info Types:");
     foreach (var InfoType in response.InfoTypes)
     {
@@ -323,6 +331,15 @@ using (var client = Server.CreateClient())
 {
     // make a request with the client
 }
+
+// Another option is to use a "using" declaration, which will dispose of the resource
+// when execution falls outside the enclosing statement.
+static void ExampleMethod()
+{
+    using var client = Server.CreateClient();
+    // make a request with the client
+}
+
 {{< /tab >}}
 {{< /tabpane >}}
 

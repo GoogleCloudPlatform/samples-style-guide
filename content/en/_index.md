@@ -151,7 +151,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="PHP" >}}
 // This is an example snippet for showing best practices.
-function example_snippet($projectId, $filePath) {
+function example_snippet(string $projectId, string $filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -173,7 +173,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="PHP" >}}
 // This is an example snippet for showing best practices.
-function example_snippet($projectId, $filePath) {
+function example_snippet(string $projectId, string $filePath) {
     // Snippet content ...
     printf(
       'Response values: %s, %s',
@@ -366,7 +366,7 @@ try {
 try {
     // Do something.
 } catch (InvalidArgumentException $e) {
-    // IllegalArgumentException's are thrown when an invalid argument has been passed to a function.
+    // IllegalArgumentException is thrown when an invalid argument has been passed to a function.
 }
 {{< /tab >}}
 {{< /tabpane >}}

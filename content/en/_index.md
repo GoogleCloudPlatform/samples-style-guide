@@ -51,14 +51,14 @@ are displayed from the documentation. Each region tag should be:
 * In snake case
 
 Region tags should show as much of the sample as possible, so that a user can
-easily copy and pase the sample into their own environment to run it. 
+easily copy and paste the sample into their own environment to run it. 
 
 ### Imports
  
 Samples should include any imports used in the sample.
  
 This is easiest to enforce/detect when the samples are in their own file, so
-samples should be structured as such unless their is a compelling reason not to.
+samples should be structured as such unless there is a compelling reason not to.
  
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -80,6 +80,18 @@ def example_snippet():
 
 # [END product_example]
 {{< /tab >}}
+{{< tab header="C#" >}}
+// [START product_example]
+using System;
+namespace Example
+{
+    public class ExampleSnippet {   
+        // Snippet methods ...
+    }
+}
+// [END product_example]
+
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description
@@ -96,6 +108,12 @@ the sample work:
 * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 */
 {{< /tab >}}
+{{< tab header="C#" >}}
+// Moves a persistent disk from one zone to another.
+//
+// See https://cloud.google.com/compute/docs/quickstart-client-libraries before 
+// running the code snippet.
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Main runner
@@ -104,7 +122,7 @@ Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the
 entrypoint for the snippet. If the values for these variables need to be
 replaced by the user, be explicit that they are example values only. Wherever
-possible, provide a link to documentation that enumartes the options.
+possible, provide a link to documentation that enumerates the options.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -112,6 +130,14 @@ public static void main(String[] args) {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "my-project-id";
     String filePath = "path/to/image.png";
+    exampleSnippet(projectId, filePath);
+}
+{{< /tab >}}
+{{< tab header="C#" >}}
+public static void Main(string[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    string projectId = "my-project-id";
+    string filePath = "path/to/image.png";
     exampleSnippet(projectId, filePath);
 }
 {{< /tab >}}
@@ -132,6 +158,12 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="C#" >}}
+// This is an example snippet for showing best practices.
+public static void exampleSnippet(string projectId, string filePath) {
+   // Snippet content ...
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result
@@ -148,6 +180,13 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="C#" >}}
+// This is an example snippet for showing best practices.
+public static void exampleSnippet(string projectId, string filePath) {
+    // Snippet content ...
+    Console.WriteLine($"Example {data} for project: {projectId}");
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Arrange, Act, Assert
@@ -161,7 +200,7 @@ more approachable to beginners:
  understanding the samples more confusing.
 1. **Act** - Send the request to the service and receive a response.
 1. **Assert** - Verify that the call was successful and that a response was
- return as expected. This is typically done by printing some aspects of the
+ returned as expected. This is typically done by printing some aspects of the
  response to stdout.
 
 {{< tabpane langEqualsHeader=true >}}
@@ -197,6 +236,26 @@ public static void listInfoTypes() throws IOException {
   }
 }
 {{< /tab >}}
+{{< tab header="C#" >}}
+public static ListInfoTypesResponse ListInfoTypes(string languageCode, string filter)
+{
+    var dlp = DlpServiceClient.Create();
+    var response = dlp.ListInfoTypes(
+        new ListInfoTypesRequest
+        {
+            LanguageCode = languageCode,
+            Filter = filter
+        });
+
+    Console.WriteLine("Info Types:");
+    foreach (var InfoType in response.InfoTypes)
+    {
+        Console.WriteLine($"\t{InfoType.Name} ({InfoType.DisplayName})");
+    }
+
+    return response;
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs
@@ -229,6 +288,11 @@ platform's credentials.
 // credential source, show users how to do that explicitly.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
 {{< /tab >}}
+{{< tab header="C#" >}}
+// Most clients use ADC by default. However, if your application needs to showcase a specific
+// credential source, show users how to do that explicitly.
+var credentials = GoogleCredential.FromFile("/path/to/credentials.json");
+{{< /tab >}}
 {{< /tabpane >}}
  
 [ADC]: (https://cloud.google.com/docs/authentication/production)
@@ -248,6 +312,16 @@ requests or if they are thread-safe).
 // or use "try-with-close" statement to do this automatically.
 try (CloudClient dlp = CloudClient.create()) {
   // make a request with the client
+}
+{{< /tab >}}
+{{< tab header="C#" >}}
+// Initialize client that will be used to send requests. This client only needs to be created
+// once, and can be reused for multiple requests. After completing all of your requests, call
+// the "Dispose" method on the client to safely clean up any remaining background resources,
+// or employ a "using" statement to do this automatically.
+using (var client = Server.CreateClient())
+{
+    // make a request with the client
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -278,6 +352,17 @@ try {
   // Do something
 } catch (IllegalArgumentException ok) {
   // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+}
+{{< /tab >}}
+{{< tab header="C#" >}}
+try
+{
+    // Do something
+}
+catch (ArgumentException e)
+{
+    //ArgumentException's are thrown when one of the arguments provided to a method is not valid.
+    Console.WriteLine(e.Message);
 }
 {{< /tab >}}
 {{< /tabpane >}}

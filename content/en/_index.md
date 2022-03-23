@@ -132,17 +132,6 @@ public static void main(String[] args) {
     exampleSnippet(projectId, filePath);
 }
 {{< /tab >}}
-{{< tab header="PHP" >}}
-/**
- * PHP has evolved separate from the guidelines on Method Structure & No CLIs.
- *
- * TODO(main runner): Should PHP samples start using the main runner concept?
- * TODO(no cli clarification): Related, PHP is doing CLIs https://github.com/GoogleCloudPlatform/php-docs-samples/blob/master/testing/sample_helpers.php
- * TODO(parameters): There are two models of documenting parameters:
- * - Docblock comment: https://github.com/GoogleCloudPlatform/php-docs-samples/blob/master/media/transcoder/src/list_job_templates.php#L30
- * - Commented out variables in global scope: https://github.com/GoogleCloudPlatform/php-docs-samples/blob/master/bigquery/api/src/browse_table.php#L36
- */
-{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments

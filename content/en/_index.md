@@ -135,19 +135,23 @@ public static void main(String[] args) {
 # [START product_example]
 require "example/resource"
 
-def run_example_snippet:
-  # TODO(developer): Replace these variables before running the sample.
-  project_id = "my-project-id"
-  file_path = "path/to/image.png"
-  example_snippet project_id: project_id, file_path: file_path
-end
- 
-def example_snippet project_id:, file_path:
-  # Snippet content ...
-end     
+class Example
+  def snippet project_id:, file_path:
+    # Snippet content ...
+  end 
+
+  def self.run
+    # TODO(developer): Replace these variables before running the sample.
+    project_id = "my-project-id"
+    file_path = "path/to/image.png"
+    
+    example = Example.new
+    example.snippet project_id: project_id, file_path: file_path
+  end
+end      
 
 if $PROGRAM_NAME == __FILE__   
-  run_example_snippet
+  Example.run
 end
 
 # [END product_example]

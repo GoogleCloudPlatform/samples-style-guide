@@ -85,7 +85,8 @@ def example_snippet():
 using System;
 namespace Example
 {
-    public class ExampleSnippet {   
+    public class ExampleSnippet
+    {   
         // Snippet methods ...
     }
 }
@@ -134,11 +135,11 @@ public static void main(String[] args) {
 }
 {{< /tab >}}
 {{< tab header="C#" >}}
-public static void Main(string[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    string projectId = "my-project-id";
-    string filePath = "path/to/image.png";
-    exampleSnippet(projectId, filePath);
+public void Example(
+    string projectId = "my-project-id,
+    string filePath = "path/to/image.png")
+{
+    // Snippet content ...
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -160,8 +161,11 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="C#" >}}
 // This is an example snippet for showing best practices.
-public static void exampleSnippet(string projectId, string filePath) {
-   // Snippet content ...
+public void Example(
+    string projectId = "my-project-id,
+    string filePath = "path/to/image.png")
+{
+    // Snippet content ...
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -182,7 +186,10 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="C#" >}}
 // This is an example snippet for showing best practices.
-public static void exampleSnippet(string projectId, string filePath) {
+public void Example(
+    string projectId = "my-project-id,
+    string filePath = "path/to/image.png")
+{
     // Snippet content ...
     Console.WriteLine($"Example {data} for project: {projectId}");
 }
@@ -238,13 +245,13 @@ public static void listInfoTypes() throws IOException {
 {{< /tab >}}
 {{< tab header="C#" >}}
 // Lists the types of sensitive information the DLP API supports.
-public static ListInfoTypesResponse ListInfoTypes(string languageCode, string filter)
+public ListInfoTypesResponse ListInfoTypes(
+    string languageCode = "en-US",
+    string filter = "supported_by=INSPECT")
 {
-    // Initialize client that will be used to send requests. This client only needs to be created
-    // once, and can be reused for multiple requests. By leveraging a "using" declaration the
-    // client will be safely disposed when execution falls outside the enclosing statement block,
-    // cleaning up any remaining background resources.
-    using var dlp = DlpServiceClient.Create();
+    // Initialize the client that will be used to send requests. This client only needs to be created
+    // once, and can be reused for multiple requests.
+    var dlp = DlpServiceClient.Create();
     // Use the client to send the API request.
     var response = dlp.ListInfoTypes(
         // Construct the request to be sent by the client
@@ -297,7 +304,7 @@ platform's credentials.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
 {{< /tab >}}
 {{< tab header="C#" >}}
-// Most clients use ADC by default. However, if your application needs to showcase a specific
+// All clients use ADC by default. However, if your application needs to showcase a specific
 // credential source, show users how to do that explicitly.
 var credentials = GoogleCredential.FromFile("/path/to/credentials.json");
 {{< /tab >}}

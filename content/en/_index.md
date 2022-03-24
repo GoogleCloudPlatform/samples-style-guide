@@ -83,12 +83,10 @@ def example_snippet():
 {{< tab header="C#" >}}
 // [START product_example]
 using System;
-namespace Example
-{
-    public class ExampleSnippet
-    {   
-        // Snippet methods ...
-    }
+
+public class ExampleSnippet
+{   
+    // Snippet methods ...
 }
 // [END product_example]
 
@@ -111,7 +109,7 @@ the sample work:
 {{< /tab >}}
 {{< tab header="C#" >}}
 // Moves a persistent disk from one zone to another.
-//
+
 // See https://cloud.google.com/compute/docs/quickstart-client-libraries before 
 // running the code snippet.
 {{< /tab >}}
@@ -254,7 +252,7 @@ public ListInfoTypesResponse ListInfoTypes(
     var dlp = DlpServiceClient.Create();
     // Use the client to send the API request.
     var response = dlp.ListInfoTypes(
-        // Construct the request to be sent by the client
+        // Construct the request to be sent by the client.
         new ListInfoTypesRequest
         {
             LanguageCode = languageCode,
@@ -330,21 +328,27 @@ try (CloudClient dlp = CloudClient.create()) {
 }
 {{< /tab >}}
 {{< tab header="C#" >}}
-// Initialize client that will be used to send requests. This client only needs to be created
-// once, and can be reused for multiple requests. After completing all of your requests, call
-// the "Dispose" method on the client to safely clean up any remaining background resources,
-// or employ a "using" statement to do this automatically.
+// Initialize the client that will be used to send requests. This client only needs to be created
+// once, and can be reused for multiple requests across your entire application.
+
+var client = Server.CreateClient();
+// make a request with the client.
+
+// If for any reason the client lifetime needs to be scoped to a single method,
+// you can use a "using" statement or a "using" declaration.
+
+// Example "using" statement.
 using (var client = Server.CreateClient())
 {
-    // make a request with the client
+    // make a request with the client.
 }
 
-// Another option is to use a "using" declaration, which will dispose of the resource
-// when execution falls outside the enclosing statement.
+// Example "using" declaration, which will dispose of the resource
+// when execution falls outside the enclosing statement block.
 static void ExampleMethod()
 {
     using var client = Server.CreateClient();
-    // make a request with the client
+    // make a request with the client.
 }
 
 {{< /tab >}}

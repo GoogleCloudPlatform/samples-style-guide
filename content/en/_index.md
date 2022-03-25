@@ -345,7 +345,7 @@ using (var client = Server.CreateClient())
 
 // Example "using" declaration, which will dispose of the resource
 // when execution falls outside the enclosing statement block.
-static void ExampleMethod()
+public void ExampleMethod()
 {
     using var client = Server.CreateClient();
     // make a request with the client.

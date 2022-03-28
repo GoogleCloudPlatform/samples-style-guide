@@ -80,6 +80,15 @@ def example_snippet():
 
 # [END product_example]
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+// [START product_example]
+const resource = require('@google-cloud/example');
+
+const exampleSnippet = function() {
+    // Snippet content ...
+}
+// [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description
@@ -90,6 +99,13 @@ the sample work:
  
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
+/**
+* Moves a persistent disk from one zone to another.
+*
+* See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+*/
+{{< /tab >}}
+{{< tab header="Node.js" >}}
 /**
 * Moves a persistent disk from one zone to another.
 *
@@ -115,6 +131,14 @@ public static void main(String[] args) {
     exampleSnippet(projectId, filePath);
 }
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+function main() {
+  // TODO(developer): Replace these variables before running the sample.
+  const projectId = "my-project-id";
+  const filePath = "path/to/image.png";
+  exampleSnippet(arg1, arg2);
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments
@@ -130,6 +154,18 @@ a file or a specific action is not.
 // This is an example snippet for showing best practices.
 public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
+}
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+function main() {
+  // This argument is required, and should be declared
+  const requiredArg = '...';
+
+  exampleSnippet(requiredArg)
+}
+
+const exampleSnippet = function(requiredArg) {
+  // Snippet content...
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -148,6 +184,12 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+const exampleSnippet = function(projectId, filePath) {
+  // Snippet content ...
+  // (This snippet should not `return` anything.)
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Arrange, Act, Assert
@@ -163,6 +205,8 @@ more approachable to beginners:
 1. **Assert** - Verify that the call was successful and that a response was
  return as expected. This is typically done by printing some aspects of the
  response to stdout.
+
+The samples below show this in action.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -197,6 +241,39 @@ public static void listInfoTypes() throws IOException {
   }
 }
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+// Imports the Google Cloud Data Loss Prevention library
+const {DlpServiceClient} = require('@google-cloud/dlp');
+
+// Instantiates a reusable client object
+const dlpClientInstance = new DlpServiceClient();
+
+// Lists the types of sensitive information the DLP API supports.
+async function listInfoTypes() {
+  // Only return infoTypes supported by certain parts of the API.
+  // Supported filters are:
+  //   "supported_by=INSPECT"
+  //   "supported_by=RISK_ANALYSIS"
+  const filter = 'supported_by=INSPECT';
+
+  // BCP-47 language code for localized infoType friendly names.
+  // Defaults to "en_US"
+  languageCode = 'en-us';
+
+  // Perform the API request.
+  const [response] = await dlpClientInstance.listInfoTypes({
+    languageCode,
+    filter
+  });
+
+  // Parse the response and process the results.
+  const infoTypes = response.infoTypes;
+  console.log('Info types:');
+  infoTypes.forEach(infoType => {
+    console.log(`\t${infoType.name} (${infoType.displayName})`);
+  });
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs
@@ -229,6 +306,15 @@ platform's credentials.
 // credential source, show users how to do that explicitly.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+// Most clients use ADC by default. However, if your application needs to showcase a specific
+// credential source, show users how to do that explicitly.
+const keyFile = '/path/to/credentials.json';
+const auth = new GoogleAuth({
+  keyFile: keyFile,
+  scopes: 'https://www.googleapis.com/auth/cloud-platform',
+});
+{{< /tab >}}
 {{< /tabpane >}}
  
 [ADC]: (https://cloud.google.com/docs/authentication/production)
@@ -249,6 +335,14 @@ requests or if they are thread-safe).
 try (CloudClient dlp = CloudClient.create()) {
   // make a request with the client
 }
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+// Imports the Google Cloud Data Loss Prevention library
+const {DlpServiceClient} = require('@google-cloud/dlp');
+
+// Instantiates a reusable client object in the global scope.
+// (Node.js will automatically clean it up when the script terminates.)
+const dlpClientInstance = new DlpServiceClient();
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -273,11 +367,26 @@ developer should do.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
-// Follow the Google Java style guide and catch the most specific type of Exception, instead of a more general one.
+// Always catch the most specific type of Exception, instead of a more general one.
 try {
   // Do something
 } catch (IllegalArgumentException ok) {
   // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+}
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+// Unhandled exceptions will cause Node.js to crash. Log exception
+// messages via console.error(), and handle any non-fatal exceptions.
+try {
+  // Do something
+} catch (e) {
+  // Log the error to stdout
+  console.error('Error:', e.message);
+
+  // Reraise any fatal exceptions
+  if (/* exception is fatal */) {
+    throw e
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}

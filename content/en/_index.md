@@ -206,8 +206,7 @@ more approachable to beginners:
  return as expected. This is typically done by printing some aspects of the
  response to stdout.
 
-The samples below show this in action. Note that you do **not** need to copy the
-`ARRANGE`, `ACT`, or `ASSERT` comments into your own samples.
+The samples below show this in action.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -244,10 +243,10 @@ public static void listInfoTypes() throws IOException {
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Imports the Google Cloud Data Loss Prevention library
-const DLP = require('@google-cloud/dlp');
+const {DlpServiceClient} = require('@google-cloud/dlp');
 
 // Instantiates a reusable client object
-const dlp = new DLP.DlpServiceClient();
+const dlpClientInstance = new DlpServiceClient();
 
 // Lists the types of sensitive information the DLP API supports.
 async function listInfoTypes() {
@@ -262,7 +261,7 @@ async function listInfoTypes() {
   languageCode = 'en-us';
 
   // Perform the API request.
-  const [response] = await dlp.listInfoTypes({
+  const [response] = await dlpClientInstance.listInfoTypes({
     languageCode,
     filter
   });

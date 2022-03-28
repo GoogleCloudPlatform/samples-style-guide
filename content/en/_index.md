@@ -89,6 +89,16 @@ const exampleSnippet = function() {
 }
 // [END product_example]
 {{< /tab >}}
+{{< tab header="Ruby" >}}
+# [START product_example]
+require "example/resource"
+
+def example_snippet
+  # Snippet Content ...
+end     
+
+# [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description
@@ -111,6 +121,11 @@ the sample work:
 *
 * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 */
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# Moves a persistent disk from one zone to another.
+#
+# See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -138,6 +153,31 @@ function main() {
   const filePath = "path/to/image.png";
   exampleSnippet(arg1, arg2);
 }
+{{< /tab >}}
+{{< tab header="Ruby">}}
+# [START product_example]
+require "example/resource"
+
+class Example
+  def snippet project_id:, file_path:
+    # Snippet content ...
+  end 
+
+  def self.run
+    # TODO(developer): Replace these variables before running the sample.
+    project_id = "my-project-id"
+    file_path = "path/to/image.png"
+
+    example = Example.new
+    example.snippet project_id: project_id, file_path: file_path
+  end
+end      
+
+if $PROGRAM_NAME == __FILE__   
+  Example.run
+end
+
+# [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -168,6 +208,12 @@ const exampleSnippet = function(requiredArg) {
   // Snippet content...
 }
 {{< /tab >}}
+{{< tab header="Ruby" >}}
+# This is an example snippet for showing best practices.
+def example_snippet project_id:, file_path:
+  # Snippet content ...
+end
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result
@@ -189,6 +235,13 @@ const exampleSnippet = function(projectId, filePath) {
   // Snippet content ...
   // (This snippet should not `return` anything.)
 }
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+def example_snippet project_id:, file_path: 
+  # Snippet content ...
+  response = client.example_action example_action_request
+  puts "Got the following response #{response.details}"
+end
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -233,13 +286,13 @@ public static void listInfoTypes() throws IOException {
     ListInfoTypesResponse response = dlpClient.listInfoTypes(listInfoTypesRequest);
 
     // Parse the response and process the results
-    System.out.println("Infotypes found:");
+    System.out.println("Info types found:");
     for (InfoTypeDescription infoTypeDescription : response.getInfoTypesList()) {
       System.out.println("Name : " + infoTypeDescription.getName());
       System.out.println("Display name : " + infoTypeDescription.getDisplayName());
     }
   }
-}
+}  
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Imports the Google Cloud Data Loss Prevention library
@@ -273,6 +326,35 @@ async function listInfoTypes() {
     console.log(`\t${infoType.name} (${infoType.displayName})`);
   });
 }
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# Lists the types of sensitive information the DLP API supports.
+def list_info_types
+
+  # Initialize client that will be used to send requests.
+  dlp_client = Google::Cloud::Dlp.dlp_service
+
+  # Construct the request to be sent by the client 
+  list_info_types_request = { 
+    # BCP-47 language code for localized info_type friendly names.
+    # Defaults to "en_US"
+    parent: "en-US", 
+    
+    # Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+    # Defaults to "supported_by=INSPECT"
+    filter: "supported_by=INSPECT" 
+  }
+
+  # Use the client to send the API request.
+  list_info_types_response = dlp_client.list_info_types request
+
+  # Parse the response and process the results
+  puts "Info types found:"
+  list_info_types_response.info_types.each do |info_type|
+    puts "Name : #{info_type.name}"
+    puts "Display name: #{info_type.display_name}"
+  end
+end
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -315,6 +397,18 @@ const auth = new GoogleAuth({
   scopes: 'https://www.googleapis.com/auth/cloud-platform',
 });
 {{< /tab >}}
+{{< tab header="Ruby" >}}
+require "google/cloud/spanner"
+
+# Most clients use ADC by default. However, if your application needs to showcase a specific
+# credential source, show users how to do that explicitly.
+Google::Cloud::Spanner.configure do |config|
+  config.project_id  = "my-project-id"
+  config.credentials = "path/to/keyfile.json"
+end
+
+client = Google::Cloud::Spanner.new
+{{< /tab >}}
 {{< /tabpane >}}
  
 [ADC]: (https://cloud.google.com/docs/authentication/production)
@@ -343,6 +437,16 @@ const {DlpServiceClient} = require('@google-cloud/dlp');
 // Instantiates a reusable client object in the global scope.
 // (Node.js will automatically clean it up when the script terminates.)
 const dlpClientInstance = new DlpServiceClient();
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+require "google/cloud/spanner"
+
+# Initialize client that will be used to send requests. This client only needs to be created
+# once, and can be reused for multiple requests. After completing all of your requests, call
+# the "close" method on the client to safely clean up any remaining background resources.
+spanner = Google::Cloud::Spanner.new
+spanner_client = spanner.client spanner_instance_id, spanner_database_id
+spanner_client.close
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -388,6 +492,14 @@ try {
     throw e
   }
 }
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# Catch the most specific type of Exception, instead of a more general one.
+begin
+  # Do something
+rescue Google::Cloud::AlreadyExistsError
+  # Do nothing if it already exists
+end
 {{< /tab >}}
 {{< /tabpane >}}
 

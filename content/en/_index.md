@@ -338,11 +338,11 @@ try (CloudClient dlp = CloudClient.create()) {
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Imports the Google Cloud Data Loss Prevention library
-const DLP = require('@google-cloud/dlp');
+const {DlpServiceClient} = require('@google-cloud/dlp');
 
 // Instantiates a reusable client object in the global scope.
 // (Node.js will automatically clean it up when the script terminates.)
-const dlp = new DLP.DlpServiceClient();
+const dlpClientInstance = new DlpServiceClient();
 {{< /tab >}}
 {{< /tabpane >}}
 

@@ -23,7 +23,11 @@ jobs:
   preview:
     runs-on: ubuntu-20.04
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+      # Run in the same concurrency group as PR previews.
+      # 'Preview' is the name of github_pages_preview.yml workflow.
+      group: "Preview-${{ github.event.number || github.ref }}"
+      # If cleanup is triggered, cancel existing stage jobs.
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v3
         with:

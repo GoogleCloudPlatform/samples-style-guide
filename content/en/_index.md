@@ -139,7 +139,7 @@ func main() {
     // TODO(developer): Replace these variables before running the sample.
     projectId := "my-project-id"
     filePath := "path/to/image.png"
-    exampleSnippet(projectId, filePath)
+    exampleSnippet(os.Stdout, projectId, filePath)
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -348,6 +348,12 @@ try (CloudClient dlp = CloudClient.create()) {
 // up any remaining background resources.
 ctx := context.Background()
 c, err := foo.NewClient(ctx)
+if err != nil {
+    // TODO(developer): handle error
+}
+defer c.Close()
+
+// make a request with the client.
 {{< /tab >}}
 {{< /tabpane >}}
 

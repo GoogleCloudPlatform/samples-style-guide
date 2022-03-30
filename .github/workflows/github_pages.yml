@@ -70,5 +70,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           # Do not delete previews on each production deploy.
+          # CSS or JS changes will require manual clean-up.
           keep_files: true
-          commit_message: ${{ github.event.head_commit.message }}
+          commit_message: "deploy: ${{ github.event.head_commit.message }}"

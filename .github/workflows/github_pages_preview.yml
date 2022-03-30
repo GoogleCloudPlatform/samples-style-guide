@@ -65,7 +65,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           destination_dir: ./previews/PR-${{ github.event.number }}
-          commit_message: ${{ github.event.head_commit.message }}
+          commit_message: "stage: PR-${{ github.event.number }}: ${{ github.event.head_commit.message }}"
 
       - name: Comment
         uses: actions/github-script@v6

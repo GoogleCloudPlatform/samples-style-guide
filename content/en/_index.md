@@ -84,15 +84,15 @@ def example_snippet():
 package example
 
 // Region tags should start after the package, but before imports.
-# [START product_example]
+// [START product_example]
 import "example.com/resource"
 
 func exampleSnippet() {
     // Snippet Content ...
 }
 
-# [END product_example]
-{{< /tab >}}}}
+// [END product_example]
+{{< /tab >}}
 {{< tab header="Node.js" >}}
 // [START product_example]
 const resource = require('@google-cloud/example');
@@ -417,7 +417,8 @@ GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream
 // Most clients use ADC by default. However, if your application needs to
 // showcase a specific Go credential source, show users how to do that
 // explicitly.
-_ = option.WithCredentialsFile("/path/to/credentials.json")
+ctx := context.Background()
+foo.NewClient(ctx, option.WithCredentialsFile("/path/to/credentials.json"))
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Most clients use ADC by default. However, if your application needs to showcase a specific
@@ -473,7 +474,7 @@ if err != nil {
 }
 defer c.Close()
 
-// make a request with the client.
+// make a request with the client...
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Imports the Google Cloud Data Loss Prevention library
@@ -528,6 +529,7 @@ try {
 // io.Writer. Don't call log.Fatal or friends.
 if err != nil {
     fmt.Fprintf(w, "foo.NewClient: %v", err)
+    // TODO(developer): handle error
     return
 }
 {{< /tab >}}

@@ -470,7 +470,9 @@ try (CloudClient dlp = CloudClient.create()) {
 ctx := context.Background()
 c, err := foo.NewClient(ctx)
 if err != nil {
-    // TODO(developer): handle error
+    // TODO(developer): return or handle error as necessary
+    fmt.Fprintf(w, "failed to initialize foo.Client: %v", err)
+    return
 }
 defer c.Close()
 
@@ -528,8 +530,8 @@ try {
 // If the sample can run into errors, write the error message to the provided
 // io.Writer. Don't call log.Fatal or friends.
 if err != nil {
-    fmt.Fprintf(w, "foo.NewClient: %v", err)
-    // TODO(developer): handle error
+    // TODO(developer): return or handle error as necessary
+    fmt.Fprintf(w, "failed to initialize foo.Client: %v", err)
     return
 }
 {{< /tab >}}

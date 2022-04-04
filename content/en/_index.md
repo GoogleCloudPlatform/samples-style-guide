@@ -80,6 +80,25 @@ def example_snippet():
 
 # [END product_example]
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+// [START product_example]
+const resource = require('@google-cloud/example');
+
+const exampleSnippet = function() {
+    // Snippet content ...
+}
+// [END product_example]
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# [START product_example]
+require "example/resource"
+
+def example_snippet
+  # Snippet Content ...
+end     
+
+# [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description
@@ -96,24 +115,17 @@ the sample work:
 * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 */
 {{< /tab >}}
-{{< /tabpane >}}
-
-### Main runner
-
-Any declared function arguments should include a no-arg, main method with
-examples for how the user can initialize the method arguments and call the
-entrypoint for the snippet. If the values for these variables need to be
-replaced by the user, be explicit that they are example values only. Wherever
-possible, provide a link to documentation that enumartes the options.
-
-{{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-public static void main(String[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "my-project-id";
-    String filePath = "path/to/image.png";
-    exampleSnippet(projectId, filePath);
-}
+{{< tab header="Node.js" >}}
+/**
+* Moves a persistent disk from one zone to another.
+*
+* See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+*/
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# Moves a persistent disk from one zone to another.
+#
+# See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -132,6 +144,24 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+function main() {
+  // This argument is required, and should be declared
+  const requiredArg = '...';
+
+  exampleSnippet(requiredArg)
+}
+
+const exampleSnippet = function(requiredArg) {
+  // Snippet content...
+}
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# This is an example snippet for showing best practices.
+def example_snippet project_id:, file_path:
+  # Snippet content ...
+end
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result
@@ -148,6 +178,19 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+const exampleSnippet = function(projectId, filePath) {
+  // Snippet content ...
+  // (This snippet should not `return` anything.)
+}
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+def example_snippet project_id:, file_path: 
+  # Snippet content ...
+  response = client.example_action example_action_request
+  puts "Got the following response #{response.details}"
+end
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Arrange, Act, Assert
@@ -163,6 +206,8 @@ more approachable to beginners:
 1. **Assert** - Verify that the call was successful and that a response was
  return as expected. This is typically done by printing some aspects of the
  response to stdout.
+
+The samples below show this in action.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -189,13 +234,75 @@ public static void listInfoTypes() throws IOException {
     ListInfoTypesResponse response = dlpClient.listInfoTypes(listInfoTypesRequest);
 
     // Parse the response and process the results
-    System.out.println("Infotypes found:");
+    System.out.println("Info types found:");
     for (InfoTypeDescription infoTypeDescription : response.getInfoTypesList()) {
       System.out.println("Name : " + infoTypeDescription.getName());
       System.out.println("Display name : " + infoTypeDescription.getDisplayName());
     }
   }
+}  
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+// Imports the Google Cloud Data Loss Prevention library
+const {DlpServiceClient} = require('@google-cloud/dlp');
+
+// Instantiates a reusable client object
+const dlpClientInstance = new DlpServiceClient();
+
+// Lists the types of sensitive information the DLP API supports.
+async function listInfoTypes() {
+  // Only return infoTypes supported by certain parts of the API.
+  // Supported filters are:
+  //   "supported_by=INSPECT"
+  //   "supported_by=RISK_ANALYSIS"
+  const filter = 'supported_by=INSPECT';
+
+  // BCP-47 language code for localized infoType friendly names.
+  // Defaults to "en_US"
+  languageCode = 'en-us';
+
+  // Perform the API request.
+  const [response] = await dlpClientInstance.listInfoTypes({
+    languageCode,
+    filter
+  });
+
+  // Parse the response and process the results.
+  const infoTypes = response.infoTypes;
+  console.log('Info types:');
+  infoTypes.forEach(infoType => {
+    console.log(`\t${infoType.name} (${infoType.displayName})`);
+  });
 }
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# Lists the types of sensitive information the DLP API supports.
+def list_info_types
+
+  # Initialize client that will be used to send requests.
+  dlp_client = Google::Cloud::Dlp.dlp_service
+
+  # Construct the request to be sent by the client 
+  list_info_types_request = { 
+    # BCP-47 language code for localized info_type friendly names.
+    # Defaults to "en_US"
+    parent: "en-US", 
+    
+    # Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+    # Defaults to "supported_by=INSPECT"
+    filter: "supported_by=INSPECT" 
+  }
+
+  # Use the client to send the API request.
+  list_info_types_response = dlp_client.list_info_types request
+
+  # Parse the response and process the results
+  puts "Info types found:"
+  list_info_types_response.info_types.each do |info_type|
+    puts "Name : #{info_type.name}"
+    puts "Display name: #{info_type.display_name}"
+  end
+end
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -229,6 +336,27 @@ platform's credentials.
 // credential source, show users how to do that explicitly.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+// Most clients use ADC by default. However, if your application needs to showcase a specific
+// credential source, show users how to do that explicitly.
+const keyFile = '/path/to/credentials.json';
+const auth = new GoogleAuth({
+  keyFile: keyFile,
+  scopes: 'https://www.googleapis.com/auth/cloud-platform',
+});
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+require "google/cloud/spanner"
+
+# Most clients use ADC by default. However, if your application needs to showcase a specific
+# credential source, show users how to do that explicitly.
+Google::Cloud::Spanner.configure do |config|
+  config.project_id  = "my-project-id"
+  config.credentials = "path/to/keyfile.json"
+end
+
+client = Google::Cloud::Spanner.new
+{{< /tab >}}
 {{< /tabpane >}}
  
 [ADC]: (https://cloud.google.com/docs/authentication/production)
@@ -249,6 +377,24 @@ requests or if they are thread-safe).
 try (CloudClient dlp = CloudClient.create()) {
   // make a request with the client
 }
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+// Imports the Google Cloud Data Loss Prevention library
+const {DlpServiceClient} = require('@google-cloud/dlp');
+
+// Instantiates a reusable client object in the global scope.
+// (Node.js will automatically clean it up when the script terminates.)
+const dlpClientInstance = new DlpServiceClient();
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+require "google/cloud/spanner"
+
+# Initialize client that will be used to send requests. This client only needs to be created
+# once, and can be reused for multiple requests. After completing all of your requests, call
+# the "close" method on the client to safely clean up any remaining background resources.
+spanner = Google::Cloud::Spanner.new
+spanner_client = spanner.client spanner_instance_id, spanner_database_id
+spanner_client.close
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -273,12 +419,35 @@ developer should do.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
-// Follow the Google Java style guide and catch the most specific type of Exception, instead of a more general one.
+// Always catch the most specific type of Exception, instead of a more general one.
 try {
   // Do something
 } catch (IllegalArgumentException ok) {
   // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
 }
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+// Unhandled exceptions will cause Node.js to crash. Log exception
+// messages via console.error(), and handle any non-fatal exceptions.
+try {
+  // Do something
+} catch (e) {
+  // Log the error to stdout
+  console.error('Error:', e.message);
+
+  // Reraise any fatal exceptions
+  if (/* exception is fatal */) {
+    throw e
+  }
+}
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+# Catch the most specific type of Exception, instead of a more general one.
+begin
+  # Do something
+rescue Google::Cloud::AlreadyExistsError
+  # Do nothing if it already exists
+end
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -328,3 +497,62 @@ idiomatic to the language, though cross-language consistency does not hurt.
 Use features that work in all GCP-supported versions of a language and use
 language idioms that the community understands. Generally, do things “the way
 the community does it”.
+
+## Language-specific practices
+
+{{< content-tabpane >}}
+{{< content-tab header="Java" >}}
+
+### Easy run function
+
+Any declared function arguments should include a no-arg, main method with
+examples for how the user can initialize the method arguments and call the
+entrypoint for the snippet. If the values for these variables need to be
+replaced by the user, be explicit that they are example values only. Wherever
+possible, provide a link to documentation that enumartes the options.
+
+
+{{< highlight java >}}
+// [START product_example]
+import com.example.resource;
+
+public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "my-project-id";
+    String filePath = "path/to/image.png";
+    exampleSnippet(projectId, filePath);
+}
+
+// This is an example snippet for showing best practices.
+public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
+// [END product_example]
+{{< / highlight >}}
+
+{{< /content-tab >}}
+
+{{< content-tab header="Python" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="Go" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="Nodejs" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="C#" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="PHP" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="Ruby" >}}
+// TODO
+{{< /content-tab >}}
+{{< /content-tabpane >}}

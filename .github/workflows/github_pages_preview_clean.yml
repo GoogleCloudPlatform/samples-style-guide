@@ -14,6 +14,8 @@
 
 name: Clean
 
+# This Workflow depends on 'github.event.number',
+# not compatible with branch or manual triggers.
 on:
   pull_request:
     types:
@@ -23,10 +25,8 @@ jobs:
   preview:
     runs-on: ubuntu-20.04
     concurrency:
-      # Run in the same concurrency group as PR previews.
-      # 'Preview' is the name of github_pages_preview.yml workflow.
-      group: "Preview-${{ github.event.number || github.ref }}"
-      # If cleanup is triggered, cancel existing stage jobs.
+      # Shared concurrency group wih preview staging.
+      group: "preview-${{ github.event.number }}"
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v3

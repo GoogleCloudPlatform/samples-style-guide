@@ -1,6 +1,6 @@
 ---
-title: "Samples Style Guide"
-linkTitle: "Samples Style Guide"
+title: "Effecive Samples"
+linkTitle: "Style Guide"
 type: docs
 weight: 20
 ---

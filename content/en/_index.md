@@ -259,39 +259,6 @@ public static void listInfoTypes() throws IOException {
   }
 }  
 {{< /tab >}}
-{{< tab header="Node.js" >}}
-// Imports the Google Cloud Data Loss Prevention library
-const {DlpServiceClient} = require('@google-cloud/dlp');
-
-// Instantiates a reusable client object
-const dlpClientInstance = new DlpServiceClient();
-
-// Lists the types of sensitive information the DLP API supports.
-async function listInfoTypes() {
-  // Only return infoTypes supported by certain parts of the API.
-  // Supported filters are:
-  //   "supported_by=INSPECT"
-  //   "supported_by=RISK_ANALYSIS"
-  const filter = 'supported_by=INSPECT';
-
-  // BCP-47 language code for localized infoType friendly names.
-  // Defaults to "en_US"
-  languageCode = 'en-us';
-
-  // Perform the API request.
-  const [response] = await dlpClientInstance.listInfoTypes({
-    languageCode,
-    filter
-  });
-
-  // Parse the response and process the results.
-  const infoTypes = response.infoTypes;
-  console.log('Info types:');
-  infoTypes.forEach(infoType => {
-    console.log(`\t${infoType.name} (${infoType.displayName})`);
-  });
-}
-{{< /tab >}}
 {{< tab header="Python" >}}
 def list_info_type(
     language_code: Optional[str] = "en-US",
@@ -325,6 +292,39 @@ def list_info_type(
     for info_type in info_types:
         print(f"Name: {info_type.name}")
         print(f"Display name: {info_type.display_name}")
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+// Imports the Google Cloud Data Loss Prevention library
+const {DlpServiceClient} = require('@google-cloud/dlp');
+
+// Instantiates a reusable client object
+const dlpClientInstance = new DlpServiceClient();
+
+// Lists the types of sensitive information the DLP API supports.
+async function listInfoTypes() {
+  // Only return infoTypes supported by certain parts of the API.
+  // Supported filters are:
+  //   "supported_by=INSPECT"
+  //   "supported_by=RISK_ANALYSIS"
+  const filter = 'supported_by=INSPECT';
+
+  // BCP-47 language code for localized infoType friendly names.
+  // Defaults to "en_US"
+  languageCode = 'en-us';
+
+  // Perform the API request.
+  const [response] = await dlpClientInstance.listInfoTypes({
+    languageCode,
+    filter
+  });
+
+  // Parse the response and process the results.
+  const infoTypes = response.infoTypes;
+  console.log('Info types:');
+  infoTypes.forEach(infoType => {
+    console.log(`\t${infoType.name} (${infoType.displayName})`);
+  });
+}
 {{< /tab >}}
 {{< tab header="Ruby" >}}
 # Lists the types of sensitive information the DLP API supports.

@@ -270,7 +270,7 @@ def list_info_type(
     # needs to be created once, and can be reused for multiple requests. After
     # completing all of your requests, call the "__exit__" method on the client to
     # safely clean up any remaining background resources. Alternatively, use the
-    # client as a context amnager. A single client can be shared across multiple threads.
+    # client as a context manager. A single client can be shared across multiple threads.
     # In multiprocessing# scenarios, create client instances after forking.
     dlp_client = dlp_v2.DlpServiceClient()
 

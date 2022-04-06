@@ -1,6 +1,6 @@
 ---
-title: "Samples Style Guide"
-linkTitle: "Samples Style Guide"
+title: "Effecive Samples"
+linkTitle: "Style Guide"
 type: docs
 weight: 20
 ---
@@ -143,66 +143,6 @@ the sample work:
 # Moves a persistent disk from one zone to another.
 #
 # See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
-{{< /tab >}}
-{{< /tabpane >}}
-
-### Main runner
-
-Any declared function arguments should include a no-arg, main method with
-examples for how the user can initialize the method arguments and call the
-entrypoint for the snippet. If the values for these variables need to be
-replaced by the user, be explicit that they are example values only. Wherever
-possible, provide a link to documentation that enumerates the options.
-
-{{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-public static void main(String[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "my-project-id";
-    String filePath = "path/to/image.png";
-    exampleSnippet(projectId, filePath);
-}
-{{< /tab >}}
-{{< tab header="Node.js" >}}
-function main() {
-  // TODO(developer): Replace these variables before running the sample.
-  const projectId = "my-project-id";
-  const filePath = "path/to/image.png";
-  exampleSnippet(arg1, arg2);
-}
-{{< /tab >}}
-{{< tab header="C#" >}}
-public void Example(
-    string projectId = "my-project-id,
-    string filePath = "path/to/image.png")
-{
-    // Snippet content ...
-}
-{{< /tab >}}
-{{< tab header="Ruby">}}
-# [START product_example]
-require "example/resource"
-
-class Example
-  def snippet project_id:, file_path:
-    # Snippet content ...
-  end 
-
-  def self.run
-    # TODO(developer): Replace these variables before running the sample.
-    project_id = "my-project-id"
-    file_path = "path/to/image.png"
-
-    example = Example.new
-    example.snippet project_id: project_id, file_path: file_path
-  end
-end      
-
-if $PROGRAM_NAME == __FILE__   
-  Example.run
-end
-
-# [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -662,3 +602,62 @@ idiomatic to the language, though cross-language consistency does not hurt.
 Use features that work in all GCP-supported versions of a language and use
 language idioms that the community understands. Generally, do things “the way
 the community does it”.
+
+## Language-specific practices
+
+{{< content-tabpane >}}
+{{< content-tab header="Java" >}}
+
+### Easy run function
+
+Any declared function arguments should include a no-arg, main method with
+examples for how the user can initialize the method arguments and call the
+entrypoint for the snippet. If the values for these variables need to be
+replaced by the user, be explicit that they are example values only. Wherever
+possible, provide a link to documentation that enumartes the options.
+
+
+{{< highlight java >}}
+// [START product_example]
+import com.example.resource;
+
+public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "my-project-id";
+    String filePath = "path/to/image.png";
+    exampleSnippet(projectId, filePath);
+}
+
+// This is an example snippet for showing best practices.
+public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
+// [END product_example]
+{{< / highlight >}}
+
+{{< /content-tab >}}
+
+{{< content-tab header="Python" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="Go" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="Nodejs" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="C#" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="PHP" >}}
+// TODO
+{{< /content-tab >}}
+
+{{< content-tab header="Ruby" >}}
+// TODO
+{{< /content-tab >}}
+{{< /content-tabpane >}}

@@ -147,23 +147,14 @@ a file or a specific action is not.
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // This is an example snippet for showing best practices.
-public static void inspectImageFile(String projectId, String filePath) {
+public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
 {{< tab header="Python" >}}
-
-def main():
-    # TODO(developer): Replace these variables before running the sample.
-    project_id = "my-project-id"
-    file_path = "path/to/image.png"
-    inspect_image_file(project_id, file_path)
-
-def inspect_image_file(project_id: str, file_path: str):
+# This is an example snippet for showing best practices.
+def example_snippet(project_id: str, file_path: str):
     # Snippet content ...
-
-if __name__ == "__main__":
-    main()
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 function main() {
@@ -198,6 +189,11 @@ ensure that it works.
 public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
+{{< /tab >}}
+{{< tab header="Python" >}}
+# This is an example snippet for showing best practices.
+def example_snippet(project_id: str, file_path: str):
+    # Snippet content ...
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 const exampleSnippet = function(projectId, filePath) {

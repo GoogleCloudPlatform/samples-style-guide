@@ -378,31 +378,6 @@ Comments should be used as needed, and should follow the following guidelines:
 * For values that the user may wish to configure, provide links to
  documentation that lists available options (and when to use them).
  
-### Main runner
-
-Any declared function arguments should include a no-arg, main method with
-examples for how the user can initialize the method arguments and call the
-entrypoint for the snippet. If the values for these variables need to be
-replaced by the user, be explicit that they are example values only. Wherever
-possible, provide a link to documentation that enumartes the options.
-
-{{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-public static void main(String[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "my-project-id";
-    String filePath = "path/to/image.png";
-    exampleSnippet(projectId, filePath);
-}
-{{< /tab >}}
-{{< tab header="Python" >}}
-def main():
-    # TODO(developer): Replace these variables before running the sample.
-    project_id = "my-project-id"
-    file_path = "path/to/image.png"
-    example_snippet(project_id, file_path)
-{{< /tab >}}
-{{< /tabpane >}}
 
 ### Minimal arguments
 
@@ -419,10 +394,29 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+function main() {
+  // This argument is required, and should be declared
+  const requiredArg = '...';
+
+  exampleSnippet(requiredArg)
+}
+
+const exampleSnippet = function(requiredArg) {
+  // Snippet content...
+}
+{{< /tab >}}
 {{< tab header="Python" >}}
 # This is an example snippet for showing best practices.
 def example_snippet(project_id: str, file_path: str):
     # Snippet content ...
+{{< /tab >}}
+{{< /tabpane >}}
+{{< tab header="Ruby" >}}
+# This is an example snippet for showing best practices.
+def example_snippet project_id:, file_path:
+  # Snippet content ...
+end
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -440,13 +434,25 @@ public static void exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Node.js" >}}
+const exampleSnippet = function(projectId, filePath) {
+  // Snippet content ...
+  // (This snippet should not `return` anything.)
+}
+{{< /tab >}}
 {{< tab header="Python" >}}
 # This is an example snippet for showing best practices.
 def example_snippet(project_id: str, file_path: str):
     # Snippet content ...
 {{< /tab >}}
+{{< tab header="Ruby" >}}
+def example_snippet project_id:, file_path: 
+  # Snippet content ...
+  response = client.example_action example_action_request
+  puts "Got the following response #{response.details}"
+end
+{{< /tab >}}
 {{< /tabpane >}}
-
 
 ### Authentication
  

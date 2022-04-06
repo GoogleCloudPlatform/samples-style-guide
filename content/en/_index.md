@@ -301,15 +301,8 @@ def list_info_type(
     language_code: Optional[str] = "en-US",
     result_filter: Optional[str] = "supported_by=INSPECT",
 ):
-    """List types of sensitive information within a category.
+    """List types of sensitive information within a category."""
 
-    Args:
-        language_code (str): The BCP-47 language code to use, e.g. 'en-US'.
-        filter (str): An optional filter to only return info types supported
-            by certain parts of the API. Supported filters are 
-            "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS". Defaults
-            to "supported_by=INSPECT".
-    """
     # Initialize client that will be used to send requests. This client only
     # needs to be created once, and can be reused for multiple requests. After
     # completing all of your requests, call the "__exit__" method on the client to
@@ -318,9 +311,13 @@ def list_info_type(
     # In multiprocessing# scenarios, create client instances after forking.
     dlp_client = dlp_v2.DlpServiceClient()
 
-    # Construct the request to be sent by the client
     request = dlp_v2.ListInfoTypesRequest(
+        # An optional filter to only return info types supported
+        # by certain parts of the API. Supported filters are 
+        # "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS". Defaults
+        # to "supported_by=INSPECT".
         filter=result_filter,
+        # The BCP-47 language code to use, e.g. 'en-US'.
         language_code=language_code,
     )
 
@@ -516,6 +513,12 @@ try (CloudClient dlp = CloudClient.create()) {
 }
 {{< /tab >}}
 {{< tab header="Python" >}}
+
+# NOTE FOR SAMPLE AUTHOR: 
+# **DO NOT include this comment block in the sample.**
+# The comment below about clients applies to gRPC-based clients (clients with GAPIC_AUTO in .repo-metadata.json). For google-api-python-client, see https://googleapis.github.io/google-api-python-client/docs/thread_safety.html#the-httplib2http-objects-are-not-thread-safe. For other libraries, consult with
+# the library owner.
+
 # Initialize client that will be used to send requests. This client only
 # needs to be created once, and can be reused for multiple requests. After
 # completing all of your requests, call the "__exit__" method on the client to

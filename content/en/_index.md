@@ -235,6 +235,8 @@ public static void exampleSnippet(String projectId, String filePath) {
 // stdout or stderr. Use the io.Writer instead.
 func exampleSnippet(w io.Writer, projectId, filePath string) {
     // Snippet content ...
+    // Using the io.Writer looks like this:
+    fmt.Fprintf(w, "The answer is %v\n", 42)
 }
 {{< /tab >}}
 {{< tab header="Node.js" >}}

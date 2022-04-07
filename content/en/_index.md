@@ -1,6 +1,6 @@
 ---
-title: "Samples Style Guide"
-linkTitle: "Samples Style Guide"
+title: "Effecive Samples"
+linkTitle: "Style Guide"
 type: docs
 weight: 20
 ---
@@ -58,7 +58,7 @@ easily copy and paste the sample into their own environment to run it.
 Samples should include any imports used in the sample.
 
 This is easiest to enforce/detect when the samples are in their own file, so
-samples should be structured as such unless their is a compelling reason not to.
+samples should be structured as such unless there is a compelling reason not to.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -102,6 +102,17 @@ const exampleSnippet = function() {
 }
 // [END product_example]
 {{< /tab >}}
+{{< tab header="C#" >}}
+// [START product_example]
+using System;
+
+public class ExampleSnippet
+{
+    // Snippet methods ...
+}
+// [END product_example]
+
+{{< /tab >}}
 {{< tab header="Ruby" >}}
 # [START product_example]
 require "example/resource"
@@ -141,6 +152,12 @@ the sample work:
 * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 */
 {{< /tab >}}
+{{< tab header="C#" >}}
+// Moves a persistent disk from one zone to another.
+
+// See https://cloud.google.com/compute/docs/quickstart-client-libraries before
+// running the code snippet.
+{{< /tab >}}
 {{< tab header="Ruby" >}}
 # Moves a persistent disk from one zone to another.
 #
@@ -179,6 +196,15 @@ function main() {
 
 const exampleSnippet = function(requiredArg) {
   // Snippet content...
+}
+{{< /tab >}}
+{{< tab header="C#" >}}
+// This is an example snippet for showing best practices.
+public void Example(
+    string projectId = "my-project-id,
+    string filePath = "path/to/image.png")
+{
+    // Snippet content ...
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}
@@ -224,6 +250,16 @@ def example_snippet project_id:, file_path:
   puts "Got the following response #{response.details}"
 end
 {{< /tab >}}
+{{< tab header="C#" >}}
+// This is an example snippet for showing best practices.
+public void Example(
+    string projectId = "my-project-id,
+    string filePath = "path/to/image.png")
+{
+    // Snippet content ...
+    Console.WriteLine($"Example {data} for project: {projectId}");
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Arrange, Act, Assert
@@ -237,7 +273,7 @@ more approachable to beginners:
  understanding the samples more confusing.
 1. **Act** - Send the request to the service and receive a response.
 1. **Assert** - Verify that the call was successful and that a response was
- return as expected. This is typically done by printing some aspects of the
+ returned as expected. This is typically done by printing some aspects of the
  response to stdout.
 
 The samples below show this in action.
@@ -352,6 +388,34 @@ func listInfoTypes(w io.Writer) {
 	}
 }
 {{< /tab >}}
+{{< tab header="C#" >}}
+// Lists the types of sensitive information the DLP API supports.
+public ListInfoTypesResponse ListInfoTypes(
+    string languageCode = "en-US",
+    string filter = "supported_by=INSPECT")
+{
+    // Initialize the client that will be used to send requests. This client only needs to be created
+    // once, and can be reused for multiple requests.
+    var dlp = DlpServiceClient.Create();
+    // Use the client to send the API request.
+    var response = dlp.ListInfoTypes(
+        // Construct the request to be sent by the client.
+        new ListInfoTypesRequest
+        {
+            LanguageCode = languageCode,
+            Filter = filter
+        });
+
+    // Parse the response and process the results.
+    Console.WriteLine("Info Types:");
+    foreach (var InfoType in response.InfoTypes)
+    {
+        Console.WriteLine($"\t{InfoType.Name} ({InfoType.DisplayName})");
+    }
+
+    return response;
+}
+{{< /tab >}}
 {{< tab header="Ruby" >}}
 # Lists the types of sensitive information the DLP API supports.
 def list_info_types
@@ -429,6 +493,11 @@ const auth = new GoogleAuth({
   scopes: 'https://www.googleapis.com/auth/cloud-platform',
 });
 {{< /tab >}}
+{{< tab header="C#" >}}
+// All clients use ADC by default. However, if your application needs to showcase a specific
+// credential source, show users how to do that explicitly.
+var credentials = GoogleCredential.FromFile("/path/to/credentials.json");
+{{< /tab >}}
 {{< tab header="Ruby" >}}
 require "google/cloud/spanner"
 
@@ -485,6 +554,30 @@ const {DlpServiceClient} = require('@google-cloud/dlp');
 // Instantiates a reusable client object in the global scope.
 // (Node.js will automatically clean it up when the script terminates.)
 const dlpClientInstance = new DlpServiceClient();
+{{< /tab >}}
+{{< tab header="C#" >}}
+// Initialize the client that will be used to send requests. This client only needs to be created
+// once, and can be reused for multiple requests across your entire application.
+
+var client = Server.CreateClient();
+// make a request with the client.
+
+// If for any reason the client lifetime needs to be scoped to a single method,
+// you can use a "using" statement or a "using" declaration.
+
+// Example "using" statement.
+using (var client = Server.CreateClient())
+{
+    // make a request with the client.
+}
+
+// Example "using" declaration, which will dispose of the resource
+// when execution falls outside the enclosing statement block.
+public void ExampleMethod()
+{
+    using var client = Server.CreateClient();
+    // make a request with the client.
+}
 {{< /tab >}}
 {{< tab header="Ruby" >}}
 require "google/cloud/spanner"
@@ -548,6 +641,17 @@ try {
   if (/* exception is fatal */) {
     throw e
   }
+}
+{{< /tab >}}
+{{< tab header="C#" >}}
+try
+{
+    // Do something
+}
+catch (ArgumentException e)
+{
+    //ArgumentException's are thrown when one of the arguments provided to a method is not valid.
+    Console.WriteLine(e.Message);
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}

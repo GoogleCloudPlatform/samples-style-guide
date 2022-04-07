@@ -365,6 +365,7 @@ func listInfoTypes(w io.Writer) {
 	c, err := dlp.NewClient(ctx)
 	if err != nil {
 		// TODO: Handle error.
+        return
 	}
 	defer c.Close()
 
@@ -382,6 +383,7 @@ func listInfoTypes(w io.Writer) {
 	resp, err := c.ListInfoTypes(ctx, req)
 	if err != nil {
 		// TODO: Handle error.
+        return
 	}
 	fmt.Fprintln(w, "Infotypes found:")
 	for _, t := range resp.InfoTypes {

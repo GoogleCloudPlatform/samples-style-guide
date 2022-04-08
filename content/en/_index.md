@@ -212,13 +212,13 @@ ensure that it works.
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // This is an example snippet for showing best practices.
-public static void exampleSnippet(String projectId, String filePath) {
+public static void exampleSnippet(String projectId, StringfilePath) {
     // Snippet content ...
 }
 {{< /tab >}}
 {{< tab header="Python" >}}
 # This is an example snippet for showing best practices.
-def example_snippet(project_id: str, file_path: str -> None):
+def example_snippet(project_id: str, file_path: str) -> None:
     # Snippet content ...
 {{< /tab >}}
 {{< tab header="Node.js" >}}
@@ -299,7 +299,7 @@ public static void listInfoTypes() throws IOException {
 def list_info_type(
     language_code: Optional[str] = "en-US",
     result_filter: Optional[str] = "supported_by=INSPECT",
- -> None):
+  ) -> None:
     """List types of sensitive information within a category."""
 
     # Initialize client that will be used to send requests. This client only
@@ -440,10 +440,13 @@ Comments should be used as needed, and should follow the following guidelines:
 
 ### Authentication
  
-Samples should use authenticate using [Application Default Credentials][ADC].
+Samples should always authenticate using [Application Default Credentials][ADC].
+Most clients do this automatically, and no special steps are required. 
  
 If the code snippet is platform specific, explicitly show how to use that
 platform's credentials.
+
+[ADC]:https://cloud.google.com/docs/authentication/production#automatically
  
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -487,8 +490,6 @@ end
 client = Google::Cloud::Spanner.new
 {{< /tab >}}
 {{< /tabpane >}}
- 
-[ADC]: https://cloud.google.com/docs/authentication/production#automatically
 
 ### Initializing Clients
  

@@ -488,7 +488,7 @@ client = Google::Cloud::Spanner.new
 {{< /tab >}}
 {{< /tabpane >}}
  
-[ADC]: (https://cloud.google.com/docs/authentication/production#automatically)
+[ADC]: https://cloud.google.com/docs/authentication/production#automatically
 
 ### Initializing Clients
  

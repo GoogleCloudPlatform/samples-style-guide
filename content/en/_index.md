@@ -75,7 +75,7 @@ public class exampleSnippet {
 # [START product_example]
 import com.example.resource
 
-def example_snippet():
+def example_snippet() -> None:
       # Snippet Content ...
 
 # [END product_example]
@@ -170,7 +170,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="Python" >}}
 # This is an example snippet for showing best practices.
-def example_snippet(project_id: str, file_path: str):
+def example_snippet(project_id: str, file_path: str) -> None:
     # Snippet content ...
 {{< /tab >}}
 {{< tab header="Node.js" >}}
@@ -218,7 +218,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="Python" >}}
 # This is an example snippet for showing best practices.
-def example_snippet(project_id: str, file_path: str):
+def example_snippet(project_id: str, file_path: str -> None):
     # Snippet content ...
 {{< /tab >}}
 {{< tab header="Node.js" >}}
@@ -299,7 +299,7 @@ public static void listInfoTypes() throws IOException {
 def list_info_type(
     language_code: Optional[str] = "en-US",
     result_filter: Optional[str] = "supported_by=INSPECT",
-):
+ -> None):
     """List types of sensitive information within a category."""
 
     # Initialize client that will be used to send requests. This client only
@@ -488,7 +488,7 @@ client = Google::Cloud::Spanner.new
 {{< /tab >}}
 {{< /tabpane >}}
  
-[ADC]: (https://cloud.google.com/docs/authentication/production)
+[ADC]: (https://cloud.google.com/docs/authentication/production#automatically)
 
 ### Initializing Clients
  
@@ -514,12 +514,11 @@ try (CloudClient dlp = CloudClient.create()) {
 # The comment below about clients applies to gRPC-based clients (clients with GAPIC_AUTO in .repo-metadata.json). For google-api-python-client, see https://googleapis.github.io/google-api-python-client/docs/thread_safety.html#the-httplib2http-objects-are-not-thread-safe. For other libraries, consult with
 # the library owner.
 
-# Initialize client that will be used to send requests. This client only
-# needs to be created once, and can be reused for multiple requests. After
-# completing all of your requests, call the "__exit__" method on the client to
-# safely clean up any remaining background resources. Alternatively, use the
-# client as a context amnager. A single client can be shared across multiple threads.
-# In multiprocessing scenarios, create client instances after forking.
+# Initialize client that will be used to send requests across threads. This 
+# client only needs to be created once, and can be reused for multiple requests.
+# After completing all of your requests, call the "__exit__()" method to safely 
+# clean up any remaining background resources. Alternatively, use the client as 
+# a context manager.
 with dlp_v2.DlpServiceClient() as dlp_client:
     # make a request with the client
 {{< /tab >}}
@@ -596,12 +595,13 @@ try {
 }
 {{< /tab >}}
 {{< tab header="Python" >}}
-# Follow the Google Python style guide and catch the most specific type of
-# Exception, instead of a more general one.
+# Catch the most specific type of Exception, instead of a more general one.
 try:
-  # Delete resource
+    bucket = storage_client.get_bucket(bucket_name)
+    bucket.delete()
 except google.api_core.exceptions.NotFound:
-  pass  # Resource has already been deleted, okay to ignore
+    # NOTE TO SAMPLE AUTHOR: Make sure to log errors rather than silentily ignore
+    print(f"Resource '{name}' already deleted.")
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Unhandled exceptions will cause Node.js to crash. Log exception

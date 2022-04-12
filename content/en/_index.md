@@ -178,9 +178,9 @@ function example_snippet(string $projectId, string $filePath): void
 {
     // Snippet content ...
     printf(
-      'Response values: %s, %s',
-      $response->getExampleName(),
-      $response->getExampleValue()
+        'Response values: %s, %s',
+        $response->getExampleName(),
+        $response->getExampleValue()
     );
 }
 {{< /tab >}}

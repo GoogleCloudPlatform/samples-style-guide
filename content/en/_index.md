@@ -151,7 +151,8 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="PHP" >}}
 // This is an example snippet for showing best practices.
-function example_snippet(string $projectId, string $filePath) {
+function example_snippet(string $projectId, string $filePath): void
+{
     // Snippet content ...
 }
 {{< /tab >}}
@@ -173,7 +174,8 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="PHP" >}}
 // This is an example snippet for showing best practices.
-function example_snippet(string $projectId, string $filePath) {
+function example_snippet(string $projectId, string $filePath): void
+{
     // Snippet content ...
     printf(
       'Response values: %s, %s',

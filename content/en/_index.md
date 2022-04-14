@@ -87,7 +87,7 @@ package example
 // [START product_example]
 import "example.com/resource"
 
-func exampleSnippet() {
+func exampleSnippet() error {
     // Snippet Content ...
 }
 
@@ -189,7 +189,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="Go" >}}
 // exampleSnippet demonstrates best practices.
-func exampleSnippet(projectId, filePath string) error {
+func exampleSnippet(projectID, filePath string) error {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -245,7 +245,7 @@ public static void exampleSnippet(String projectId, StringfilePath) {
 // exampleSnippet demonstrates best practices.
 // The function prints to an io.Writer for testing purposes. Do not print to
 // stdout or stderr. Use the io.Writer instead.
-func exampleSnippet(w io.Writer, projectId, filePath string) error {
+func exampleSnippet(w io.Writer, projectID, filePath string) error {
     // Snippet content ...
     // Using the io.Writer looks like this:
     fmt.Fprintf(w, "The answer is %v\n", 42)

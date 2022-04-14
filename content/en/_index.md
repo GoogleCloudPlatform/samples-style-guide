@@ -234,7 +234,6 @@ public static void listInfoTypes() throws IOException {
 }
 {{< /tab >}}
 {{< tab header="PHP" >}}
-<?php
 /**
  * Lists all Info Types for the Data Loss Prevention (DLP) API.
  */

@@ -189,7 +189,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /tab >}}
 {{< tab header="Go" >}}
 // exampleSnippet demonstrates best practices.
-func exampleSnippet(projectId, filePath string) {
+func exampleSnippet(projectId, filePath string) error {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -245,7 +245,7 @@ public static void exampleSnippet(String projectId, StringfilePath) {
 // exampleSnippet demonstrates best practices.
 // The function prints to an io.Writer for testing purposes. Do not print to
 // stdout or stderr. Use the io.Writer instead.
-func exampleSnippet(w io.Writer, projectId, filePath string) {
+func exampleSnippet(w io.Writer, projectId, filePath string) error {
     // Snippet content ...
     // Using the io.Writer looks like this:
     fmt.Fprintf(w, "The answer is %v\n", 42)
@@ -407,7 +407,7 @@ import (
 )
 
 // listInfoTypes lists the types of sensitive information the DLP API supports.
-func listInfoTypes(w io.Writer) {
+func listInfoTypes(w io.Writer) error {
 	ctx := context.Background()
 	// Initialize client that will be used to send requests. This client only
 	// needs to be created once, and can be reused for multiple requests. After
@@ -415,8 +415,8 @@ func listInfoTypes(w io.Writer) {
 	// safely clean up any remaining background resources.
 	c, err := dlp.NewClient(ctx)
 	if err != nil {
-		// TODO: Handle error.
-        return
+        fmt.Fprintf(w, "failed to initialize dlp.Client: %v", err)
+        return err
 	}
 	defer c.Close()
 
@@ -433,8 +433,8 @@ func listInfoTypes(w io.Writer) {
 
 	resp, err := c.ListInfoTypes(ctx, req)
 	if err != nil {
-		// TODO: Handle error.
-        return
+        fmt.Fprintf(w, "c.ListInfoTypes failed: %v", err)
+        return err
 	}
 	fmt.Fprintln(w, "Infotypes found:")
 	for _, t := range resp.InfoTypes {
@@ -603,9 +603,8 @@ try (CloudClient dlp = CloudClient.create()) {
 ctx := context.Background()
 c, err := foo.NewClient(ctx)
 if err != nil {
-    // TODO(developer): return or handle error as necessary
     fmt.Fprintf(w, "failed to initialize foo.Client: %v", err)
-    return
+    return err
 }
 defer c.Close()
 
@@ -704,7 +703,7 @@ try {
 if err != nil {
     // TODO(developer): return or handle error as necessary
     fmt.Fprintf(w, "failed to initialize foo.Client: %v", err)
-    return
+    return err
 }
 {{< /tab >}}
 {{< tab header="Python" >}}

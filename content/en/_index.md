@@ -234,35 +234,40 @@ public static void listInfoTypes() throws IOException {
 }
 {{< /tab >}}
 {{< tab header="PHP" >}}
+<?php
 /**
  * Lists all Info Types for the Data Loss Prevention (DLP) API.
  */
 use Google\Cloud\Dlp\V2\DlpServiceClient;
 
-/** Uncomment and populate these variables in your code */
-// $filter = ''; // (Optional) filter to use, empty for ''.
-// $languageCode = ''; // (Optional) language code, empty for 'en-US'.
+/**
+ * Lists all Info Types for the Data Loss Prevention (DLP) API.
+ *
+ * @param string $filter        (Optional) filter to use
+ * @param string $languageCode  (Optional) language code, empty for 'en-US'
+ */
+function list_info_types(string $filter = '', string $languageCode = ''): void
+    // Arrange: Instantiate a client.
+    $dlp = new DlpServiceClient();
 
-// Arrange: Instantiate a client.
-$dlp = new DlpServiceClient();
+    // Arrange: Prepare the request parameters.
+    $params = [
+        'languageCode' => $languageCode,
+        'filter' => $filter
+    ]
 
-// Arrange: Prepare request parameters.
-$params = [
-    'languageCode' => $languageCode,
-    'filter' => $filter,
-]
+    // Act: Run the request.
+    $response = $dlp->listInfoTypes($params);
 
-// Act: Run the request.
-$response = $dlp->listInfoTypes($params);
-
-// Assert: Print the results.
-print('Info Types:' . PHP_EOL);
-foreach ($response->getInfoTypes() as $infoType) {
-    printf(
-        '  %s (%s)' . PHP_EOL,
-        $infoType->getDisplayName(),
-        $infoType->getName()
-    );
+    // Assert: Print the results.
+    print('Info Types:' . PHP_EOL);
+    foreach ($response->getInfoTypes() as $infoType) {
+        printf(
+            '  %s (%s)' . PHP_EOL,
+            $infoType->getDisplayName(),
+            $infoType->getName()
+        );
+    }
 }
 {{< /tab >}}
 {{< /tabpane >}}

@@ -75,7 +75,7 @@ public class exampleSnippet {
 # [START product_example]
 import com.example.resource
 
-def example_snippet():
+def example_snippet() -> None:
       # Snippet Content ...
 
 # [END product_example]
@@ -145,6 +145,13 @@ the sample work:
 // Comments should follow the best practices described in
 // https://golang.org/doc/effective_go.html#commentary.
 {{< /tab >}}
+{{< tab header="Python" >}}
+"""
+Moves a persistent disk from one zone to another.
+
+See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+"""
+{{< /tab >}}
 {{< tab header="Node.js" >}}
 /**
 * Moves a persistent disk from one zone to another.
@@ -186,6 +193,11 @@ func exampleSnippet(projectId, filePath string) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Python" >}}
+# This is an example snippet for showing best practices.
+def example_snippet(project_id: str, file_path: str) -> None:
+    # Snippet content ...
+{{< /tab >}}
 {{< tab header="Node.js" >}}
 function main() {
   // This argument is required, and should be declared
@@ -225,7 +237,7 @@ ensure that it works.
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // This is an example snippet for showing best practices.
-public static void exampleSnippet(String projectId, String filePath) {
+public static void exampleSnippet(String projectId, StringfilePath) {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -238,6 +250,11 @@ func exampleSnippet(w io.Writer, projectId, filePath string) {
     // Using the io.Writer looks like this:
     fmt.Fprintf(w, "The answer is %v\n", 42)
 }
+{{< /tab >}}
+{{< tab header="Python" >}}
+# This is an example snippet for showing best practices.
+def example_snippet(project_id: str, file_path: str) -> None:
+    # Snippet content ...
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 const exampleSnippet = function(projectId, filePath) {
@@ -312,6 +329,40 @@ public static void listInfoTypes() throws IOException {
     }
   }
 }
+{{< /tab >}}
+{{< tab header="Python" >}}
+def list_info_type(
+    language_code: Optional[str] = "en-US",
+    result_filter: Optional[str] = "supported_by=INSPECT",
+  ) -> None:
+    """List types of sensitive information within a category."""
+
+    # Initialize client that will be used to send requests. This client only
+    # needs to be created once, and can be reused for multiple requests. After
+    # completing all of your requests, call the "__exit__" method on the client to
+    # safely clean up any remaining background resources. Alternatively, use the
+    # client as a context manager. A single client can be shared across multiple threads.
+    # In multiprocessing# scenarios, create client instances after forking.
+    dlp_client = dlp_v2.DlpServiceClient()
+
+    request = dlp_v2.ListInfoTypesRequest(
+        # An optional filter to only return info types supported
+        # by certain parts of the API. Supported filters are
+        # "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS". Defaults
+        # to "supported_by=INSPECT".
+        filter=result_filter,
+        # The BCP-47 language code to use, e.g. 'en-US'.
+        language_code=language_code,
+    )
+
+    # Use the client to send the API request
+    info_types = dlp_client.list_info_types(request)
+
+    # Parse the response and process the results
+    print("Infotypes found:")
+    for info_type in info_types:
+        print(f"Name: {info_type.name}")
+        print(f"Display name: {info_type.display_name}")
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Imports the Google Cloud Data Loss Prevention library
@@ -469,11 +520,13 @@ Comments should be used as needed, and should follow the following guidelines:
  documentation that lists available options (and when to use them).
 
 ### Authentication
-
-Samples should use authenticate using [Application Default Credentials][ADC].
+Samples should always authenticate using [Application Default Credentials][ADC].
+Most clients do this automatically, and no special steps are required.
 
 If the code snippet is platform specific, explicitly show how to use that
 platform's credentials.
+
+[ADC]:https://cloud.google.com/docs/authentication/production#automatically
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -487,6 +540,15 @@ GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream
 // explicitly.
 ctx := context.Background()
 foo.NewClient(ctx, option.WithCredentialsFile("/path/to/credentials.json"))
+{{< /tab >}}
+{{< tab header="Python" >}}
+# Most clients use ADC by default. However, if your application needs to
+# showcase a specific credential source, show users how to do that explicitly.
+from google.oauth2 import service_account
+
+credentials = service_account.Credentials.from_service_account_file(
+  "/path/to/credentials.json"
+)
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Most clients use ADC by default. However, if your application needs to showcase a specific
@@ -515,8 +577,6 @@ end
 client = Google::Cloud::Spanner.new
 {{< /tab >}}
 {{< /tabpane >}}
-
-[ADC]: (https://cloud.google.com/docs/authentication/production)
 
 ### Initializing Clients
 
@@ -550,6 +610,21 @@ if err != nil {
 defer c.Close()
 
 // make a request with the client...
+{{< /tab >}}
+{{< tab header="Python" >}}
+
+# NOTE FOR SAMPLE AUTHOR:
+# **DO NOT include this comment block in the sample.**
+# The comment below about clients applies to gRPC-based clients (clients with GAPIC_AUTO in .repo-metadata.json). For google-api-python-client, see https://googleapis.github.io/google-api-python-client/docs/thread_safety.html#the-httplib2http-objects-are-not-thread-safe. For other libraries, consult with
+# the library owner.
+
+# Initialize client that will be used to send requests across threads. This
+# client only needs to be created once, and can be reused for multiple requests.
+# After completing all of your requests, call the "__exit__()" method to safely
+# clean up any remaining background resources. Alternatively, use the client as
+# a context manager.
+with dlp_v2.DlpServiceClient() as dlp_client:
+    # make a request with the client
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Imports the Google Cloud Data Loss Prevention library
@@ -631,6 +706,15 @@ if err != nil {
     fmt.Fprintf(w, "failed to initialize foo.Client: %v", err)
     return
 }
+{{< /tab >}}
+{{< tab header="Python" >}}
+# Catch the most specific type of Exception, instead of a more general one.
+try:
+    bucket = storage_client.get_bucket(bucket_name)
+    bucket.delete()
+except google.api_core.exceptions.NotFound:
+    # NOTE TO SAMPLE AUTHOR: Make sure to log errors rather than silentily ignore
+    print(f"Resource '{name}' already deleted.")
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 // Unhandled exceptions will cause Node.js to crash. Log exception

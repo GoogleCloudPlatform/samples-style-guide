@@ -409,15 +409,15 @@ import (
 // listInfoTypes lists the types of sensitive information the DLP API supports.
 func listInfoTypes(w io.Writer) error {
 	ctx := context.Background()
-	// Initialize client that will be used to send requests. This client only
-	// needs to be created once, and can be reused for multiple requests. After
-	// completing all of your requests, call the "Close" method on the client to
-	// safely clean up any remaining background resources.
+    // Initialize a client that will be used to send requests.
+    // This client can be created once and reused for multiple requests.
 	c, err := dlp.NewClient(ctx)
 	if err != nil {
         fmt.Fprintf(w, "failed to initialize dlp.Client: %v", err)
         return err
 	}
+    // Call the 'Close' method on the client to safely clean up background
+    // resources.
 	defer c.Close()
 
 	// Construct the request to be sent by the client

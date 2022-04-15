@@ -519,6 +519,7 @@ Comments should be used as needed, and should follow the following guidelines:
  documentation that lists available options (and when to use them).
 
 ### Authentication
+
 Samples should always authenticate using [Application Default Credentials][ADC].
 Most clients do this automatically, and no special steps are required.
 

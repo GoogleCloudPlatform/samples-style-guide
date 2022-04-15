@@ -399,47 +399,47 @@ async function listInfoTypes() {
 {{< /tab >}}
 {{< tab header="Go" >}}
 import (
-	"context"
-	"fmt"
+    "context"
+    "fmt"
 
-	dlp "cloud.google.com/go/dlp/apiv2"
-	dlppb "google.golang.org/genproto/googleapis/privacy/dlp/v2"
+    dlp "cloud.google.com/go/dlp/apiv2"
+    dlppb "google.golang.org/genproto/googleapis/privacy/dlp/v2"
 )
 
 // listInfoTypes lists the types of sensitive information the DLP API supports.
 func listInfoTypes(w io.Writer) error {
-	ctx := context.Background()
+    ctx := context.Background()
     // Initialize a client once and reuse it to send multiple requests. Clients
     // are safe to use across goroutines. When the client is no longer needed,
     // call the Close method to cleanup its resources.
-	c, err := dlp.NewClient(ctx)
-	if err != nil {
+    c, err := dlp.NewClient(ctx)
+    if err != nil {
         fmt.Fprintf(w, "failed to initialize dlp.Client: %v", err)
         return err
-	}
-	defer c.Close()
+    }
+    defer c.Close()
 
-	// Construct the request to be sent by the client
-	req := &dlppb.ListInfoTypesRequest{
-		// Only return infoTypes supported by certain parts of the API.
-		// Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
-		// Defaults to "supported_by=INSPECT"
-		Filter: "supported_by=INSPECT",
-		// BCP-47 language code for localized infoType friendly names.
-		// Defaults to "en_US"
-		LanguageCode: "en-US",
-	}
+    // Construct the request to be sent by the client
+    req := &dlppb.ListInfoTypesRequest{
+        // Only return infoTypes supported by certain parts of the API.
+        // Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+        // Defaults to "supported_by=INSPECT"
+        Filter: "supported_by=INSPECT",
+        // BCP-47 language code for localized infoType friendly names.
+        // Defaults to "en_US"
+        LanguageCode: "en-US",
+    }
 
-	resp, err := c.ListInfoTypes(ctx, req)
-	if err != nil {
+    resp, err := c.ListInfoTypes(ctx, req)
+    if err != nil {
         fmt.Fprintf(w, "c.ListInfoTypes failed: %v", err)
         return err
-	}
-	fmt.Fprintln(w, "Infotypes found:")
-	for _, t := range resp.InfoTypes {
-		fmt.Fprintf(w, "Name: %s\n", t.Name)
-		fmt.Fprintf(w, "Display name: %s\n", t.DisplayName)
-	}
+    }
+    fmt.Fprintln(w, "Infotypes found:")
+    for _, t := range resp.InfoTypes {
+        fmt.Fprintf(w, "Name: %s\n", t.Name)
+        fmt.Fprintf(w, "Display name: %s\n", t.DisplayName)
+    }
 }
 {{< /tab >}}
 {{< tab header="C#" >}}

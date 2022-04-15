@@ -242,7 +242,11 @@ use Google\Cloud\Dlp\V2\DlpServiceClient;
  * @param string $filter        (Optional) filter to use
  * @param string $languageCode  (Optional) language code, empty for 'en-US'
  */
-function list_info_types(string $filter = '', string $languageCode = ''): void
+function list_info_types(
+    // TODO(developer): Replace these values before running your sample: 
+    string $filter = 'your-filter', 
+    string $languageCode = 'your-language-code'): void
+{
     // Arrange: Instantiate a client.
     $dlp = new DlpServiceClient();
 

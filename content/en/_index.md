@@ -4,24 +4,24 @@ linkTitle: "Style Guide"
 type: docs
 weight: 20
 ---
- 
+
 ## Introduction
- 
+
 This document serves as a definition of our samples standards for both
 standalone snippets and sample applications. It is intended to help encourage
 consistency and best practices when authoring code intended to teach others.
- 
+
 Even if not specifically mentioned in the guide, all samples should make
 best-efforts to achieve the following goals wherever possible:
- 
+
 * **Copy-paste-runnable** - Users should be able to copy, paste, and run the
 code into their environment with as few changes as possible. Samples should be
 easy as possible for a user to run.
- 
+
 * **Teach through code** - Samples should teach users both how and _why_
 specific best practices should be implemented and performed when interacting
 with our services.
- 
+
 * **Idiomatic** - Samples should encourage idiomatic and best practices specific
 to language, framework, or service.
 
@@ -42,7 +42,7 @@ descending order of priority:
 ## Structure
 
 ### Region tags
- 
+
 Each code snippet should have a region tag to define which parts of the snippet
 are displayed from the documentation. Each region tag should be:
 * Globally unique
@@ -51,15 +51,15 @@ are displayed from the documentation. Each region tag should be:
 * In snake case
 
 Region tags should show as much of the sample as possible, so that a user can
-easily copy and paste the sample into their own environment to run it. 
+easily copy and paste the sample into their own environment to run it.
 
 ### Imports
- 
+
 Samples should include any imports used in the sample.
- 
+
 This is easiest to enforce/detect when the samples are in their own file, so
 samples should be structured as such unless there is a compelling reason not to.
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // Region tags should start after the package, but before imports.
@@ -80,6 +80,19 @@ def example_snippet() -> None:
 
 # [END product_example]
 {{< /tab >}}
+{{<tab header="Go">}}
+package example
+
+// Region tags should start after the package, but before imports.
+// [START product_example]
+import "example.com/resource"
+
+func exampleSnippet() error {
+    // Snippet Content ...
+}
+
+// [END product_example]
+{{< /tab >}}
 {{< tab header="Node.js" >}}
 // [START product_example]
 const resource = require('@google-cloud/example');
@@ -94,7 +107,7 @@ const exampleSnippet = function() {
 using System;
 
 public class ExampleSnippet
-{   
+{
     // Snippet methods ...
 }
 // [END product_example]
@@ -106,18 +119,18 @@ require "example/resource"
 
 def example_snippet
   # Snippet Content ...
-end     
+end
 
 # [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description
- 
+
 Each code snippet file should have a top-level comment that succinctly describes
 what the snippet does, including any setup (such as resources) required to make
 the sample work:
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 /**
@@ -125,6 +138,12 @@ the sample work:
 *
 * See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
 */
+{{< /tab >}}
+{{< tab header="Go" >}}
+// exampleSnippet moves a persistent disk from one zone to another.
+//
+// Comments should follow the best practices described in
+// https://golang.org/doc/effective_go.html#commentary.
 {{< /tab >}}
 {{< tab header="Python" >}}
 """
@@ -143,7 +162,7 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
 {{< tab header="C#" >}}
 // Moves a persistent disk from one zone to another.
 
-// See https://cloud.google.com/compute/docs/quickstart-client-libraries before 
+// See https://cloud.google.com/compute/docs/quickstart-client-libraries before
 // running the code snippet.
 {{< /tab >}}
 {{< tab header="Ruby" >}}
@@ -160,11 +179,17 @@ In most cases, this is project specific information or the path to an external
 file. For example, project specific information (such as `projectId`) or a
 `filePath` for an external file is acceptable, while an argument for the type of
 a file or a specific action is not.
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // This is an example snippet for showing best practices.
 public static void exampleSnippet(String projectId, String filePath) {
+    // Snippet content ...
+}
+{{< /tab >}}
+{{< tab header="Go" >}}
+// exampleSnippet demonstrates best practices.
+func exampleSnippet(projectID, filePath string) error {
     // Snippet content ...
 }
 {{< /tab >}}
@@ -216,6 +241,16 @@ public static void exampleSnippet(String projectId, StringfilePath) {
     // Snippet content ...
 }
 {{< /tab >}}
+{{< tab header="Go" >}}
+// exampleSnippet demonstrates best practices.
+// The function prints to an io.Writer for testing purposes. Do not print to
+// stdout or stderr. Use the io.Writer instead.
+func exampleSnippet(w io.Writer, projectID, filePath string) error {
+    // Snippet content ...
+    // Using the io.Writer looks like this:
+    fmt.Fprintf(w, "The answer is %v\n", 42)
+}
+{{< /tab >}}
 {{< tab header="Python" >}}
 # This is an example snippet for showing best practices.
 def example_snippet(project_id: str, file_path: str) -> None:
@@ -228,7 +263,7 @@ const exampleSnippet = function(projectId, filePath) {
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-def example_snippet project_id:, file_path: 
+def example_snippet project_id:, file_path:
   # Snippet content ...
   response = client.example_action example_action_request
   puts "Got the following response #{response.details}"
@@ -293,7 +328,7 @@ public static void listInfoTypes() throws IOException {
       System.out.println("Display name : " + infoTypeDescription.getDisplayName());
     }
   }
-}  
+}
 {{< /tab >}}
 {{< tab header="Python" >}}
 def list_info_type(
@@ -312,7 +347,7 @@ def list_info_type(
 
     request = dlp_v2.ListInfoTypesRequest(
         # An optional filter to only return info types supported
-        # by certain parts of the API. Supported filters are 
+        # by certain parts of the API. Supported filters are
         # "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS". Defaults
         # to "supported_by=INSPECT".
         filter=result_filter,
@@ -362,6 +397,51 @@ async function listInfoTypes() {
   });
 }
 {{< /tab >}}
+{{< tab header="Go" >}}
+import (
+    "context"
+    "fmt"
+
+    dlp "cloud.google.com/go/dlp/apiv2"
+    dlppb "google.golang.org/genproto/googleapis/privacy/dlp/v2"
+)
+
+// listInfoTypes lists the types of sensitive information the DLP API supports.
+func listInfoTypes(w io.Writer) error {
+    ctx := context.Background()
+    // Initialize a client once and reuse it to send multiple requests. Clients
+    // are safe to use across goroutines. When the client is no longer needed,
+    // call the Close method to cleanup its resources.
+    c, err := dlp.NewClient(ctx)
+    if err != nil {
+        fmt.Fprintf(w, "failed to initialize dlp.Client: %v", err)
+        return err
+    }
+    defer c.Close()
+
+    // Construct the request to be sent by the client
+    req := &dlppb.ListInfoTypesRequest{
+        // Only return infoTypes supported by certain parts of the API.
+        // Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+        // Defaults to "supported_by=INSPECT"
+        Filter: "supported_by=INSPECT",
+        // BCP-47 language code for localized infoType friendly names.
+        // Defaults to "en_US"
+        LanguageCode: "en-US",
+    }
+
+    resp, err := c.ListInfoTypes(ctx, req)
+    if err != nil {
+        fmt.Fprintf(w, "c.ListInfoTypes failed: %v", err)
+        return err
+    }
+    fmt.Fprintln(w, "Infotypes found:")
+    for _, t := range resp.InfoTypes {
+        fmt.Fprintf(w, "Name: %s\n", t.Name)
+        fmt.Fprintf(w, "Display name: %s\n", t.DisplayName)
+    }
+}
+{{< /tab >}}
 {{< tab header="C#" >}}
 // Lists the types of sensitive information the DLP API supports.
 public ListInfoTypesResponse ListInfoTypes(
@@ -397,15 +477,15 @@ def list_info_types
   # Initialize client that will be used to send requests.
   dlp_client = Google::Cloud::Dlp.dlp_service
 
-  # Construct the request to be sent by the client 
-  list_info_types_request = { 
+  # Construct the request to be sent by the client
+  list_info_types_request = {
     # BCP-47 language code for localized info_type friendly names.
     # Defaults to "en_US"
-    parent: "en-US", 
-    
+    parent: "en-US",
+
     # Supported filters are "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
     # Defaults to "supported_by=INSPECT"
-    filter: "supported_by=INSPECT" 
+    filter: "supported_by=INSPECT"
   }
 
   # Use the client to send the API request.
@@ -428,7 +508,7 @@ paste code directly from cloud.google.com into their own environment. Adding
 CLIs has historically been expensive to maintain in the past, and detracts from
 the purpose of the snippet itself.
 
-## Code 
+## Code
 
 ### Useful comments
 
@@ -439,20 +519,27 @@ Comments should be used as needed, and should follow the following guidelines:
  documentation that lists available options (and when to use them).
 
 ### Authentication
- 
+
 Samples should always authenticate using [Application Default Credentials][ADC].
-Most clients do this automatically, and no special steps are required. 
- 
+Most clients do this automatically, and no special steps are required.
+
 If the code snippet is platform specific, explicitly show how to use that
 platform's credentials.
 
 [ADC]:https://cloud.google.com/docs/authentication/production#automatically
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // Most clients use ADC by default. However, if your application needs to showcase a specific
 // credential source, show users how to do that explicitly.
 GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
+{{< /tab >}}
+{{< tab header="Go" >}}
+// Most clients use ADC by default. However, if your application needs to
+// showcase a specific Go credential source, show users how to do that
+// explicitly.
+ctx := context.Background()
+foo.NewClient(ctx, option.WithCredentialsFile("/path/to/credentials.json"))
 {{< /tab >}}
 {{< tab header="Python" >}}
 # Most clients use ADC by default. However, if your application needs to
@@ -492,12 +579,12 @@ client = Google::Cloud::Spanner.new
 {{< /tabpane >}}
 
 ### Initializing Clients
- 
+
 Code snippets should show users how to initialize (and clean up, if necessary)
 clients used by the user. Additionally, clients should contain a comment
 clarifying proper usage (such as if clients should be reused for multiple
 requests or if they are thread-safe).
- 
+
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // Initialize client that will be used to send requests. This client only needs to be created
@@ -508,17 +595,31 @@ try (CloudClient dlp = CloudClient.create()) {
   // make a request with the client
 }
 {{< /tab >}}
+{{< tab header="Go" >}}
+// Initialize a client once and reuse it to send multiple requests. Clients
+// are safe to use across goroutines. When the client is no longer needed,
+// call the Close method to cleanup its resources.
+ctx := context.Background()
+c, err := foo.NewClient(ctx)
+if err != nil {
+    fmt.Fprintf(w, "failed to initialize foo.Client: %v", err)
+    return err
+}
+defer c.Close()
+
+// make a request with the client...
+{{< /tab >}}
 {{< tab header="Python" >}}
 
-# NOTE FOR SAMPLE AUTHOR: 
+# NOTE FOR SAMPLE AUTHOR:
 # **DO NOT include this comment block in the sample.**
 # The comment below about clients applies to gRPC-based clients (clients with GAPIC_AUTO in .repo-metadata.json). For google-api-python-client, see https://googleapis.github.io/google-api-python-client/docs/thread_safety.html#the-httplib2http-objects-are-not-thread-safe. For other libraries, consult with
 # the library owner.
 
-# Initialize client that will be used to send requests across threads. This 
+# Initialize client that will be used to send requests across threads. This
 # client only needs to be created once, and can be reused for multiple requests.
-# After completing all of your requests, call the "__exit__()" method to safely 
-# clean up any remaining background resources. Alternatively, use the client as 
+# After completing all of your requests, call the "__exit__()" method to safely
+# clean up any remaining background resources. Alternatively, use the client as
 # a context manager.
 with dlp_v2.DlpServiceClient() as dlp_client:
     # make a request with the client
@@ -573,14 +674,14 @@ Cyclomatic complexity is the measure of possible code paths. The more code
 paths, the more complex the code snippet, and the harder to understand and test.
 Flow control statements like conditionals (if/else), switches, and loops are
 examples of code that increases cyclomatic complexity.
-	
+
 Code snippets should have a single path demonstrating their purpose with no
 extra code.
 
 ### Error Handling
 
 Samples should include examples and details of how to catch and handle common
-errors that are the result of improper interactions with the client or service. 
+errors that are the result of improper interactions with the client or service.
 
 If there is no solution (or if the solution is too verbose to resolve in a
 sample) it is acceptable to either log or leave a comment explaining what the
@@ -593,6 +694,15 @@ try {
   // Do something
 } catch (IllegalArgumentException ok) {
   // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+}
+{{< /tab >}}
+{{< tab header="Go" >}}
+// If the sample can run into errors, write the error message to the provided
+// io.Writer. Don't call log.Fatal or friends.
+if err != nil {
+    // TODO(developer): return or handle error as necessary
+    fmt.Fprintf(w, "failed to initialize foo.Client: %v", err)
+    return err
 }
 {{< /tab >}}
 {{< tab header="Python" >}}
@@ -669,7 +779,7 @@ For example, a code snippet that:
 
 ### Coverage
 Code snippets should have reasonable test coverage and all critical code paths
-should have integration tests that test against the production service. 
+should have integration tests that test against the production service.
 
 ## Additional best practices
 

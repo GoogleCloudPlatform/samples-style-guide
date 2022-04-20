@@ -537,23 +537,22 @@ use Google\Cloud\Dlp\V2\DlpServiceClient;
 
 /**
  * Lists all Info Types for the Data Loss Prevention (DLP) API.
- *
- * @param string $filter        (Optional) filter to use
- * @param string $languageCode  (Optional) language code, empty for 'en-US'
  */
-function list_info_types(
-    // TODO(developer): Replace these values before running your sample: 
-    string $filter = 'your-filter', 
-    string $languageCode = 'your-language-code'): void
+function list_info_types(): void
 {
     // Arrange: Instantiate a client.
     $dlp = new DlpServiceClient();
 
     // Arrange: Prepare the request parameters.
     $params = [
-        'languageCode' => $languageCode,
-        'filter' => $filter
-    ]
+        // Only return infoTypes supported by certain parts of the API.
+        // Supported filters: "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+        'filter' =>'supported_by=INSPECT',
+
+        // BCP-47 language code for localized infoType friendly names.
+        // Defaults to "en_US"
+        'languageCode' => 'en-US'
+    ];
 
     // Act: Run the request.
     $response = $dlp->listInfoTypes($params);

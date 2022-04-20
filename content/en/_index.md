@@ -939,7 +939,44 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /content-tab >}}
 
 {{< content-tab header="PHP" >}}
-// TODO
+
+### Easy run function
+
+Samples with function parameters should show how to prepare parameter values
+and call the function. Do this from a `callSample()` function below the main
+sample code. Do not include significant logic in the `callSample()` function,
+and do not write tests for it.
+
+Direct the developer to change the parameter values from the provided examples.
+
+Where possible, provide a link to documentation that explains the options.
+
+{{<highlight PHP>}}
+// [START product_example]
+
+/**
+ * Example snippet showing the easy run function rule.
+ *
+ * @param string $projectId         Google Cloud Project
+ * @param string $filePath          Path to file for processing
+ */
+function example_snippet(string $projectId, string $filePath): void
+{
+    // Snippet content ...
+}
+
+/**
+ * TODO(developer): Replace sample parameters before running the code.
+ */
+function callSample(): void
+{
+    $projectId = 'your-project-id';
+    $filePath = 'path/to/image.png';
+    example_snippet($projectId, $region);
+}
+// [END product_example]
+{{< / highlight >}}
+
 {{< /content-tab >}}
 
 {{< content-tab header="Ruby" >}}

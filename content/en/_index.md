@@ -5,8 +5,8 @@ type: docs
 weight: 20
 ---
 
-## Introduction
-
+## Introduction {#introduction}
+ 
 This document serves as a definition of our samples standards for both
 standalone snippets and sample applications. It is intended to help encourage
 consistency and best practices when authoring code intended to teach others.
@@ -25,7 +25,7 @@ with our services.
 * **Idiomatic** - Samples should encourage idiomatic and best practices specific
 to language, framework, or service.
 
-### Principles
+### Principles {#principles}
 
 Where the guidelines below are insufficient, these principles apply in
 descending order of priority:
@@ -39,9 +39,9 @@ descending order of priority:
 6. **Maintainability**: The code is written such that it can be easily
    maintained
 
-## Structure
+## Structure {#structure}
 
-### Region tags
+### Region tags {#region-tags}
 
 Each code snippet should have a region tag to define which parts of the snippet
 are displayed from the documentation. Each region tag should be:
@@ -53,7 +53,7 @@ are displayed from the documentation. Each region tag should be:
 Region tags should show as much of the sample as possible, so that a user can
 easily copy and paste the sample into their own environment to run it.
 
-### Imports
+### Imports {#imports}
 
 Samples should include any imports used in the sample.
 
@@ -134,7 +134,7 @@ function example_snippet() {
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Sample description
+### Sample description {#description}
 
 Each code snippet file should have a top-level comment that succinctly describes
 what the snippet does, including any setup (such as resources) required to make
@@ -189,7 +189,7 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Minimal arguments
+### Minimal arguments {#minimal-arguments}
 
 Method arguments should be limited to what is absolutely required for testing.
 In most cases, this is project specific information or the path to an external
@@ -248,7 +248,7 @@ function example_snippet(string $projectId, string $filePath): void
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Process the result
+### Process the result {#result}
 
 Methods should avoid a return type whenever possible. Instead, show the user how
 to interact with a returned object programmatically by printing some example
@@ -314,7 +314,7 @@ function example_snippet(string $projectId, string $filePath): void
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Arrange, Act, Assert
+### Arrange, Act, Assert {#pattern}
 
 Generally, most samples should follow the "Arrange, Act, Assert" pattern as
 closely as possible. Composing samples into these discrete steps can make them
@@ -570,16 +570,16 @@ function list_info_types(): void
 {{< /tab >}}
 {{< /tabpane >}}
 
-### No CLIs
+### No CLIs {#no-cli}
 
 Do not include CLIs for running your sample. We expect developers to copy and
 paste code directly from cloud.google.com into their own environment. Adding
 CLIs has historically been expensive to maintain in the past, and detracts from
 the purpose of the snippet itself.
 
-## Code
+## Code {#code}
 
-### Useful comments
+### Useful comments {#comments}
 
 Comments should be used as needed, and should follow the following guidelines:
 * Comments should add context not otherwise obvious from the code.
@@ -587,7 +587,7 @@ Comments should be used as needed, and should follow the following guidelines:
 * For values that the user may wish to configure, provide links to
  documentation that lists available options (and when to use them).
 
-### Authentication
+### Authentication {#authentication}
 
 Samples should always authenticate using [Application Default Credentials][ADC].
 Most clients do this automatically, and no special steps are required.
@@ -656,7 +656,7 @@ $storage = new StorageClient($config);
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Initializing Clients
+### Initializing Clients {#clients}
 
 Code snippets should show users how to initialize (and clean up, if necessary)
 clients used by the user. Additionally, clients should contain a comment
@@ -752,7 +752,7 @@ $dlp = new DlpServiceClient();
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Cyclomatic Complexity
+### Cyclomatic Complexity {#complexity}
 
 Cyclomatic complexity is the measure of possible code paths. The more code
 paths, the more complex the code snippet, and the harder to understand and test.
@@ -762,7 +762,7 @@ examples of code that increases cyclomatic complexity.
 Code snippets should have a single path demonstrating their purpose with no
 extra code.
 
-### Error Handling
+### Error Handling {#errors}
 
 Samples should include examples and details of how to catch and handle common
 errors that are the result of improper interactions between the client and service.
@@ -842,13 +842,13 @@ try {
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Linting
+### Linting {#linting}
 
 Our code snippets should adhere to a style used by the language communities. We
 should prefer using standard linters that are popular in the community to
 enforce style.
 
-### Portability
+### Portability {#portability}
 
 Each of the major operating systems are well-represented among GCP users. To
 provide a good experience for most GCP users, our code snippets need to work on
@@ -867,15 +867,15 @@ For example, a code snippet that:
 * Handles code-sensitivity differences
 * Avoids platform-specific APIs
 
-## Testing
+## Testing {#testing}
 
-### Coverage
+### Coverage {#coverage}
 Code snippets should have reasonable test coverage and all critical code paths
 should have integration tests that test against the production service.
 
-## Additional best practices
+## Additional best practices {#additional}
 
-### Adhere to language idioms
+### Adhere to language idioms {#idiomatic}
 
 Code snippets should use preferred code patterns that are idiomatic to the
 particular language (e.g. promises, futures, static API calls from singletons,
@@ -889,12 +889,12 @@ Use features that work in all GCP-supported versions of a language and use
 language idioms that the community understands. Generally, do things “the way
 the community does it”.
 
-## Language-specific practices
+## Language-specific practices {#language-specific}
 
 {{< content-tabpane >}}
 {{< content-tab header="Java" >}}
 
-### Easy run function
+### Easy run function {#run-function}
 
 Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the

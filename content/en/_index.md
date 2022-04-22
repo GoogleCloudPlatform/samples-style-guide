@@ -123,6 +123,15 @@ end
 
 # [END product_example]
 {{< /tab >}}
+{{< tab header="PHP" >}}
+// [START product_example]
+use Example\Resource
+
+function example_snippet() {
+    // Snippet Content ...
+}
+// [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Sample description {#description}
@@ -169,6 +178,14 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
 # Moves a persistent disk from one zone to another.
 #
 # See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
+{{< /tab >}}
+{{< tab header="PHP" >}}
+/**
+ * Moves a persistent disk from one zone to another.
+ *
+ * See https://cloud.google.com/compute/docs/quickstart-client-libraries
+ * before running the code snippet.
+ */
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -225,6 +242,10 @@ def example_snippet project_id:, file_path:
   # Snippet content ...
 end
 {{< /tab >}}
+{{< tab header="PHP" >}}
+// This is an example snippet for showing best practices.
+function example_snippet(string $projectId, string $filePath): void
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result {#result}
@@ -277,6 +298,18 @@ public void Example(
 {
     // Snippet content ...
     Console.WriteLine($"Example {data} for project: {projectId}");
+}
+{{< /tab >}}
+{{< tab header="PHP" >}}
+// This is an example snippet for showing best practices.
+function example_snippet(string $projectId, string $filePath): void
+{
+    // Snippet content ...
+    printf(
+        'Response values: %s, %s',
+        $response->getExampleName(),
+        $response->getExampleValue()
+    );
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -499,6 +532,42 @@ def list_info_types
   end
 end
 {{< /tab >}}
+{{< tab header="PHP" >}}
+use Google\Cloud\Dlp\V2\DlpServiceClient;
+
+/**
+ * Lists all Info Types for the Data Loss Prevention (DLP) API.
+ */
+function list_info_types(): void
+{
+    // Arrange: Instantiate a client.
+    $dlp = new DlpServiceClient();
+
+    // Arrange: Prepare the request parameters.
+    $params = [
+        // Only return infoTypes supported by certain parts of the API.
+        // Supported filters: "supported_by=INSPECT" and "supported_by=RISK_ANALYSIS"
+        'filter' =>'supported_by=INSPECT',
+
+        // BCP-47 language code for localized infoType friendly names.
+        // Defaults to "en_US"
+        'languageCode' => 'en-US'
+    ];
+
+    // Act: Run the request.
+    $response = $dlp->listInfoTypes($params);
+
+    // Assert: Print the results.
+    print('Info Types:' . PHP_EOL);
+    foreach ($response->getInfoTypes() as $infoType) {
+        printf(
+            '  %s (%s)' . PHP_EOL,
+            $infoType->getDisplayName(),
+            $infoType->getName()
+        );
+    }
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs {#no-cli}
@@ -575,6 +644,15 @@ Google::Cloud::Spanner.configure do |config|
 end
 
 client = Google::Cloud::Spanner.new
+{{< /tab >}}
+{{< tab header="PHP" >}}
+// Most clients use ADC by default. However, if your application needs to showcase a specific
+// credential source, show users how to do that explicitly.
+$config = [
+    'keyFilePath' => '/path/to/credentials.json',
+    'projectId' => $projectId,
+];
+$storage = new StorageClient($config);
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -666,6 +744,12 @@ spanner = Google::Cloud::Spanner.new
 spanner_client = spanner.client spanner_instance_id, spanner_database_id
 spanner_client.close
 {{< /tab >}}
+{{< tab header="PHP" >}}
+// Initialize client that will be used to send requests.
+// This client only needs to be created once, reuse it for multiple requests.
+
+$dlp = new DlpServiceClient();
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Cyclomatic Complexity {#complexity}
@@ -681,7 +765,7 @@ extra code.
 ### Error Handling {#errors}
 
 Samples should include examples and details of how to catch and handle common
-errors that are the result of improper interactions with the client or service.
+errors that are the result of improper interactions between the client and service.
 
 If there is no solution (or if the solution is too verbose to resolve in a
 sample) it is acceptable to either log or leave a comment explaining what the
@@ -748,6 +832,14 @@ rescue Google::Cloud::AlreadyExistsError
   # Do nothing if it already exists
 end
 {{< /tab >}}
+{{< tab header="PHP" >}}
+// Catch the most specific type of Exception, instead of a more general one.
+try {
+    // Do something.
+} catch (InvalidArgumentException $e) {
+    // IllegalArgumentException is thrown when an invalid argument has been passed to a function.
+}
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Linting {#linting}
@@ -810,7 +902,6 @@ entrypoint for the snippet. If the values for these variables need to be
 replaced by the user, be explicit that they are example values only. Wherever
 possible, provide a link to documentation that enumartes the options.
 
-
 {{< highlight java >}}
 // [START product_example]
 import com.example.resource;
@@ -848,7 +939,44 @@ public static void exampleSnippet(String projectId, String filePath) {
 {{< /content-tab >}}
 
 {{< content-tab header="PHP" >}}
-// TODO
+
+### Easy run function
+
+Samples with function parameters should show how to prepare parameter values
+and call the function. Do this from a `callSample()` function below the main
+sample code. Do not include significant logic in the `callSample()` function,
+and do not write tests for it.
+
+Direct the developer to change the parameter values from the provided examples.
+
+Where possible, provide a link to documentation that explains the options.
+
+{{<highlight PHP>}}
+// [START product_example]
+
+/**
+ * Example snippet showing the easy run function rule.
+ *
+ * @param string $projectId         Google Cloud Project
+ * @param string $filePath          Path to file for processing
+ */
+function example_snippet(string $projectId, string $filePath): void
+{
+    // Snippet content ...
+}
+
+/**
+ * TODO(developer): Replace sample parameters before running the code.
+ */
+function callSample(): void
+{
+    $projectId = 'your-project-id';
+    $filePath = 'path/to/image.png';
+    example_snippet($projectId, $region);
+}
+// [END product_example]
+{{< / highlight >}}
+
 {{< /content-tab >}}
 
 {{< content-tab header="Ruby" >}}

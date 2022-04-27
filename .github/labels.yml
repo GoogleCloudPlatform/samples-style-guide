@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: duplicate
+- name: 'duplicate'
   color: ededed
   description: ""
 
@@ -50,7 +50,7 @@
   color: ffffc7
   description: Desirable enhancement or fix. May not be included in next release.
 
-- name: automerge
+- name: 'automerge'
   color: 00ff00
   description: Merge the pull request once unit tests and other checks pass.
 - name: 'automerge: exact'

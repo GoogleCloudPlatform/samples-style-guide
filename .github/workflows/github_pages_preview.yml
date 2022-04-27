@@ -18,6 +18,7 @@ name: Preview
 # not compatible with branch or manual triggers.
 on:
   pull_request:
+    # Sync with github_actions_preview_fallback.yml on.pull_request.paths
     paths-ignore:
       - '.github/labels.yml'
       - '.github/workflows/labels.yaml'

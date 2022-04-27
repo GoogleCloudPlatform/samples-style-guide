@@ -22,7 +22,7 @@ on:
       - closed
 
 jobs:
-  preview:
+  clean:
     runs-on: ubuntu-20.04
     concurrency:
       # Shared concurrency group wih preview staging.

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: duplicate
+- name: 'duplicate'
   color: ededed
   description: ""
 
@@ -50,14 +50,21 @@
   color: ffffc7
   description: Desirable enhancement or fix. May not be included in next release.
 
-- name: automerge
+- name: 'automerge'
   color: 00ff00
   description: Merge the pull request once unit tests and other checks pass.
 - name: 'automerge: exact'
   color: 8dd517
   description: Summon MOG for automerging, but approvals need to be against the latest
     commit
-- name: do not merge
+- name: 'do not merge'
   color: d93f0b
   description: Indicates a pull request not ready for merge, due to either quality
     or timing.
+
+- name: 'help wanted'
+  color: 3f5e3d
+  description: "We'd love to have community involvement on this issue."
+- name: 'good first issue'
+  color: 520b77
+  description: 'This issue is a good place to started contributing to this repository.'

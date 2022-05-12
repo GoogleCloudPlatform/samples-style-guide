@@ -64,6 +64,9 @@ jobs:
       - run: hugo --minify
 
       - name: Deploy
+        # If run from a fork, GitHub write operations will fail.
+        # See https://github.com/GoogleCloudPlatform/samples-style-guide/issues/56
+        if: github.repository == 'googlecloudplatform/samples-style-guide'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -72,6 +75,9 @@ jobs:
           commit_message: "stage: PR-${{ github.event.number }}: ${{ github.event.head_commit.message }}"
 
       - name: Comment
+        # If run from a fork, GitHub write operations will fail.
+        # See https://github.com/GoogleCloudPlatform/samples-style-guide/issues/56
+        if: github.repository == 'googlecloudplatform/samples-style-guide'
         uses: actions/github-script@v6
         with:
           script: |

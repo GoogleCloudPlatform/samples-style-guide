@@ -23,6 +23,9 @@ on:
 
 jobs:
   clean:
+    # If run from a fork, GitHub write operations will fail.
+    # See https://github.com/GoogleCloudPlatform/samples-style-guide/issues/56
+    if: github.repository == 'googlecloudplatform/samples-style-guide'
     runs-on: ubuntu-20.04
     concurrency:
       # Shared concurrency group wih preview staging.

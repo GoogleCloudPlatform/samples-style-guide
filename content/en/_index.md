@@ -7,9 +7,10 @@ weight: 20
 
 ## Introduction {#introduction}
  
-This document serves as a definition of our samples standards for both
-standalone snippets and sample applications. It is intended to help encourage
-consistency and best practices when authoring code intended to teach others.
+This document defines samples standards for "standalone" code snippets.
+It encourages recommended practices for authoring code intended to teach others.
+By consistently applying these practices, the collection of samples as a whole
+become more approachable.
 
 Even if not specifically mentioned in the guide, all samples should make
 best-efforts to achieve the following goals wherever possible:
@@ -48,14 +49,14 @@ are displayed from the documentation. Each region tag should be:
 * Globally unique
 * Consistent across the same snippets in different languages
 * Begins with the product's region tag prefix
-* In snake case
+* In snake case (`snake_case`)
 
 Region tags should show as much of the sample as possible, so that a user can
 easily copy and paste the sample into their own environment to run it.
 
 ### Imports {#imports}
 
-Samples should include any imports used in the sample.
+Samples should include any imports statements the code depends on.
 
 This is easiest to enforce/detect when the samples are in their own file, so
 samples should be structured as such unless there is a compelling reason not to.
@@ -191,11 +192,11 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
 
 ### Minimal arguments {#minimal-arguments}
 
-Method arguments should be limited to what is absolutely required for testing.
-In most cases, this is project specific information or the path to an external
-file. For example, project specific information (such as `projectId`) or a
-`filePath` for an external file is acceptable, while an argument for the type of
-a file or a specific action is not.
+Method arguments should be limited requirements for testing. In most cases, this
+is project-specific information (`projectID`) or the path to an external file (`filePath`).
+
+Do not use arguments for values that can be hard-coded, such as the type of a
+file or an operation to perform.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -251,9 +252,9 @@ function example_snippet(string $projectId, string $filePath): void
 ### Process the result {#result}
 
 Methods should avoid a return type whenever possible. Instead, show the user how
-to interact with a returned object programmatically by printing some example
-attributes to the console. Tests should use the output of the function to
-ensure that it works.
+to interact with a returned object programmatically by printing example
+attributes to the console. Tests should use the output of the function to ensure
+that it works.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -316,19 +317,17 @@ function example_snippet(string $projectId, string $filePath): void
 
 ### Arrange, Act, Assert {#pattern}
 
-Generally, most samples should follow the "Arrange, Act, Assert" pattern as
-closely as possible. Composing samples into these discrete steps can make them
-more approachable to beginners:
+Most samples should follow the "Arrange, Act, Assert" pattern as closely as
+possible. Composing samples into these discrete steps makes them more
+approachable to beginners:
 
 1. **Arrange** - Create and configure the components for the request. Avoid
- nesting these components beyond 2-3 levels, as it can make parsing and
- understanding the samples more confusing.
-1. **Act** - Send the request to the service and receive a response.
-1. **Assert** - Verify that the call was successful and that a response was
- returned as expected. This is typically done by printing some aspects of the
- response to stdout.
-
-The samples below show this in action.
+ nesting these components beyond 2-3 levels, it makes understanding the code
+ more difficult.
+2. **Act** - Send the request to the service and receive a response.
+3. **Assert** - Verify that the call was successful and that the expected
+ response was returned. This is typically done by [printing some of the
+ response to stdout](#result).
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -573,15 +572,16 @@ function list_info_types(): void
 ### No CLIs {#no-cli}
 
 Do not include CLIs for running your sample. We expect developers to copy and
-paste code directly from cloud.google.com into their own environment. Adding
-CLIs has historically been expensive to maintain in the past, and detracts from
-the purpose of the snippet itself.
+paste code directly from cloud.google.com into their own environment.
+
+Previous practice shows CLIs are expensive to maintain and detracts from the
+purpose of the snippet.
 
 ## Code {#code}
 
 ### Useful comments {#comments}
 
-Comments should be used as needed, and should follow the following guidelines:
+Comments should be used as needed with the following guidelines:
 * Comments should add context not otherwise obvious from the code.
 * Comments should be readable and grammatically correct.
 * For values that the user may wish to configure, provide links to

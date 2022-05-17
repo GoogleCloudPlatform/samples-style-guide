@@ -868,28 +868,38 @@ try {
 
 ### Linting {#linting}
 
-Our code snippets should adhere to a style used by the language communities. We
-should prefer using standard linters that are popular in the community to
-enforce style.
+Our code snippets should adhere to a style used by the language communities.
+We prefer to enforce style using standard linters that are popular in
+the community.
 
 ### Portability {#portability}
 
 Each of the major operating systems are well-represented among GCP users. To
-provide a good experience for most GCP users, our code snippets need to work on
-multiple operating systems. In addition, our code snippets may be executed in
-multiple hosting environments, such as GCF, GAE, GKE, GCE, AWS, and local
-machines.
+provide a good user experience, our code snippets need to work on multiple
+operating systems.
+
+Our code snippets may be executed in multiple hosting environments, such as
+[App Engine][gae], [Cloud Functions][gcf], [Cloud Run][run],
+[Kubernetes Engine][gke], [Compute Engine][gce], [Cloud Shell][shell],
+other cloud providers, and local machines.
 
 Where possible, code snippets should work across environments and hosting
 platforms. Code snippets should point out any differences between platforms via
 code comments and use platform-agnostic libraries and code constructs.
 
-For example, a code snippet that:
+Examples of portable practices include:
 
-* Uses the language’s standard path library to construct file paths
-* Does not directly rely on POSIX system calls
-* Handles code-sensitivity differences
-* Avoids platform-specific APIs
+* Use the language’s standard path library to construct file paths
+* Do not directly rely on POSIX system calls
+* Handle case-sensitivity differences
+* Avoid platform-specific APIs
+
+[gae]: https://cloud.google.com/appengine
+[gcf]: https://cloud.google.com/functions
+[run]: https://cloud.google.com/run
+[gke]: https://cloud.google.com/kubernetes-engine
+[gce]: https://cloud.google.com/compute
+[shell]: https://cloud.google.com/shell
 
 ## Testing {#testing}
 

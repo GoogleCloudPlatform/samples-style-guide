@@ -67,8 +67,8 @@ easily copy and paste the sample into their own environment to run it.
 
 Samples should include any imports statements the code depends on.
 
-This is easiest to enforce/detect when the samples are in their own file, so
-samples should be structured as such unless there is a compelling reason not to.
+This is easiest to enforce/detect when the samples are in their own file, see
+the [one sample per file](#one-per-file) guideline.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
@@ -143,6 +143,13 @@ function example_snippet() {
 // [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
+
+### One sample per file {#one-per-file}
+
+A single file should only include one sample. This shows the minimal
+set of dependencies via import statements, keeps the end-to-end code relevant
+to the reader's current learning need, and helps reviewers validate the
+ [imports](#imports) guideline.
 
 ### Sample description {#description}
 

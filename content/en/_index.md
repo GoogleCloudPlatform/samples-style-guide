@@ -6,7 +6,7 @@ weight: 20
 ---
 
 ## Introduction {#introduction}
- 
+
 This document defines samples standards for "standalone" code snippets.
 It encourages recommended practices for authoring code intended to teach others.
 By consistently applying these practices, the collection of samples as a whole
@@ -30,6 +30,7 @@ to language, framework, or service.
 
 Where the guidelines below are insufficient, these principles apply in
 descending order of priority:
+
 1. **Clarity**: The code's purpose and rationale is clear to the reader
 2. **Idiomaticity**: The code should be written using idiomatic,
    community-driven coding practices
@@ -40,12 +41,20 @@ descending order of priority:
 6. **Maintainability**: The code is written such that it can be easily
    maintained
 
+Code snippets should use preferred code patterns that are idiomatic to the
+particular language (e.g. promises, futures, static API calls from singletons,
+builders, etc). This may result in code snippets that are radically different
+from language-to-language. Err on the side of what is idiomatic to the language,
+though cross-language consistency does not hurt. Generally, do things
+“the way the community does it”.
+
 ## Structure {#structure}
 
 ### Region tags {#region-tags}
 
 Each code snippet should have a region tag to define which parts of the snippet
 are displayed from the documentation. Each region tag should be:
+
 * Globally unique
 * Consistent across the same snippets in different languages
 * Begins with the product's region tag prefix
@@ -579,9 +588,15 @@ purpose of the snippet.
 
 ## Code {#code}
 
+### Language compatibility {#lang-compat}
+
+Use features that work in all GCP-supported versions of a language and use
+language idioms that the community understands.
+
 ### Useful comments {#comments}
 
 Comments should be used as needed with the following guidelines:
+
 * Comments should add context not otherwise obvious from the code.
 * Comments should be readable and grammatically correct.
 * For values that the user may wish to configure, provide links to
@@ -691,8 +706,10 @@ defer c.Close()
 
 # NOTE FOR SAMPLE AUTHOR:
 # **DO NOT include this comment block in the sample.**
-# The comment below about clients applies to gRPC-based clients (clients with GAPIC_AUTO in .repo-metadata.json). For google-api-python-client, see https://googleapis.github.io/google-api-python-client/docs/thread_safety.html#the-httplib2http-objects-are-not-thread-safe. For other libraries, consult with
-# the library owner.
+# The comment below about clients applies to gRPC-based clients (clients with GAPIC_AUTO in .repo-metadata.json). 
+# For google-api-python-client, see 
+# https://googleapis.github.io/google-api-python-client/docs/thread_safety.html#the-httplib2http-objects-are-not-thread-safe. 
+# For other libraries, consult with the library owner.
 
 # Initialize client that will be used to send requests across threads. This
 # client only needs to be created once, and can be reused for multiple requests.
@@ -870,24 +887,9 @@ For example, a code snippet that:
 ## Testing {#testing}
 
 ### Coverage {#coverage}
+
 Code snippets should have reasonable test coverage and all critical code paths
 should have integration tests that test against the production service.
-
-## Additional best practices {#additional}
-
-### Adhere to language idioms {#idiomatic}
-
-Code snippets should use preferred code patterns that are idiomatic to the
-particular language (e.g. promises, futures, static API calls from singletons,
-builders, etc).
-
-Aside: Note that in being idiomatic we can end up creating code snippets that
-are radically different from language-to-language. Err on the side of what is
-idiomatic to the language, though cross-language consistency does not hurt.
-
-Use features that work in all GCP-supported versions of a language and use
-language idioms that the community understands. Generally, do things “the way
-the community does it”.
 
 ## Language-specific practices {#language-specific}
 

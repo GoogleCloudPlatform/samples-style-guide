@@ -6,7 +6,7 @@ weight: 20
 ---
 
 ## Introduction {#introduction}
- 
+
 This document serves as a definition of our samples standards for both
 standalone snippets and sample applications. It is intended to help encourage
 consistency and best practices when authoring code intended to teach others.
@@ -29,6 +29,7 @@ to language, framework, or service.
 
 Where the guidelines below are insufficient, these principles apply in
 descending order of priority:
+
 1. **Clarity**: The code's purpose and rationale is clear to the reader
 2. **Idiomaticity**: The code should be written using idiomatic,
    community-driven coding practices
@@ -39,12 +40,20 @@ descending order of priority:
 6. **Maintainability**: The code is written such that it can be easily
    maintained
 
+Code snippets should use preferred code patterns that are idiomatic to the
+particular language (e.g. promises, futures, static API calls from singletons,
+builders, etc). This may result in code snippets that are radically different
+from language-to-language. Err on the side of what is idiomatic to the language,
+though cross-language consistency does not hurt. Generally, do things
+“the way the community does it”.
+
 ## Structure {#structure}
 
 ### Region tags {#region-tags}
 
 Each code snippet should have a region tag to define which parts of the snippet
 are displayed from the documentation. Each region tag should be:
+
 * Globally unique
 * Consistent across the same snippets in different languages
 * Begins with the product's region tag prefix
@@ -579,9 +588,15 @@ the purpose of the snippet itself.
 
 ## Code {#code}
 
+### Language compatibility {#lang-compat}
+
+Use features that work in all GCP-supported versions of a language and use
+language idioms that the community understands.
+
 ### Useful comments {#comments}
 
 Comments should be used as needed, and should follow the following guidelines:
+
 * Comments should add context not otherwise obvious from the code.
 * Comments should be readable and grammatically correct.
 * For values that the user may wish to configure, provide links to
@@ -870,24 +885,9 @@ For example, a code snippet that:
 ## Testing {#testing}
 
 ### Coverage {#coverage}
+
 Code snippets should have reasonable test coverage and all critical code paths
 should have integration tests that test against the production service.
-
-## Additional best practices {#additional}
-
-### Adhere to language idioms {#idiomatic}
-
-Code snippets should use preferred code patterns that are idiomatic to the
-particular language (e.g. promises, futures, static API calls from singletons,
-builders, etc).
-
-Aside: Note that in being idiomatic we can end up creating code snippets that
-are radically different from language-to-language. Err on the side of what is
-idiomatic to the language, though cross-language consistency does not hurt.
-
-Use features that work in all GCP-supported versions of a language and use
-language idioms that the community understands. Generally, do things “the way
-the community does it”.
 
 ## Language-specific practices {#language-specific}
 

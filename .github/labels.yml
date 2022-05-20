@@ -68,3 +68,10 @@
 - name: 'good first issue'
   color: 520b77
   description: 'This issue is a good place to started contributing to this repository.'
+  
+- name: 'autorelease: pending'
+  color: ededed
+  description: Release please needs to do its work on this.
+- name: 'autorelease: tagged'
+  color: ededed
+  description: Release please has completed a release for this.

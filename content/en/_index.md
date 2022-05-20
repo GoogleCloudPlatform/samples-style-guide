@@ -1,5 +1,5 @@
 ---
-title: "Effecive Samples"
+title: "Effective Samples"
 linkTitle: "Style Guide"
 type: docs
 weight: 20

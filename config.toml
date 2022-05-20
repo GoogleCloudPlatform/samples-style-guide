@@ -3,6 +3,7 @@ title = 'Samples Style Guide | Google Cloud'
 theme = ["docsy"]
 languageCode = 'en-us'
 enableGitInfo = true
+enableRobotsTXT = true
 
 [Params]
   copyright = 'Google LLC'

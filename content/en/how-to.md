@@ -7,17 +7,15 @@ weight: 20
 
 ## Applicable Samples
 
-This style guide is intended to apply to new samples and significant revisions 
-to previous samples. It is not a mandate to make sure previously authored 
-samples are always in compliance as the sample guide changes and evolves. 
+This style guide applies to new samples and to significant revisions of existing samples.
+It does not require that previously authored samples keep up with guideline changes.
 
-For "standalone" samples, the guidelines are intended to be enforced more
-strictly and exceptions should be rare and with good reason, up to the
-disgression of the language reviewer(s).
+For "standalone" samples, the guidelines should be enforced strictly and
+exceptions should be rare and with specific reason, up to the discretion of
+the language reviewer(s).
 
 For "application" samples, the guidelines should apply more loosely, following
-the rules in as many places as possible without comprising the integrity of the
-application. 
+the rules as possible without comprising the integrity of the application. 
 
 ## Review Comments
 

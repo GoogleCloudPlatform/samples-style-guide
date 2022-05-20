@@ -4,6 +4,7 @@ theme = ["docsy"]
 languageCode = 'en-us'
 enableGitInfo = true
 enableRobotsTXT = true
+googleAnalytics = 'G-WJFDXY846K'
 
 [Params]
   copyright = 'Google LLC'

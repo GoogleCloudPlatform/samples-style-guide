@@ -83,7 +83,7 @@ public class exampleSnippet {
 {{< /tab >}}
 {{< tab header="Python" >}}
 # [START product_example]
-import com.example.resource
+import example
 
 def example_snippet() -> None:
       # Snippet Content ...

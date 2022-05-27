@@ -1,6 +1,6 @@
 # Samples Style Guide
 
-This is the **future home** of the Samples Style Guide.
+This is the **home** of the Google Cloud Samples Style Guide.
 
 You can [read the guide](https://googlecloudplatform.github.io/samples-style-guide/) and open issues for feedback.
 

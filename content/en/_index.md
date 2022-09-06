@@ -254,7 +254,15 @@ public void Example(
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}
+##
 # This is an example snippet for showing best practices.
+#
+# If any arguments are needed, document them using YARD format
+# (https://yardoc.org) as illustrated below.
+#
+# @param project_id [String] The project ID (e.g. "my-project-id")
+# @param file_path [String] Full path to input file (e.g. "/tmp/my-input.txt")
+#
 def example_snippet project_id:, file_path:
   # Snippet content ...
 end
@@ -999,6 +1007,66 @@ function callSample(): void
 {{< /content-tab >}}
 
 {{< content-tab header="Ruby" >}}
-// TODO
+
+### Named entrypoint
+
+Each Ruby sample should include an entrypoint method with the same name as the
+sample file. (It may include helper methods if appropriate for readability.) The
+entrypoint method should appear at the top level of the file rather than within
+a class.
+
+Example snippet with file name `read_a_file.rb`:
+
+{{< highlight ruby >}}
+##
+# This is the entrypoint.
+#
+# @param file_path [String] Full path to input file (e.g. "/tmp/my-input.txt")
+#
+def read_a_file file_path:
+  content = File.read file_path
+  puts "Contents: #{content}"
+end
+{{< /highlight >}}
+
+### Testing practices
+
+Each Ruby sample should have its own separate test file. Sample tests should
+use the [Minitest][minitest] framework, and should be located in a file named
+`<sample-name>_test.rb` under the `acceptance` directory.
+
+Be aware that sample methods are defined at the top level and would thus be
+added to the `Object` class if the file is loaded directly. In most cases,
+tests should define a temporary class and load the sample in that class. Ruby
+repositories may provide tools to help with this process, but it can also be
+done with `eval`.
+
+Example test: `acceptance/read_a_file.rb`:
+
+{{< highlight ruby >}}
+require "minitest/autorun"
+require "tmpdir"
+
+# Load the sample into this class so the method isn't defined on Object.
+class ReadAFileSample
+  sample_file = File.read "#{__dir__}/../read_a_file.rb"
+  eval sample_file
+end
+
+describe "#read_a_file" do
+  # Test the critical code paths
+  it "reads a file" do
+    Dir.mktmpdir do |dir|
+      File.write "#{dir}/my-test.txt", "Hello, Ruby!"
+      assert_output "Contents: Hello, Ruby!\n" do
+        ReadAFileSample.new.read_a_file file_path: "#{dir}/my-test.txt"
+      end
+    end
+  end
+end
+{{< /highlight >}}
+
+[minitest]: https://github.com/minitest/minitest
+
 {{< /content-tab >}}
 {{< /content-tabpane >}}

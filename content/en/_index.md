@@ -142,6 +142,9 @@ function example_snippet() {
 }
 // [END product_example]
 {{< /tab >}}
+{{< tab header="Terraform" >}}
+// TODO
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### One sample per file {#one-per-file}
@@ -203,6 +206,9 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
  * See https://cloud.google.com/compute/docs/quickstart-client-libraries
  * before running the code snippet.
  */
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+// TODO
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -271,6 +277,9 @@ end
 // This is an example snippet for showing best practices.
 function example_snippet(string $projectId, string $filePath): void
 {{< /tab >}}
+{{<tab header="Terraform" >}}
+// TODO
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Process the result {#result}
@@ -336,6 +345,9 @@ function example_snippet(string $projectId, string $filePath): void
         $response->getExampleValue()
     );
 }
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+// TODO
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -591,6 +603,9 @@ function list_info_types(): void
     }
 }
 {{< /tab >}}
+{{< tab header="Terraform" >}}
+// TODO
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### No CLIs {#no-cli}
@@ -683,6 +698,9 @@ $config = [
     'projectId' => $projectId,
 ];
 $storage = new StorageClient($config);
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+// TODO
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -782,6 +800,9 @@ spanner_client.close
 
 $dlp = new DlpServiceClient();
 {{< /tab >}}
+{{< tab header="Terraform" >}}
+// TODO
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Cyclomatic Complexity {#complexity}
@@ -871,6 +892,9 @@ try {
 } catch (InvalidArgumentException $e) {
     // IllegalArgumentException is thrown when an invalid argument has been passed to a function.
 }
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+// TODO
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -1068,5 +1092,8 @@ end
 
 [minitest]: https://github.com/minitest/minitest
 
+{{< /content-tab >}}
+{{< content-tab header="Terraform" >}}
+// TODO
 {{< /content-tab >}}
 {{< /content-tabpane >}}

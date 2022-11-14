@@ -1,13 +1,13 @@
 ---
-title: "How to use this Guide"
-linkTitle: "How to use this Guide"
+title: "How to use these Guides"
+linkTitle: "How to use these Guides"
 type: docs
 weight: 20
 ---
 
 ## Applicable Samples
 
-This style guide applies to new samples and to significant revisions of existing samples.
+These style guides apply to new samples and to significant revisions of existing samples.
 It does not require that previously authored samples keep up with guideline changes.
 
 For "standalone" samples, the guidelines should be enforced strictly and
@@ -19,9 +19,9 @@ the rules as possible without comprising the integrity of the application.
 
 ## Review Comments
 
-Feedback on samples PRs should reference the style guide wherever possible. 
-Leave a short description of what's need to comply with the style guide, and
-then link to the relevant guideline. 
+Feedback on samples PRs should reference a style guide wherever possible. 
+Leave a short description of what's needed to comply with the style
+guide, and then link to the relevant guideline. 
 
 ![Example review commment](/samples-style-guide/images/example-review-comment.png)
 

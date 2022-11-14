@@ -131,6 +131,10 @@ Do not include CLI commands (such as `gcloud` or `kubectl`) inside of your sampl
 by using the `null_resource` resource. Previous practice shows CLIs are expensive
 to maintain and detract from the purpose of the sample.
 
+In case the functionality is not supported by the Google provider and can be
+accessed only via the CLI or API, consider delaying the Terraform sample
+until the functionality is available in the Google provider.
+
 ### No variables {#no-variables}
 
 Don't include Terraform variables (`var.VARIABLE_NAME`). Instead, hard code the
@@ -211,7 +215,7 @@ terraform {
   required_providers {
     google = {
       source = "hashicorp/google"
-      version = ">= 4.37.0"
+      version = "~= 4.37.0"
     }
   }
 }

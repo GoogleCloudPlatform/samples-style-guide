@@ -877,14 +877,8 @@ try {
 ### Linting {#linting}
 
 Our code snippets should adhere to a style used by the language communities.
-We follow the [PSR-1][psr-1] and [PSR-2][psr-2] community coding standards, with
-one notable exception:
-   
-1. The function names for sample are in `snake_case` rather than `camelCase`,
-   in order to differentiate them from class methods.
-
-[psr-1]: https://www.php-fig.org/psr/psr-1/
-[psr-2]: https://www.php-fig.org/psr/psr-2/#1-overview
+We prefer to enforce style using standard linters that are popular in
+the community.
 
 ### Portability {#portability}
 
@@ -973,6 +967,17 @@ public static void exampleSnippet(String projectId, String filePath) {
 
 {{< content-tab header="PHP" >}}
 
+### Linting
+
+We follow the [PSR-1][psr-1] and [PSR-2][psr-2] community coding standards, with
+one notable exception:
+   
+1. The function names for sample are in `snake_case` rather than `camelCase`,
+   in order to differentiate them from class methods.
+   
+[psr-1]: https://www.php-fig.org/psr/psr-1/
+[psr-2]: https://www.php-fig.org/psr/psr-2/#1-overview
+   
 ### Easy run function
 
 Samples with function parameters should show how to prepare parameter values

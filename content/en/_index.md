@@ -1320,4 +1320,8 @@ end
 [minitest]: https://github.com/minitest/minitest
 
 {{< /content-tab >}}
+{{< content-tab header="Terraform" >}}
+For information about testing, see the Terraform samples [contributing guide]
+(https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/CONTRIBUTING.md).
+{{< /content-tab >}}
 {{< /content-tabpane >}}

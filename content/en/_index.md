@@ -42,11 +42,11 @@ descending order of priority:
    maintained
 
 Code snippets should use preferred code patterns that are idiomatic to the
-particular language (e.g. promises, futures, static API calls from singletons,
+particular language (e.g., promises, futures, static API calls from singletons,
 builders, etc). This may result in code snippets that are radically different
 from language-to-language. Err on the side of what is idiomatic to the language,
 though cross-language consistency does not hurt. Generally, do things
-“the way the community does it”.
+"the way the community does it."
 
 ## Structure {#structure}
 
@@ -142,14 +142,46 @@ function example_snippet() {
 }
 // [END product_example]
 {{< /tab >}}
+
+{{< tab header="Terraform" >}}
+// Terraform doesn't have `import` statements. However, Terraform
+// has the concept of importing resources to bring them under
+// Terraform management. For more information, see
+// [Import your Google Cloud resources into Terraform state](https://cloud.google.com/docs/terraform/resource-management/import).
+
+// Region tags should start after the copyright and license agreement.
+
+# Copyright 2023 Google LLC.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+// [START product_example]
+
+resource "example_resource" "resource_reference" {
+  ...
+}
+// [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### One sample per file {#one-per-file}
 
-A single file should only include one sample. This shows the minimal
-set of dependencies via import statements, keeps the end-to-end code relevant
-to the reader's current learning need, and helps reviewers validate the
- [imports](#imports) guideline.
+A single file should only include one sample. This keeps the end-to-end
+code relevant to the reader's current learning need.
+
+For languages that have import statements, this shows the minimal
+set of dependencies via import statements and helps reviewers validate the
+[imports](#imports) guideline.
 
 ### Sample description {#description}
 
@@ -204,11 +236,18 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
  * before running the code snippet.
  */
 {{< /tab >}}
+{{< tab header="Terraform" >}}
+// [START product_example]
+#   Triggers DAGs Using Cloud Function and Pub/Sub Messages with Terraform
+
+...
+// [END product_example]
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments {#minimal-arguments}
 
-Method arguments should be limited requirements for testing. In most cases, this
+Arguments should be limited to requirements for testing. In some cases, this
 is project-specific information (`projectID`) or the path to an external file (`filePath`).
 
 Do not use arguments for values that can be hard-coded, such as the type of a
@@ -270,6 +309,17 @@ end
 {{< tab header="PHP" >}}
 // This is an example snippet for showing best practices.
 function example_snippet(string $projectId, string $filePath): void
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+// [START product_example]
+#   Creates a VPC network
+ 
+resource "google_compute_network" "default" {
+  project                 = data.google_project.project.project_id
+  name                    = "my-network"
+  auto_create_subnetworks = false
+}
+// [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -336,6 +386,10 @@ function example_snippet(string $projectId, string $filePath): void
         $response->getExampleValue()
     );
 }
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+Terraform doesn't have custom, user-defined methods or functions.
+For more information, see [Built-in Functions](https://developer.hashicorp.com/terraform/language/functions).
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -591,6 +645,111 @@ function list_info_types(): void
     }
 }
 {{< /tab >}}
+
+{{< tab header="Terraform" >}}
+Define any local variables at the beginning of the sample.
+Include any output statements at the end of the sample.
+
+// Arrange: Set local values.
+locals {
+  domain = "example.me"
+  name   = "prefixname"
+}
+
+// Arrange: Create random value to help ensure unique resource names.
+resource "random_id" "tf_prefix" {
+  byte_length = 4
+}
+
+// Act: Create the resources.
+# [START certificatemanager_dns_wildcard]
+resource "google_project_service" "certificatemanager_svc" {
+  service            = "certificatemanager.googleapis.com"
+  disable_on_destroy = false
+}
+
+resource "google_dns_managed_zone" "default" {
+  name        = "example-mz-${random_id.tf_prefix.hex}"
+  dns_name    = "${local.domain}."
+  description = "Example DNS zone"
+  labels = {
+    "terraform" : true
+  }
+  visibility    = "public"
+  force_destroy = true
+}
+
+resource "google_certificate_manager_dns_authorization" "default" {
+  name        = "${local.name}-dnsauth-${random_id.tf_prefix.hex}"
+  description = "The default dns auth"
+  domain      = local.domain
+  labels = {
+    "terraform" : true
+  }
+}
+
+resource "google_dns_record_set" "cname" {
+  name         = google_certificate_manager_dns_authorization.default.dns_resource_record[0].name
+  managed_zone = google_dns_managed_zone.default.name
+  type         = google_certificate_manager_dns_authorization.default.dns_resource_record[0].type
+  ttl          = 300
+  rrdatas      = [google_certificate_manager_dns_authorization.default.dns_resource_record[0].data]
+}
+
+resource "google_certificate_manager_certificate" "root_cert" {
+  name        = "${local.name}-rootcert-${random_id.tf_prefix.hex}"
+  description = "The wildcard cert"
+  managed {
+    domains = [local.domain, "*.${local.domain}"]
+    dns_authorizations = [
+      google_certificate_manager_dns_authorization.default.id
+    ]
+  }
+  labels = {
+    "terraform" : true
+  }
+}
+
+resource "google_certificate_manager_certificate_map" "certificate_map" {
+  name        = "${local.name}-certmap-${random_id.tf_prefix.hex}"
+  description = "${local.domain} certificate map"
+  labels = {
+    "terraform" : true
+  }
+}
+
+resource "google_certificate_manager_certificate_map_entry" "first_entry" {
+  name        = "${local.name}-first-entry-${random_id.tf_prefix.hex}"
+  description = "example certificate map entry"
+  map         = google_certificate_manager_certificate_map.certificate_map.name
+  labels = {
+    "terraform" : true
+  }
+  certificates = [google_certificate_manager_certificate.root_cert.id]
+  hostname     = local.domain
+}
+
+resource "google_certificate_manager_certificate_map_entry" "second_entry" {
+  name        = "${local.name}-second-entity-${random_id.tf_prefix.hex}"
+  description = "example certificate map entry"
+  map         = google_certificate_manager_certificate_map.certificate_map.name
+  labels = {
+    "terraform" : true
+  }
+  certificates = [google_certificate_manager_certificate.root_cert.id]
+  hostname     = "*.${local.domain}"
+}
+# [END certificatemanager_dns_wildcard]
+
+// Assert: Print the results.
+output "domain_name_servers" {
+  value = google_dns_managed_zone.default.name_servers
+}
+output "certificate_map" {
+  value = google_certificate_manager_certificate_map.certificate_map.id
+}
+{{< /tab >}}
+
 {{< /tabpane >}}
 
 ### No CLIs {#no-cli}
@@ -684,7 +843,14 @@ $config = [
 ];
 $storage = new StorageClient($config);
 {{< /tab >}}
-{{< /tabpane >}}
+{{< tab header="Terraform" >}}
+Use application default credentials when running locally.
+When developers are locally iterating on Terraform configuration,
+they should authenticate by running `gcloud auth application-default login`
+to generate application default credentials. Don't  download service account keys,
+because downloaded  keys are harder to manage and secure.
+{{< /tab >}}
+ {{< /tabpane >}}
 
 ### Initializing Clients {#clients}
 
@@ -782,6 +948,9 @@ spanner_client.close
 
 $dlp = new DlpServiceClient();
 {{< /tab >}}
+{{< tab header="Terraform" >}}
+Clients run `terraform init`.
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Cyclomatic Complexity {#complexity}
@@ -871,6 +1040,11 @@ try {
 } catch (InvalidArgumentException $e) {
     // IllegalArgumentException is thrown when an invalid argument has been passed to a function.
 }
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+Because they increase cyclomatic complexity, do not use error handling such as
+[`try` statements](https://developer.hashicorp.com/terraform/language/functions/try)
+in Terraform samples.
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -1028,6 +1202,79 @@ def read_a_file file_path:
   puts "Contents: #{content}"
 end
 {{< /highlight >}}
+{{< /content-tab >}}
+{{< content-tab header="Terraform" >}}
+#### No CLIs
+
+Do not include CLI commands (such as gcloud or kubectl) inside
+of your sample via the `null_resource` resource.
+
+#### No Variables
+
+Don't include Terraform variables (`var.VARIABLE_NAME`). Variables
+enabling users to use Terraform samples not as snippets but as direct
+module references. Disabling the avenue of customization 
+reduces the risk so that users don't take accidental 
+dependency.
+Instead, hard code the resource names and attribute values.
+In some cases, [locals](#locals) are allowed.
+
+#### Locals {#locals}
+
+Sometimes multiple resources have a common string that is not
+accessible as a reference or there is no child/parent
+reference. Locals are allowed and encouraged for repeated text
+that a user may want to change. When a name is used multiple
+times, it's easier to copy, paste, and edit a local than search
+and replace the whole file. Locals are allowed and variable blocks
+are not because locals are an internal implementation and not
+part of the API  exposed via Terraform. Locals should be used only
+when necessary, and are best used when a repeated value is used
+throughout the configuration (3 or more times).
+
+#### Outputs
+
+Output statement provide values that are generated after creating
+a resource. They are allowed because they are readonly and they
+give  users some important information such as URLs and IP addresses.
+To keep it simple, they must be defined inline at the end of
+a  sample, not in a separate `outputs.tf` file.
+
+#### Resource references
+
+When possible, refer to already-defined resources.
+
+#### Terraform Google Provider version
+
+When your sample contains a new resource, add the required minimum
+Terraform Google Provider version corresponding to which 
+provider version introduced a resource. For example, `google_apigee_nat_address`
+was added in version 4.37, so the minimum version is 4.37. To specify a minimum
+version in a sample, include the provider requirements, as follows:
+
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "~= 4.37.0"
+    }
+  }
+}
+
+To determine when a resource was added, see the terraform-provider-google/CHANGELOG.md or 
+terraform-provider-google-beta/CHANGELOG.md.
+
+#### Provider argument
+
+Add the provider argument if the resource is from provider google-beta.
+resource "google_<resource_name>" "default" {
+  provider = google-beta
+  ...
+}
+
+Fields and resources that are only present in google-beta are clearly marked in
+the provider documentation.
+{{< /content-tab >}}
 
 ### Testing practices
 

@@ -1276,8 +1276,12 @@ Fields and resources that are only present in google-beta are clearly marked in
 the provider documentation.
 {{< /content-tab >}}
 
+{{< /content-tabpane >}}
+
 ### Testing practices
 
+{{< content-tabpane >}}
+{{< content-tab header="Ruby" >}}
 Each Ruby sample should have its own separate test file. Sample tests should
 use the [Minitest][minitest] framework, and should be located in a file named
 `<sample-name>_test.rb` under the `acceptance` directory.

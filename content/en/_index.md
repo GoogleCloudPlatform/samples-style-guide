@@ -33,7 +33,8 @@ descending order of priority:
 
 1. **Clarity**: The code's purpose and rationale is clear to the reader
 2. **Idiomaticity**: The code should be written using idiomatic,
-   community-driven coding practices
+   community-driven coding practices, except where these practices
+   negatively impact clarity, simplicity, or maintainability
 3. **Consistency**: The code has the same implementation from language to
    language
 4. **Simplicity**: The code accomplishes its goal in the simplest way possible

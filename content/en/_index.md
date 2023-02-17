@@ -33,8 +33,7 @@ descending order of priority:
 
 1. **Clarity**: The code's purpose and rationale is clear to the reader
 2. **Idiomaticity**: The code should be written using idiomatic,
-   community-driven coding practices, except where these practices
-   negatively impact clarity, simplicity, or maintainability
+   community-driven coding practices
 3. **Consistency**: The code has the same implementation from language to
    language
 4. **Simplicity**: The code accomplishes its goal in the simplest way possible
@@ -145,32 +144,7 @@ function example_snippet() {
 {{< /tab >}}
 
 {{< tab header="Terraform" >}}
-// Terraform doesn't have `import` statements. However, Terraform
-// has the concept of importing resources to bring them under
-// Terraform management. For more information, see
-// [Import your Google Cloud resources into Terraform state](https://cloud.google.com/docs/terraform/resource-management/import).
-
-// Region tags should start after the copyright and license agreement.
-
-# Copyright 2023 Google LLC.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-// [START product_example]
-
-resource "example_resource" "resource_reference" {
-  ...
-}
+N/A
 // [END product_example]
 {{< /tab >}}
 {{< /tabpane >}}
@@ -238,11 +212,11 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
  */
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-// [START product_example]
-#   Triggers DAGs Using Cloud Function and Pub/Sub Messages with Terraform
+# Create a VM instance from a public image
+# in the `default` VPC network and subnet
 
-...
-// [END product_example]
+# See https://cloud.google.com/compute/docs/instances/create-start-instance
+# before running the code snippet.
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -281,7 +255,7 @@ function main() {
 }
 
 const exampleSnippet = function(requiredArg) {
-  // Snippet content...
+  // Snippet content ...
 }
 {{< /tab >}}
 {{< tab header="C#" >}}
@@ -312,15 +286,50 @@ end
 function example_snippet(string $projectId, string $filePath): void
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-// [START product_example]
-#   Creates a VPC network
- 
+#  These are example snippets for showing best practices.
+#
+# Don't include the `project` argument in resources.
+# The guidance at https://cloud.google.com/docs/terraform/basic-commands
+# shows how to use an `export` statement to set the Google Cloud project
+# where you want to apply the Terraform configuration.
+#
+# If you run the `export GOOGLE_CLOUD_PROJECT` command, most resources
+# can infer the project ID.
+
+#  Creates a VPC network
 resource "google_compute_network" "default" {
-  project                 = data.google_project.project.project_id
   name                    = "my-network"
   auto_create_subnetworks = false
 }
-// [END product_example]
+
+#
+# Some resources, such as `project_iam_*`, cannot infer the project ID.
+# As a workaround, use the `data "google_project"` data source.
+#
+# Creates an IAM policy
+
+data "google_project" "project" {
+}
+
+data "google_iam_policy" "sql_iam_policy" {
+  binding {
+    role = "roles/cloudsql.client"
+    members = [
+      "serviceAccount:${google_project_service_identity.gcp_sa_cloud_sql.email}",
+    ]
+    condition {
+      expression  = "resource.name == 'projects/${data.google_project.project.id}/instances/${google_sql_database_instance.default.name}' && resource.type == 'sqladmin.googleapis.com/Instance'"
+      title       = "created"
+      description = "Cloud SQL instance creation"
+    }
+  }
+}
+
+resource "google_project_iam_policy" "project" {
+  project     = data.google_project.project.id
+  policy_data = data.google_iam_policy.sql_iam_policy.policy_data
+} 
+
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -389,8 +398,19 @@ function example_snippet(string $projectId, string $filePath): void
 }
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-Terraform doesn't have custom, user-defined methods or functions.
-For more information, see [Built-in Functions](https://developer.hashicorp.com/terraform/language/functions).
+# Output statement provide values that are generated after creating
+# a resource. They are allowed because they are readonly and they
+# give users some important information such as URLs and IP addresses.
+# To keep it simple, they must be defined inline at the end of
+# a  sample, not in a separate `outputs.tf` file.
+
+output "domain_name_servers" {
+  value = google_dns_managed_zone.default.name_servers
+}
+output "certificate_map" {
+  value = google_certificate_manager_certificate_map.certificate_map.id
+}
+
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -648,8 +668,8 @@ function list_info_types(): void
 {{< /tab >}}
 
 {{< tab header="Terraform" >}}
-Define any local variables at the beginning of the sample.
-Include any output statements at the end of the sample.
+# Define any local variables at the beginning of the sample.
+# Include any output statements at the end of the sample.
 
 // Arrange: Set local values.
 locals {
@@ -673,73 +693,12 @@ resource "google_dns_managed_zone" "default" {
   name        = "example-mz-${random_id.tf_prefix.hex}"
   dns_name    = "${local.domain}."
   description = "Example DNS zone"
-  labels = {
-    "terraform" : true
-  }
-  visibility    = "public"
-  force_destroy = true
+
+  # More resource arguments ...
 }
 
-resource "google_certificate_manager_dns_authorization" "default" {
-  name        = "${local.name}-dnsauth-${random_id.tf_prefix.hex}"
-  description = "The default dns auth"
-  domain      = local.domain
-  labels = {
-    "terraform" : true
-  }
-}
+# More resources ...
 
-resource "google_dns_record_set" "cname" {
-  name         = google_certificate_manager_dns_authorization.default.dns_resource_record[0].name
-  managed_zone = google_dns_managed_zone.default.name
-  type         = google_certificate_manager_dns_authorization.default.dns_resource_record[0].type
-  ttl          = 300
-  rrdatas      = [google_certificate_manager_dns_authorization.default.dns_resource_record[0].data]
-}
-
-resource "google_certificate_manager_certificate" "root_cert" {
-  name        = "${local.name}-rootcert-${random_id.tf_prefix.hex}"
-  description = "The wildcard cert"
-  managed {
-    domains = [local.domain, "*.${local.domain}"]
-    dns_authorizations = [
-      google_certificate_manager_dns_authorization.default.id
-    ]
-  }
-  labels = {
-    "terraform" : true
-  }
-}
-
-resource "google_certificate_manager_certificate_map" "certificate_map" {
-  name        = "${local.name}-certmap-${random_id.tf_prefix.hex}"
-  description = "${local.domain} certificate map"
-  labels = {
-    "terraform" : true
-  }
-}
-
-resource "google_certificate_manager_certificate_map_entry" "first_entry" {
-  name        = "${local.name}-first-entry-${random_id.tf_prefix.hex}"
-  description = "example certificate map entry"
-  map         = google_certificate_manager_certificate_map.certificate_map.name
-  labels = {
-    "terraform" : true
-  }
-  certificates = [google_certificate_manager_certificate.root_cert.id]
-  hostname     = local.domain
-}
-
-resource "google_certificate_manager_certificate_map_entry" "second_entry" {
-  name        = "${local.name}-second-entity-${random_id.tf_prefix.hex}"
-  description = "example certificate map entry"
-  map         = google_certificate_manager_certificate_map.certificate_map.name
-  labels = {
-    "terraform" : true
-  }
-  certificates = [google_certificate_manager_certificate.root_cert.id]
-  hostname     = "*.${local.domain}"
-}
 # [END certificatemanager_dns_wildcard]
 
 // Assert: Print the results.
@@ -753,13 +712,14 @@ output "certificate_map" {
 
 {{< /tabpane >}}
 
-### No CLIs {#no-cli}
+### No use of external tools {#no-external-tools}
 
-Do not include CLIs for running your sample. We expect developers to copy and
-paste code directly from cloud.google.com into their own environment.
+Do not include external tools such as CLIs in your sample. We expect
+developers to copy and paste code directly from cloud.google.com into their
+own environment.
 
-Previous practice shows CLIs are expensive to maintain and detracts from the
-purpose of the snippet.
+Previous practice shows external tools are expensive to maintain and detract
+from the purpose of the snippet.
 
 ## Code {#code}
 
@@ -845,11 +805,11 @@ $config = [
 $storage = new StorageClient($config);
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-Use application default credentials when running locally.
-When developers are locally iterating on Terraform configuration,
-they should authenticate by running `gcloud auth application-default login`
-to generate application default credentials. Don't  download service account keys,
-because downloaded  keys are harder to manage and secure.
+# Use application default credentials when running locally.
+# When developers are locally iterating on Terraform configuration,
+# they should authenticate by running `gcloud auth application-default login`
+# to generate application default credentials. Don't download service account keys,
+# because downloaded keys are harder to manage and secure.
 {{< /tab >}}
  {{< /tabpane >}}
 
@@ -950,7 +910,7 @@ spanner_client.close
 $dlp = new DlpServiceClient();
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-Clients run `terraform init`.
+N/A
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -1043,8 +1003,10 @@ try {
 }
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-Because they increase cyclomatic complexity, do not use error handling such as
-[`try` statements](https://developer.hashicorp.com/terraform/language/functions/try)
+Rely on Terraform's default logging, both for our maintenance and for developer
+practice.
+
+Do not use [`try` statements](https://developer.hashicorp.com/terraform/language/functions/try)
 in Terraform samples.
 {{< /tab >}}
 {{< /tabpane >}}
@@ -1085,6 +1047,35 @@ Examples of portable practices include:
 [shell]: https://cloud.google.com/shell
 
 ## Testing {#testing}
+
+### Cloud Shell
+
+When possible, perform testing in Cloud Shell. Cloud Shell runs in a Compute
+Engine virtual machine. The service credentials associated with this virtual
+machine are automatic, so there is no need to set up or download a service
+account key.
+
+Cloud Shell provides you with command-line access to your cloud resources
+directly from your browser.
+
+[ide.cloud.google.com](ide.cloud.google.com) extends Cloud Shell with an
+online development environment that includes:
+
+* Cloud-native development via Cloud Code plugin support
+
+* Rich language support for Go, Java, .Net, Python and NodeJS 
+
+* Additional features such as integrated source control and support for
+  multiple projects
+
+### Test infrastructure
+
+We recommend using a test infrastructure that spins up a clean project
+for each test.
+
+Testing infrastructure code means that you are deploying actual resources.
+To avoid incurring charges, consider implementing a clean-up step.
+Some testing frameworks have a built-in cleanup step for you.
 
 ### Coverage {#coverage}
 
@@ -1203,12 +1194,58 @@ def read_a_file file_path:
   puts "Contents: #{content}"
 end
 {{< /highlight >}}
+
+### Testing practices
+
+Each Ruby sample should have its own separate test file. Sample tests should
+use the [Minitest][minitest] framework, and should be located in a file named
+`<sample-name>_test.rb` under the `acceptance` directory.
+
+Be aware that sample methods are defined at the top level and would thus be
+added to the `Object` class if the file is loaded directly. In most cases,
+tests should define a temporary class and load the sample in that class. Ruby
+repositories may provide tools to help with this process, but it can also be
+done with `eval`.
+
+Example test: `acceptance/read_a_file.rb`:
+
+{{< highlight ruby >}}
+require "minitest/autorun"
+require "tmpdir"
+
+# Load the sample into this class so the method isn't defined on Object.
+class ReadAFileSample
+  sample_file = File.read "#{__dir__}/../read_a_file.rb"
+  eval sample_file
+end
+
+describe "#read_a_file" do
+  # Test the critical code paths
+  it "reads a file" do
+    Dir.mktmpdir do |dir|
+      File.write "#{dir}/my-test.txt", "Hello, Ruby!"
+      assert_output "Contents: Hello, Ruby!\n" do
+        ReadAFileSample.new.read_a_file file_path: "#{dir}/my-test.txt"
+      end
+    end
+  end
+end
+{{< /highlight >}}
+
+[minitest]: https://github.com/minitest/minitest
+
 {{< /content-tab >}}
+
 {{< content-tab header="Terraform" >}}
 #### No CLIs
 
 Do not include CLI commands (such as gcloud or kubectl) inside
 of your sample via the `null_resource` resource.
+
+# https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource
+
+There are some products without Terraform support. Do not include
+those products in Terraform samples.
 
 #### No Variables
 
@@ -1222,28 +1259,22 @@ In some cases, [locals](#locals) are allowed.
 
 #### Locals {#locals}
 
-Sometimes multiple resources have a common string that is not
-accessible as a reference or there is no child/parent
-reference. Locals are allowed and encouraged for repeated text
-that a user may want to change. When a name is used multiple
-times, it's easier to copy, paste, and edit a local than search
-and replace the whole file. Locals are allowed and variable blocks
-are not because locals are an internal implementation and not
-part of the API  exposed via Terraform. Locals should be used only
-when necessary, and are best used when a repeated value is used
-throughout the configuration (3 or more times).
-
-#### Outputs
-
-Output statement provide values that are generated after creating
-a resource. They are allowed because they are readonly and they
-give  users some important information such as URLs and IP addresses.
-To keep it simple, they must be defined inline at the end of
-a  sample, not in a separate `outputs.tf` file.
+Use local variables to reuse a common string 3 or more times that is not
+accessible as a resource reference.
 
 #### Resource references
 
-When possible, refer to already-defined resources.
+When possible, refer to already-defined resources. For example,
+the `target` argument is referring to a `google_compute_target_ssl_proxy`
+resource called `default` to get the `id` attribute of that resource.
+
+```
+resource "google_compute_global_forwarding_rule" "default" { 
+  target = google_compute_target_ssl_proxy.default.id # Reference to already defined resource in the sample
+
+  # Other esource arguments ...
+}
+```
 
 #### Terraform Google Provider version
 
@@ -1270,7 +1301,8 @@ terraform-provider-google-beta/CHANGELOG.md.
 Add the provider argument if the resource is from provider google-beta.
 resource "google_<resource_name>" "default" {
   provider = google-beta
-  ...
+
+  # Other esource arguments ...
 }
 
 Fields and resources that are only present in google-beta are clearly marked in
@@ -1320,9 +1352,4 @@ end
 
 [minitest]: https://github.com/minitest/minitest
 
-{{< /content-tab >}}
-{{< content-tab header="Terraform" >}}
-For information about testing, see the Terraform samples [contributing guide]
-(https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/CONTRIBUTING.md).
-{{< /content-tab >}}
 {{< /content-tabpane >}}

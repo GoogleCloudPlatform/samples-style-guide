@@ -1247,17 +1247,27 @@ of your sample via the `null_resource` resource.
 There are some products without Terraform support. Do not include
 those products in Terraform samples.
 
-#### No Variables
+#### No global variables
 
-Don't include Terraform variables (`var.VARIABLE_NAME`). Variables
-enabling users to use Terraform samples not as snippets but as direct
-module references. Disabling the avenue of customization 
-reduces the risk so that users don't take accidental 
-dependency.
-Instead, hard code the resource names and attribute values.
-In some cases, [locals](#locals) are allowed.
+Don't include global Terraform variables (`var.VARIABLE_NAME`).
 
-#### Locals {#locals}
+Global variables become part of the API exposed via Terraform.
+Therefore, global variables help enable users to use Terraform samples
+not as snippets but as direct module references. 
+By disallowing global variables, we disable this avenue of customization.
+This reduces the risk of users developing code that is
+accidentally dependent on our samples.
+
+Instead of including global variables, hard code the resource names and
+parameter values.
+
+In some cases, [local variables](#locals) are allowed.
+
+#### Local variables {#locals}
+
+Unlike global veriables, local variables are allowed in Terraform samples
+because local variables are an internal implementation and therefore aren't
+part of the API exposed via Terraform.
 
 Use local variables to reuse a common string 3 or more times that is not
 accessible as a resource reference.

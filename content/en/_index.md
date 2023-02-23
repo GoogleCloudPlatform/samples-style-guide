@@ -396,9 +396,7 @@ function example_snippet(string $projectId, string $filePath): void
 {{< /tab >}}
 {{< tab header="Terraform" >}}
 # Output statement provide values that are generated after creating
-# a resource. They are allowed because they are readonly and they
-# give users some important information such as URLs and IP addresses.
-# To keep it simple, they must be defined inline at the end of
+# a resource. To keep it simple, they must be defined inline at the end of
 # a  sample, not in a separate `outputs.tf` file.
 
 output "domain_name_servers" {

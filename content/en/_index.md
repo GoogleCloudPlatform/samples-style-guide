@@ -1285,11 +1285,11 @@ accessible as a resource reference.
 
 #### Resource references
 
-When possible, refer to already-defined resources.
+Instead of duplicating know values, refer to already-defined resources.
 
-For example,
-the `target` argument is referring to a `google_compute_target_ssl_proxy`
-resource called `default` to get the `id` attribute of that resource.
+For example, the `target` argument is referring to a
+`google_compute_target_ssl_proxy` resource called `default` to get the
+`id` attribute of that resource.
 
 {{< highlight terraform >}}
 resource "google_compute_global_forwarding_rule" "default" { 

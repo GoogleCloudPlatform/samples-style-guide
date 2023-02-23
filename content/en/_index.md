@@ -287,20 +287,23 @@ end
 function example_snippet(string $projectId, string $filePath): void
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-#  These are example snippets for showing best practices.
-#
-# Don't include the 'project' argument in resources. Rely on
-# the 'GOOGLE_CLOUD_PROJECT' environment variable as documented at
-# https://cloud.google.com/docs/terraform/basic-commands.
-#
-# Some resources, such as 'project_iam_*', cannot infer the project ID.
-# As a workaround, use the 'data "google_project"' data source.
-
-#
-# Some resources, such as `project_iam_*`, cannot infer the project ID.
-# As a workaround, use the `data "google_project"` data source.
-#
-# Creates an IAM policy
+/*  These are example snippets for showing best practices.
+*
+* Don't include the 'project' argument in resources. Rely on
+* the 'GOOGLE_CLOUD_PROJECT' environment variable as documented at
+* https://cloud.google.com/docs/terraform/basic-commands.
+*
+* Some resources, such as 'project_iam_*', cannot infer the project ID.
+* As a workaround, use the 'data "google_project"' data source.
+*
+*
+* Some resources, such as `project_iam_*`, cannot infer the project ID.
+* As a workaround, use the `data "google_project"` data source.
+* In the following configuration, the `google_project.project` data source
+* automatically looks up the project ID of the local project.
+*
+* Creates an IAM policy
+*/
 
 data "google_project" "project" {
 }

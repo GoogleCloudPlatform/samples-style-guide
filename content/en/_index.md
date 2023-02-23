@@ -672,7 +672,6 @@ resource "random_id" "tf_prefix" {
 }
 
 // Act: Create the resources.
-# [START certificatemanager_dns_wildcard]
 resource "google_project_service" "certificatemanager_svc" {
   service            = "certificatemanager.googleapis.com"
   disable_on_destroy = false
@@ -685,10 +684,6 @@ resource "google_dns_managed_zone" "default" {
 
   # More resource arguments ...
 }
-
-# More resources ...
-
-# [END certificatemanager_dns_wildcard]
 
 // Assert: Print the results.
 output "domain_name_servers" {

@@ -144,8 +144,7 @@ function example_snippet() {
 {{< /tab >}}
 
 {{< tab header="Terraform" >}}
-N/A
-// [END product_example]
+# N/A
 {{< /tab >}}
 {{< /tabpane >}}
 

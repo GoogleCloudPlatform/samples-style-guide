@@ -912,7 +912,7 @@ spanner_client.close
 $dlp = new DlpServiceClient();
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-N/A
+# N/A
 {{< /tab >}}
 {{< /tabpane >}}
 

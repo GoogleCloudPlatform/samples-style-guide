@@ -212,11 +212,13 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
  */
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-# Create a VM instance from a public image
-# in the `default` VPC network and subnet
+/* 
+Create a VM instance from a public image
+in the `default` VPC network and subnet
 
-# See https://cloud.google.com/compute/docs/instances/create-start-instance
-# before running the code snippet.
+See https://cloud.google.com/compute/docs/instances/create-start-instance
+before running the code snippet.
+*/
 {{< /tab >}}
 {{< /tabpane >}}
 

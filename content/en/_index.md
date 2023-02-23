@@ -1297,6 +1297,7 @@ provider version introduced a resource. For example, `google_apigee_nat_address`
 was added in version 4.37, so the minimum version is 4.37. To specify a minimum
 version in a sample, include the provider requirements, as follows:
 
+{{< highlight terraform >}}
 terraform {
   required_providers {
     google = {
@@ -1305,6 +1306,7 @@ terraform {
     }
   }
 }
+{{< /highlight >}}
 
 To determine when a resource was added, see the terraform-provider-google/CHANGELOG.md or 
 terraform-provider-google-beta/CHANGELOG.md.

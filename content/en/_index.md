@@ -289,19 +289,12 @@ function example_snippet(string $projectId, string $filePath): void
 {{< tab header="Terraform" >}}
 #  These are example snippets for showing best practices.
 #
-# Don't include the `project` argument in resources.
-# The guidance at https://cloud.google.com/docs/terraform/basic-commands
-# shows how to use an `export` statement to set the Google Cloud project
-# where you want to apply the Terraform configuration.
+# Don't include the 'project' argument in resources. Rely on
+# the 'GOOGLE_CLOUD_PROJECT' environment variable as documented at
+# https://cloud.google.com/docs/terraform/basic-commands.
 #
-# If you run the `export GOOGLE_CLOUD_PROJECT` command, most resources
-# can infer the project ID.
-
-#  Creates a VPC network
-resource "google_compute_network" "default" {
-  name                    = "my-network"
-  auto_create_subnetworks = false
-}
+# Some resources, such as 'project_iam_*', cannot infer the project ID.
+# As a workaround, use the 'data "google_project"' data source.
 
 #
 # Some resources, such as `project_iam_*`, cannot infer the project ID.

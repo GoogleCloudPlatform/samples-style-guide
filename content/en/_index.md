@@ -104,7 +104,7 @@ func exampleSnippet() error {
 // [END product_example]
 {{< /tab >}}
 {{< tab header="Node.js" >}}
-{{% include "tabs/node/imports.js" %}}
+{{% include "examples/node/imports.js" %}}
 {{< /tab >}}
 {{< tab header="C#" >}}
 // [START product_example]
@@ -173,7 +173,7 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
 """
 {{< /tab >}}
 {{< tab header="Node.js" >}}
-{{% include "tabs/node/description.js" %}}
+{{% include "examples/node/description.js" %}}
 {{< /tab >}}
 {{< tab header="C#" >}}
 // Moves a persistent disk from one zone to another.

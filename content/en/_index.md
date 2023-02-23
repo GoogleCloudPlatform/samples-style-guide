@@ -1281,13 +1281,13 @@ When possible, refer to already-defined resources. For example,
 the `target` argument is referring to a `google_compute_target_ssl_proxy`
 resource called `default` to get the `id` attribute of that resource.
 
-```
+{{< highlight terraform >}}
 resource "google_compute_global_forwarding_rule" "default" { 
   target = google_compute_target_ssl_proxy.default.id # Reference to already defined resource in the sample
 
-  # Other esource arguments ...
+  # Other resource arguments ...
 }
-```
+{{< /highlight >}}
 
 #### Terraform Google Provider version
 

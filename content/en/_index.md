@@ -1005,11 +1005,13 @@ try {
 }
 {{< /tab >}}
 {{< tab header="Terraform" >}}
-Rely on Terraform's default logging, both for our maintenance and for developer
-practice.
+/**
+ * Rely on Terraform's default logging, both for our maintenance and for developer
+ * practice.
 
-Do not use [`try` statements](https://developer.hashicorp.com/terraform/language/functions/try)
-in Terraform samples.
+ * Do not use [`try` statements](https://developer.hashicorp.com/terraform/language/functions/try)
+ * in Terraform samples.
+*/
 {{< /tab >}}
 {{< /tabpane >}}
 

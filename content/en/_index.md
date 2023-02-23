@@ -1277,7 +1277,9 @@ accessible as a resource reference.
 
 #### Resource references
 
-When possible, refer to already-defined resources. For example,
+When possible, refer to already-defined resources.
+
+For example,
 the `target` argument is referring to a `google_compute_target_ssl_proxy`
 resource called `default` to get the `id` attribute of that resource.
 

@@ -662,35 +662,23 @@ function list_info_types(): void
 
 // Arrange: Set local values.
 locals {
-  domain = "example.me"
-  name   = "prefixname"
+  name   = "example-namespace"
 }
 
 // Arrange: Create random value to help ensure unique resource names.
-resource "random_id" "tf_prefix" {
+resource "random_id" "suffix" {
   byte_length = 4
 }
 
 // Act: Create the resources.
-resource "google_project_service" "certificatemanager_svc" {
-  service            = "certificatemanager.googleapis.com"
-  disable_on_destroy = false
-}
-
-resource "google_dns_managed_zone" "default" {
-  name        = "example-mz-${random_id.tf_prefix.hex}"
-  dns_name    = "${local.domain}."
-  description = "Example DNS zone"
-
-  # More resource arguments ...
+resource "google_project" "example_project" {
+  name = "${local.name}"
+  project_id = "${local.name}-{random_id.suffix.hex}"
 }
 
 // Assert: Print the results.
-output "domain_name_servers" {
-  value = google_dns_managed_zone.default.name_servers
-}
-output "certificate_map" {
-  value = google_certificate_manager_certificate_map.certificate_map.id
+output "project_id" {
+  value = google_project.example_project.id
 }
 {{< /tab >}}
 

@@ -104,13 +104,7 @@ func exampleSnippet() error {
 // [END product_example]
 {{< /tab >}}
 {{< tab header="Node.js" >}}
-// [START product_example]
-const resource = require('@google-cloud/example');
-
-const exampleSnippet = function() {
-    // Snippet content ...
-}
-// [END product_example]
+{{% include "tabs/node/imports.js" %}}
 {{< /tab >}}
 {{< tab header="C#" >}}
 // [START product_example]
@@ -179,11 +173,7 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
 """
 {{< /tab >}}
 {{< tab header="Node.js" >}}
-/**
-* Moves a persistent disk from one zone to another.
-*
-* See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
-*/
+{{% include "tabs/node/description.js" %}}
 {{< /tab >}}
 {{< tab header="C#" >}}
 // Moves a persistent disk from one zone to another.

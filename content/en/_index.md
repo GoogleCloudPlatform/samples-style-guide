@@ -659,8 +659,6 @@ function list_info_types(): void
 {{< /tab >}}
 
 {{< tab header="Terraform" >}}
-# Define any local variables at the beginning of the sample.
-# Include any output statements at the end of the sample.
 
 // Arrange: Set local values.
 locals {

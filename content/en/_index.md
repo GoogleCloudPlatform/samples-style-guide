@@ -684,13 +684,13 @@ output "project_id" {
 
 {{< /tabpane >}}
 
-### No use of external tools {#no-external-tools}
+### No CLIs {#no-cli}
 
-Do not include external tools such as CLIs in your sample. We expect
-developers to copy and paste code directly from cloud.google.com into their
+Do not include CLIs for running your sample. We expect developers
+to copy and paste code directly from cloud.google.com into their
 own environment.
 
-Previous practice shows external tools are expensive to maintain and detract
+Previous practice shows CLIs are expensive to maintain and detracts
 from the purpose of the snippet.
 
 ## Code {#code}
@@ -1226,7 +1226,7 @@ end
 {{< /content-tab >}}
 
 {{< content-tab header="Terraform" >}}
-#### No CLIs
+#### Don't use `null_resource`
 
 Do not include CLI commands (such as gcloud or kubectl) inside
 of your sample via the `null_resource` resource.

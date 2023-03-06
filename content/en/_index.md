@@ -960,7 +960,7 @@ operating systems.
 
 Our code snippets may be executed in multiple hosting environments, such as
 [App Engine][gae], [Cloud Functions][gcf], [Cloud Run][run],
-[Kubernetes Engine][gke], [Compute Engine][gce], [Cloud Shell][shell],
+[Kubernetes Engine][gke], [Compute Engine][gce], Cloud Shell,
 other cloud providers, and local machines.
 
 Where possible, code snippets should work across environments and hosting
@@ -982,26 +982,6 @@ Examples of portable practices include:
 [shell]: https://cloud.google.com/shell
 
 ## Testing {#testing}
-
-### Cloud Shell
-
-When possible, perform testing in Cloud Shell. Cloud Shell runs in a Compute
-Engine virtual machine. The service credentials associated with this virtual
-machine are automatic, so there is no need to set up or download a service
-account key.
-
-Cloud Shell provides you with command-line access to your cloud resources
-directly from your browser.
-
-[ide.cloud.google.com](ide.cloud.google.com) extends Cloud Shell with an
-online development environment that includes:
-
-* Cloud-native development via Cloud Code plugin support
-
-* Rich language support for Go, Java, .Net, Python and NodeJS 
-
-* Additional features such as integrated source control and support for
-  multiple projects
 
 ### Test infrastructure
 

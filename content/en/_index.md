@@ -72,69 +72,25 @@ the [one sample per file](#one-per-file) guideline.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
-// Region tags should start after the package, but before imports.
-// [START product_example]
-import com.example.resource;
-
-public class exampleSnippet {
-// Snippet methods ...
-}
-// [END product_example]
+{{% include "examples/java/Imports.java" %}}
 {{< /tab >}}
 {{< tab header="Python" >}}
-# [START product_example]
-import example
-
-def example_snippet() -> None:
-      # Snippet Content ...
-
-# [END product_example]
+{{% include "examples/python/imports.py" %}}
 {{< /tab >}}
 {{<tab header="Go">}}
-package example
-
-// Region tags should start after the package, but before imports.
-// [START product_example]
-import "example.com/resource"
-
-func exampleSnippet() error {
-    // Snippet Content ...
-}
-
-// [END product_example]
+{{% include "examples/go/imports.go" %}}
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 {{% include "examples/node/imports.js" %}}
 {{< /tab >}}
 {{< tab header="C#" >}}
-// [START product_example]
-using System;
-
-public class ExampleSnippet
-{
-    // Snippet methods ...
-}
-// [END product_example]
-
+{{% include "examples/dotnet/Imports.cs" %}}
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-# [START product_example]
-require "example/resource"
-
-def example_snippet
-  # Snippet Content ...
-end
-
-# [END product_example]
+{{% include "examples/ruby/imports.rb" %}}
 {{< /tab >}}
 {{< tab header="PHP" >}}
-// [START product_example]
-use Example\Resource
-
-function example_snippet() {
-    // Snippet Content ...
-}
-// [END product_example]
+{{% include "examples/php/imports.php" %}}
 {{< /tab >}}
 
 {{< tab header="Terraform" >}}

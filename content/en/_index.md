@@ -1242,45 +1242,4 @@ the provider documentation.
 
 {{< /content-tabpane >}}
 
-### Testing practices
-
-{{< content-tabpane >}}
-{{< content-tab header="Ruby" >}}
-Each Ruby sample should have its own separate test file. Sample tests should
-use the [Minitest][minitest] framework, and should be located in a file named
-`<sample-name>_test.rb` under the `acceptance` directory.
-
-Be aware that sample methods are defined at the top level and would thus be
-added to the `Object` class if the file is loaded directly. In most cases,
-tests should define a temporary class and load the sample in that class. Ruby
-repositories may provide tools to help with this process, but it can also be
-done with `eval`.
-
-Example test: `acceptance/read_a_file.rb`:
-
-{{< highlight ruby >}}
-require "minitest/autorun"
-require "tmpdir"
-
-# Load the sample into this class so the method isn't defined on Object.
-class ReadAFileSample
-  sample_file = File.read "#{__dir__}/../read_a_file.rb"
-  eval sample_file
-end
-
-describe "#read_a_file" do
-  # Test the critical code paths
-  it "reads a file" do
-    Dir.mktmpdir do |dir|
-      File.write "#{dir}/my-test.txt", "Hello, Ruby!"
-      assert_output "Contents: Hello, Ruby!\n" do
-        ReadAFileSample.new.read_a_file file_path: "#{dir}/my-test.txt"
-      end
-    end
-  end
-end
-{{< /highlight >}}
-
-[minitest]: https://github.com/minitest/minitest
-
 {{< /content-tabpane >}}

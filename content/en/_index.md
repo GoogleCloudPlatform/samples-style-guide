@@ -1224,8 +1224,11 @@ terraform {
 }
 {{< /highlight >}}
 
-To determine when a resource was added, see the terraform-provider-google/CHANGELOG.md or 
-terraform-provider-google-beta/CHANGELOG.md.
+To determine when a resource was added, see the following pages:
+   
+# https://github.com/hashicorp/terraform-provider-google/blob/main/CHANGELOG.md
+   
+# https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md
 
 #### Provider argument
 

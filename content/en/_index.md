@@ -1155,9 +1155,7 @@ end
 #### Don't use `null_resource`
 
 Do not include CLI commands (such as gcloud or kubectl) inside
-of your sample via the `null_resource` resource.
-
-# https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource
+of your sample via the [`null_resource`](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) resource.
 
 There are some products without Terraform support. Do not include
 those products in Terraform samples.

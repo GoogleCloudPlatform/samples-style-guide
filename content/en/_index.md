@@ -983,15 +983,6 @@ Examples of portable practices include:
 
 ## Testing {#testing}
 
-### Test infrastructure
-
-We recommend using a test infrastructure that spins up a clean project
-for each test.
-
-Testing infrastructure code means that you are deploying actual resources.
-To avoid incurring charges, consider implementing a clean-up step.
-Some testing frameworks have a built-in cleanup step for you.
-
 ### Coverage {#coverage}
 
 Code snippets should have reasonable test coverage and all critical code paths

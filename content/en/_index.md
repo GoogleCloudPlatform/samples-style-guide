@@ -635,15 +635,15 @@ Do not include CLIs for running your sample. We expect developers
 to copy and paste code directly from cloud.google.com into their
 own environment.
 
-Previous practice shows CLIs are expensive to maintain and detracts
+Previous practice shows that CLIs are expensive to maintain and detract
 from the purpose of the snippet.
 
 ## Code {#code}
 
 ### Language compatibility {#lang-compat}
 
-Use features that work in all GCP-supported versions of a language and use
-language idioms that the community understands.
+Use features that work in all Google Cloud-supported versions of a 
+language. Use language idioms that the community understands.
 
 ### Useful comments {#comments}
 
@@ -652,7 +652,7 @@ Comments should be used as needed with the following guidelines:
 * Comments should add context not otherwise obvious from the code.
 * Comments should be readable and grammatically correct.
 * For values that the user may wish to configure, provide links to
- documentation that lists available options (and when to use them).
+  documentation that lists available options (and when to use them).
 
 ### Authentication {#authentication}
 

@@ -10,14 +10,14 @@ weight: 20
 This document defines samples standards for "standalone" code snippets.
 It encourages recommended practices for authoring code intended to teach others.
 By consistently applying these practices, the collection of samples as a whole
-become more approachable.
+becomes more approachable.
 
-Even if not specifically mentioned in the guide, all samples should make
-best-efforts to achieve the following goals wherever possible:
+All samples should make best-efforts to achieve the following goals wherever
+possible:
 
 * **Copy-paste-runnable** - Users should be able to copy, paste, and run the
-code into their environment with as few changes as possible. Samples should be
-easy as possible for a user to run.
+code in their environment with as few changes as possible. Samples should be
+as easy as possible for a user to run.
 
 * **Teach through code** - Samples should teach users both how and _why_
 specific best practices should be implemented and performed when interacting
@@ -28,14 +28,13 @@ to language, framework, or service.
 
 ### Principles {#principles}
 
-Where the guidelines below are insufficient, these principles apply in
-descending order of priority:
+These principles apply in descending order of priority:
 
 1. **Clarity**: The code's purpose and rationale is clear to the reader
 2. **Idiomaticity**: The code should be written using idiomatic,
    community-driven coding practices
-3. **Consistency**: The code has the same implementation from language to
-   language
+3. **Consistency**: The code has the same implementation from
+   language-to-language
 4. **Simplicity**: The code accomplishes its goal in the simplest way possible
 5. **Portability**: The code should be able to run locally or in the Cloud
 6. **Maintainability**: The code is written such that it can be easily
@@ -53,21 +52,21 @@ though cross-language consistency does not hurt. Generally, do things
 ### Region tags {#region-tags}
 
 Each code snippet should have a region tag to define which parts of the snippet
-are displayed from the documentation. Each region tag should be:
+are displayed from the documentation. Each region tag should:
 
-* Globally unique
-* Consistent across the same snippets in different languages
-* Begins with the product's region tag prefix
-* In snake case (`snake_case`)
+* Be globally unique
+* Be consistent across the same snippets in different languages
+* Begin with the product's region tag prefix
+* Use snake case (`snake_case`)
 
 Region tags should show as much of the sample as possible, so that a user can
 easily copy and paste the sample into their own environment to run it.
 
 ### Imports {#imports}
 
-Samples should include any imports statements the code depends on.
+Samples should include any import statements that the code depends on.
 
-This is easiest to enforce/detect when the samples are in their own file, see
+This is easiest to enforce/detect when the samples are in their own file. See
 the [one sample per file](#one-per-file) guideline.
 
 {{< tabpane langEqualsHeader=true >}}
@@ -1221,11 +1220,14 @@ To determine when a resource was added, see the following pages:
 #### Provider argument
 
 Add the provider argument if the resource is from provider google-beta.
+   
+{{< highlight terraform >}}
 resource "google_<resource_name>" "default" {
   provider = google-beta
 
   # Other resource arguments ...
 }
+{{< /highlight >}}
 
 Fields and resources that are only present in google-beta are clearly marked in
 the provider documentation.

@@ -1233,5 +1233,3 @@ the provider documentation.
 {{< /content-tab >}}
 
 {{< /content-tabpane >}}
-
-{{< /content-tabpane >}}

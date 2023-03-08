@@ -31,6 +31,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-20.04
+    permissions:
+      checks: write
+      contents: write
+      pull-requests: write
     concurrency:
       # Shared concurrency group wih preview cleanup.
       group: "preview-${{ github.event.number }}"
@@ -72,7 +76,7 @@ jobs:
         if: ${{ !github.event.pull_request.head.repo.fork }}
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
           publish_dir: ./public
           destination_dir: ./previews/PR-${{ github.event.number }}
           commit_message: "stage: PR-${{ github.event.number }}: ${{ github.event.head_commit.message }}"

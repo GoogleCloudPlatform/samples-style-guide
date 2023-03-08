@@ -1224,7 +1224,7 @@ Add the provider argument if the resource is from provider google-beta.
 resource "google_<resource_name>" "default" {
   provider = google-beta
 
-  # Other esource arguments ...
+  # Other resource arguments ...
 }
 
 Fields and resources that are only present in google-beta are clearly marked in

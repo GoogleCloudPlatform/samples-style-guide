@@ -1215,9 +1215,8 @@ terraform {
 
 To determine when a resource was added, see the following pages:
    
-# https://github.com/hashicorp/terraform-provider-google/blob/main/CHANGELOG.md
-   
-# https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md
+* https://github.com/hashicorp/terraform-provider-google/blob/main/CHANGELOG.md
+* https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md
 
 #### Provider argument
 

@@ -10,14 +10,14 @@ weight: 20
 This document defines samples standards for "standalone" code snippets.
 It encourages recommended practices for authoring code intended to teach others.
 By consistently applying these practices, the collection of samples as a whole
-become more approachable.
+becomes more approachable.
 
-Even if not specifically mentioned in the guide, all samples should make
-best-efforts to achieve the following goals wherever possible:
+All samples should make best-efforts to achieve the following goals wherever
+possible:
 
 * **Copy-paste-runnable** - Users should be able to copy, paste, and run the
-code into their environment with as few changes as possible. Samples should be
-easy as possible for a user to run.
+code in their environment with as few changes as possible. Samples should be
+as easy as possible for a user to run.
 
 * **Teach through code** - Samples should teach users both how and _why_
 specific best practices should be implemented and performed when interacting
@@ -28,128 +28,83 @@ to language, framework, or service.
 
 ### Principles {#principles}
 
-Where the guidelines below are insufficient, these principles apply in
-descending order of priority:
+These principles apply in descending order of priority:
 
 1. **Clarity**: The code's purpose and rationale is clear to the reader
 2. **Idiomaticity**: The code should be written using idiomatic,
    community-driven coding practices
-3. **Consistency**: The code has the same implementation from language to
-   language
+3. **Consistency**: The code has the same implementation from
+   language-to-language
 4. **Simplicity**: The code accomplishes its goal in the simplest way possible
 5. **Portability**: The code should be able to run locally or in the Cloud
 6. **Maintainability**: The code is written such that it can be easily
    maintained
 
 Code snippets should use preferred code patterns that are idiomatic to the
-particular language (e.g. promises, futures, static API calls from singletons,
+particular language (e.g., promises, futures, static API calls from singletons,
 builders, etc). This may result in code snippets that are radically different
 from language-to-language. Err on the side of what is idiomatic to the language,
 though cross-language consistency does not hurt. Generally, do things
-“the way the community does it”.
+"the way the community does it."
 
 ## Structure {#structure}
 
 ### Region tags {#region-tags}
 
 Each code snippet should have a region tag to define which parts of the snippet
-are displayed from the documentation. Each region tag should be:
+are displayed from the documentation. Each region tag should:
 
-* Globally unique
-* Consistent across the same snippets in different languages
-* Begins with the product's region tag prefix
-* In snake case (`snake_case`)
+* Be globally unique
+* Be consistent across the same snippets in different languages
+* Begin with the product's region tag prefix
+* Use snake case (`snake_case`)
 
 Region tags should show as much of the sample as possible, so that a user can
 easily copy and paste the sample into their own environment to run it.
 
 ### Imports {#imports}
 
-Samples should include any imports statements the code depends on.
+Samples should include any import statements that the code depends on.
 
-This is easiest to enforce/detect when the samples are in their own file, see
+This is easiest to enforce/detect when the samples are in their own file. See
 the [one sample per file](#one-per-file) guideline.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
-// Region tags should start after the package, but before imports.
-// [START product_example]
-import com.example.resource;
-
-public class exampleSnippet {
-// Snippet methods ...
-}
-// [END product_example]
+{{% include "examples/java/Imports.java" %}}
 {{< /tab >}}
 {{< tab header="Python" >}}
-# [START product_example]
-import example
-
-def example_snippet() -> None:
-      # Snippet Content ...
-
-# [END product_example]
+{{% include "examples/python/imports.py" %}}
 {{< /tab >}}
 {{<tab header="Go">}}
-package example
-
-// Region tags should start after the package, but before imports.
-// [START product_example]
-import "example.com/resource"
-
-func exampleSnippet() error {
-    // Snippet Content ...
-}
-
-// [END product_example]
+{{% include "examples/go/imports.go" %}}
 {{< /tab >}}
 {{< tab header="Node.js" >}}
-// [START product_example]
-const resource = require('@google-cloud/example');
-
-const exampleSnippet = function() {
-    // Snippet content ...
-}
-// [END product_example]
+{{% include "examples/node/imports.js" %}}
 {{< /tab >}}
 {{< tab header="C#" >}}
-// [START product_example]
-using System;
-
-public class ExampleSnippet
-{
-    // Snippet methods ...
-}
-// [END product_example]
-
+{{% include "examples/dotnet/Imports.cs" %}}
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-# [START product_example]
-require "example/resource"
-
-def example_snippet
-  # Snippet Content ...
-end
-
-# [END product_example]
+{{% include "examples/ruby/imports.rb" %}}
 {{< /tab >}}
 {{< tab header="PHP" >}}
-// [START product_example]
-use Example\Resource
+{{% include "examples/php/imports.php" %}}
+{{< /tab >}}
 
-function example_snippet() {
-    // Snippet Content ...
-}
-// [END product_example]
+{{< tab header="Terraform" >}}
+# N/A
 {{< /tab >}}
 {{< /tabpane >}}
 
 ### One sample per file {#one-per-file}
 
-A single file should only include one sample. This shows the minimal
-set of dependencies via import statements, keeps the end-to-end code relevant
-to the reader's current learning need, and helps reviewers validate the
- [imports](#imports) guideline.
+A single file should only include one sample. This keeps the end-to-end
+code relevant to the reader's current learning need.
+
+For languages that have import statements, this shows the minimal
+set of dependencies via import statements and helps reviewers validate the
+[imports](#imports) guideline.
 
 ### Sample description {#description}
 
@@ -179,11 +134,7 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
 """
 {{< /tab >}}
 {{< tab header="Node.js" >}}
-/**
-* Moves a persistent disk from one zone to another.
-*
-* See https://cloud.google.com/compute/docs/quickstart-client-libraries before running the code snippet.
-*/
+{{% include "examples/node/description.js" %}}
 {{< /tab >}}
 {{< tab header="C#" >}}
 // Moves a persistent disk from one zone to another.
@@ -204,11 +155,20 @@ See https://cloud.google.com/compute/docs/quickstart-client-libraries before run
  * before running the code snippet.
  */
 {{< /tab >}}
+{{< tab header="Terraform" >}}
+/* 
+Create a VM instance from a public image
+in the `default` VPC network and subnet
+
+See https://cloud.google.com/compute/docs/instances/create-start-instance
+before running the code snippet.
+*/
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Minimal arguments {#minimal-arguments}
 
-Method arguments should be limited requirements for testing. In most cases, this
+Arguments should be limited to requirements for testing. In some cases, this
 is project-specific information (`projectID`) or the path to an external file (`filePath`).
 
 Do not use arguments for values that can be hard-coded, such as the type of a
@@ -241,7 +201,7 @@ function main() {
 }
 
 const exampleSnippet = function(requiredArg) {
-  // Snippet content...
+  // Snippet content ...
 }
 {{< /tab >}}
 {{< tab header="C#" >}}
@@ -270,6 +230,44 @@ end
 {{< tab header="PHP" >}}
 // This is an example snippet for showing best practices.
 function example_snippet(string $projectId, string $filePath): void
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+/*  These are example snippets for showing best practices.
+*
+* Don't include the 'project' argument in resources. Rely on
+* the 'GOOGLE_CLOUD_PROJECT' environment variable as documented at
+* https://cloud.google.com/docs/terraform/basic-commands.
+*
+* Some resources, such as 'project_iam_*', cannot infer the project ID.
+* As a workaround, use the 'data "google_project"' data source.
+*
+*
+* Some resources, such as `project_iam_*`, cannot infer the project ID.
+* As a workaround, use the `data "google_project"` data source.
+* In the following configuration, the `google_project.project` data source
+* automatically looks up the project ID of the local project.
+*
+* Creates an IAM policy
+*/
+
+data "google_project" "project" {
+}
+
+data "google_iam_policy" "sql_iam_policy" {
+  binding {
+    ...
+    condition {
+      expression  = "resource.name == 'projects/${data.google_project.project.id}/instances/${google_sql_database_instance.default.name}'"
+      ...
+    }
+  }
+}
+
+resource "google_project_iam_policy" "project" {
+  project     = data.google_project.project.id
+  policy_data = data.google_iam_policy.sql_iam_policy.policy_data
+} 
+
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -336,6 +334,19 @@ function example_snippet(string $projectId, string $filePath): void
         $response->getExampleValue()
     );
 }
+{{< /tab >}}
+{{< tab header="Terraform" >}}
+# Output statement provide values that are generated after creating
+# a resource. To keep it simple, they must be defined inline at the end of
+# a  sample, not in a separate `outputs.tf` file.
+
+output "domain_name_servers" {
+  value = google_dns_managed_zone.default.name_servers
+}
+output "certificate_map" {
+  value = google_certificate_manager_certificate_map.certificate_map.id
+}
+
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -591,22 +602,48 @@ function list_info_types(): void
     }
 }
 {{< /tab >}}
+
+{{< tab header="Terraform" >}}
+
+// Arrange: Set local values.
+locals {
+  name   = "example-namespace"
+}
+
+// Arrange: Create random value to help ensure unique resource names.
+resource "random_id" "suffix" {
+  byte_length = 4
+}
+
+// Act: Create the resources.
+resource "google_project" "example_project" {
+  name = "${local.name}"
+  project_id = "${local.name}-{random_id.suffix.hex}"
+}
+
+// Assert: Print the results.
+output "project_id" {
+  value = google_project.example_project.id
+}
+{{< /tab >}}
+
 {{< /tabpane >}}
 
 ### No CLIs {#no-cli}
 
-Do not include CLIs for running your sample. We expect developers to copy and
-paste code directly from cloud.google.com into their own environment.
+Do not include CLIs for running your sample. We expect developers
+to copy and paste code directly from cloud.google.com into their
+own environment.
 
-Previous practice shows CLIs are expensive to maintain and detracts from the
-purpose of the snippet.
+Previous practice shows that CLIs are expensive to maintain and detract
+from the purpose of the snippet.
 
 ## Code {#code}
 
 ### Language compatibility {#lang-compat}
 
-Use features that work in all GCP-supported versions of a language and use
-language idioms that the community understands.
+Use features that work in all Google Cloud-supported versions of a 
+language. Use language idioms that the community understands.
 
 ### Useful comments {#comments}
 
@@ -615,7 +652,7 @@ Comments should be used as needed with the following guidelines:
 * Comments should add context not otherwise obvious from the code.
 * Comments should be readable and grammatically correct.
 * For values that the user may wish to configure, provide links to
- documentation that lists available options (and when to use them).
+  documentation that lists available options (and when to use them).
 
 ### Authentication {#authentication}
 
@@ -684,7 +721,14 @@ $config = [
 ];
 $storage = new StorageClient($config);
 {{< /tab >}}
-{{< /tabpane >}}
+{{< tab header="Terraform" >}}
+# Use application default credentials when running locally.
+# When developers are locally iterating on Terraform configuration,
+# they should authenticate by running `gcloud auth application-default login`
+# to generate application default credentials. Don't download service account keys,
+# because downloaded keys are harder to manage and secure.
+{{< /tab >}}
+ {{< /tabpane >}}
 
 ### Initializing Clients {#clients}
 
@@ -782,6 +826,9 @@ spanner_client.close
 
 $dlp = new DlpServiceClient();
 {{< /tab >}}
+{{< tab header="Terraform" >}}
+# N/A
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Cyclomatic Complexity {#complexity}
@@ -872,6 +919,15 @@ try {
     // IllegalArgumentException is thrown when an invalid argument has been passed to a function.
 }
 {{< /tab >}}
+{{< tab header="Terraform" >}}
+/**
+ * Rely on Terraform's default logging, both for our maintenance and for developer
+ * practice.
+
+ * Do not use [`try` statements](https://developer.hashicorp.com/terraform/language/functions/try)
+ * in Terraform samples.
+*/
+{{< /tab >}}
 {{< /tabpane >}}
 
 ### Linting {#linting}
@@ -903,7 +959,7 @@ operating systems.
 
 Our code snippets may be executed in multiple hosting environments, such as
 [App Engine][gae], [Cloud Functions][gcf], [Cloud Run][run],
-[Kubernetes Engine][gke], [Compute Engine][gce], [Cloud Shell][shell],
+[Kubernetes Engine][gke], [Compute Engine][gce], Cloud Shell,
 other cloud providers, and local machines.
 
 Where possible, code snippets should work across environments and hosting
@@ -1084,4 +1140,97 @@ end
 [minitest]: https://github.com/minitest/minitest
 
 {{< /content-tab >}}
+
+{{< content-tab header="Terraform" >}}
+#### Don't use `null_resource`
+
+Do not include CLI commands (such as gcloud or kubectl) inside
+of your sample via the [`null_resource`](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) resource.
+
+There are some products without Terraform support. Do not include
+those products in Terraform samples.
+
+#### No global variables
+
+Don't include global Terraform variables (`var.VARIABLE_NAME`).
+
+{{% alert title="Explanation" %}}
+Global variables become part of the API exposed via Terraform.
+Therefore, global variables help enable users to use Terraform samples
+not as snippets but as direct module references. 
+By disallowing global variables, we disable this avenue of customization.
+This reduces the risk of users developing code that is
+accidentally dependent on our samples.
+
+Instead of including global variables, hard code the resource names and
+parameter values.
+
+Local variables are allowed in Terraform samples
+because local variables are an internal implementation and therefore aren't
+part of the API exposed via Terraform. See [local variables](#locals).
+{{% /alert %}}
+
+#### Local variables {#locals}
+
+Use local variables to reuse a common string 3 or more times that is not
+accessible as a resource reference.
+
+See [No Global Variables](#no-global-variables) for further explanation.
+
+#### Resource references
+
+Instead of duplicating know values, refer to already-defined resources.
+
+For example, the `target` argument is referring to a
+`google_compute_target_ssl_proxy` resource called `default` to get the
+`id` attribute of that resource.
+
+{{< highlight terraform >}}
+resource "google_compute_global_forwarding_rule" "default" { 
+  target = google_compute_target_ssl_proxy.default.id # Reference to already defined resource in the sample
+
+  # Other resource arguments ...
+}
+{{< /highlight >}}
+
+#### Terraform Google Provider version
+
+When your sample contains a new resource, add the required minimum
+Terraform Google Provider version corresponding to which 
+provider version introduced a resource. For example, `google_apigee_nat_address`
+was added in version 4.37, so the minimum version is 4.37. To specify a minimum
+version in a sample, include the provider requirements, as follows:
+
+{{< highlight terraform >}}
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "~= 4.37.0"
+    }
+  }
+}
+{{< /highlight >}}
+
+To determine when a resource was added, see the following pages:
+   
+* https://github.com/hashicorp/terraform-provider-google/blob/main/CHANGELOG.md
+* https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md
+
+#### Provider argument
+
+Add the provider argument if the resource is from provider google-beta.
+   
+{{< highlight terraform >}}
+resource "google_<resource_name>" "default" {
+  provider = google-beta
+
+  # Other resource arguments ...
+}
+{{< /highlight >}}
+
+Fields and resources that are only present in google-beta are clearly marked in
+the provider documentation.
+{{< /content-tab >}}
+
 {{< /content-tabpane >}}

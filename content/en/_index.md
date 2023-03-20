@@ -668,9 +668,9 @@ Most clients do this automatically, and no special steps are required.
 
 If, for whatever reason, the code snippet requires specific credentials,
 then, apart from showing how to obtain such credentials, it should show
-hot to intialized a client with other than ADC.
+how to intialize a client with other than ADC.
 
-[ADC]:https://cloud.google.com/docs/authentication/production#automatically
+[ADC]:https://cloud.google.com/docs/authentication/external/about-adc
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}

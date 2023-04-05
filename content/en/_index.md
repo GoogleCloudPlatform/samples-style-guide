@@ -238,10 +238,6 @@ function example_snippet(string $projectId, string $filePath): void
 * the 'GOOGLE_CLOUD_PROJECT' environment variable as documented at
 * https://cloud.google.com/docs/terraform/basic-commands.
 *
-* Some resources, such as 'project_iam_*', cannot infer the project ID.
-* As a workaround, use the 'data "google_project"' data source.
-*
-*
 * Some resources, such as `project_iam_*`, cannot infer the project ID.
 * As a workaround, use the `data "google_project"` data source.
 * In the following configuration, the `google_project.project` data source

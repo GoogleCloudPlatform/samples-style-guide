@@ -1,0 +1,43 @@
+name: Propose guideline
+description: Propose a change to Cloud Samples practices.
+title: 'Proposal: Short idea name '
+labels: ['type: feature request', 'guideline: request']
+assignees: ['']
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to advocate for samples practice improvements!
+
+        This is a multi-step process, you don't need to own it end-to-end!
+
+        1. Open an issue
+        2. Triage to confirm we should proceed
+        3. Put together a pull request with guideline language and code changes
+        4. Approval process
+        5. Merge the new guideline
+        6. Adoption for new samples & sample changes going forward
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        What is the change or new rule we should add? Do you have an example?
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: |
+        What impact will this change have? Do we have data showing how this
+        will create an improved user experience?
+
+  - type: textarea
+    id: challenge
+    attributes:
+      label: Challenge
+      description: |
+        What are the challenges to adopting this guideline?
+        Does it require additional training? More careful review?

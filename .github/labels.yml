@@ -72,3 +72,14 @@
 - name: 'autorelease: tagged'
   color: ededed
   description: Release please has completed a release for this.
+
+# Proposal Workflow
+- name: 'guideline: request'
+  color: BAADEB
+  description: 'Proposal of a change to samples guidelines.'
+- name: 'guideline: needs work'
+  color: 691DE7
+  description: 'Proposal is reasonable, specific wording needed.'
+- name: 'guideline: ready'
+  color: 0E8A16
+  description: 'Proposal text is ready for voting.'

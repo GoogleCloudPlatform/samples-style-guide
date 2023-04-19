@@ -32,9 +32,9 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
     permissions:
-      checks: write
-      contents: write
-      pull-requests: write
+      checks: write  # create checks
+      contents: write  # deploy to gh-pages branch
+      pull-requests: write  # add comments to PR
     concurrency:
       # Shared concurrency group wih preview cleanup.
       group: "preview-${{ github.event.number }}"

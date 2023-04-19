@@ -1,8 +1,8 @@
 name: Propose guideline
-about: Propose a change to Cloud Samples practices.
+description: Propose a change to Cloud Samples practices.
 title: 'Proposal: Short idea name '
 labels: ['type: feature request', 'guideline: request']
-assignees: ''
+assignees: ['']
 
 body:
   - type: markdown

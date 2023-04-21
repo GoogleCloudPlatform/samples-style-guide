@@ -1138,7 +1138,8 @@ end
 {{< /content-tab >}}
 
 {{< content-tab header="Terraform" >}}
-#### Don't use `null_resource`
+
+### Don't use `null_resource`
 
 Do not include CLI commands (such as gcloud or kubectl) inside
 of your sample via the [`null_resource`](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) resource.
@@ -1146,25 +1147,22 @@ of your sample via the [`null_resource`](https://registry.terraform.io/providers
 There are some products without Terraform support. Do not include
 those products in Terraform samples.
 
-#### No global variables
+### No global variables
 
 Don't include global Terraform variables (`var.VARIABLE_NAME`).
 
-{{% alert title="Explanation" %}}
 Global variables become part of the API exposed via Terraform.
 Therefore, global variables help enable users to use Terraform samples
 not as snippets but as direct module references. 
-By disallowing global variables, we disable this avenue of customization.
-This reduces the risk of users developing code that is
-accidentally dependent on our samples.
+By not using global variables in the samples in our cloud.google.com docs, 
+we reduce the risk of users developing code that depends directly on the samples.
 
-Instead of including global variables, hard code the resource names and
+Instead of global variables, hard code the resource names and
 parameter values.
 
 Local variables are allowed in Terraform samples
 because local variables are an internal implementation and therefore aren't
 part of the API exposed via Terraform. See [local variables](#locals).
-{{% /alert %}}
 
 #### Local variables {#locals}
 
@@ -1175,7 +1173,7 @@ See [No Global Variables](#no-global-variables) for further explanation.
 
 #### Resource references
 
-Instead of duplicating know values, refer to already-defined resources.
+Instead of duplicating known values, refer to already-defined resources.
 
 For example, the `target` argument is referring to a
 `google_compute_target_ssl_proxy` resource called `default` to get the
@@ -1189,13 +1187,12 @@ resource "google_compute_global_forwarding_rule" "default" {
 }
 {{< /highlight >}}
 
-#### Terraform Google Provider version
+### Terraform Google Provider version
 
 When your sample contains a new resource, add the required minimum
-Terraform Google Provider version corresponding to which 
-provider version introduced a resource. For example, `google_apigee_nat_address`
-was added in version 4.37, so the minimum version is 4.37. To specify a minimum
-version in a sample, include the provider requirements, as follows:
+Terraform Google Provider version corresponding to the version that introduced the resource. 
+For example, `google_apigee_nat_address` was added in version 4.37, so the minimum version
+is 4.37. To specify a minimum version in a sample, include the provider requirements, as follows:
 
 {{< highlight terraform >}}
 terraform {
@@ -1213,7 +1210,7 @@ To determine when a resource was added, see the following pages:
 * https://github.com/hashicorp/terraform-provider-google/blob/main/CHANGELOG.md
 * https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md
 
-#### Provider argument
+### Provider argument
 
 Add the provider argument if the resource is from provider google-beta.
    

@@ -1151,6 +1151,9 @@ those products in Terraform samples.
 
 Don't include global Terraform variables (`var.VARIABLE_NAME`).
 
+{{% alert title="Explanation" %}}
+   
+
 Global variables become part of the API exposed via Terraform.
 Therefore, global variables help enable users to use Terraform samples
 not as snippets but as direct module references. 
@@ -1163,7 +1166,8 @@ parameter values.
 Local variables are allowed in Terraform samples
 because local variables are an internal implementation and therefore aren't
 part of the API exposed via Terraform. See [local variables](#locals).
-
+{{% /alert %}}
+   
 ### Local variables {#locals}
 
 Use local variables to reuse a common string 3 or more times that is not

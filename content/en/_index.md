@@ -1164,14 +1164,14 @@ Local variables are allowed in Terraform samples
 because local variables are an internal implementation and therefore aren't
 part of the API exposed via Terraform. See [local variables](#locals).
 
-#### Local variables {#locals}
+### Local variables {#locals}
 
 Use local variables to reuse a common string 3 or more times that is not
 accessible as a resource reference.
 
 See [No Global Variables](#no-global-variables) for further explanation.
 
-#### Resource references
+### Resource references
 
 Instead of duplicating known values, refer to already-defined resources.
 

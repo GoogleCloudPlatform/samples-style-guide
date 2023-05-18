@@ -739,12 +739,12 @@ done with <code>eval</code>.</p><p>Example test: <code>acceptance/read_a_file.rb
 </span></span><span style=display:flex><span>  <span style=color:#204a87;font-weight:700>end</span>
 </span></span><span style=display:flex><span><span style=color:#204a87;font-weight:700>end</span></span></span></code></pre></div></div></div><div class="tab-pane fade" id=tabs-9-7 role=tabpanel aria-labelled-by=tabs-9-7-tab style="border:1px solid rgba(0,0,0,.125)"><div style=padding:1rem><h4 id=dont-use-null_resource>Don&rsquo;t use <code>null_resource</code></h4><p>Do not include CLI commands (such as gcloud or kubectl) inside
 of your sample via the <a href=https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource><code>null_resource</code></a> resource.</p><p>There are some products without Terraform support. Do not include
-those products in Terraform samples.</p><h4 id=no-global-variables>No global variables</h4><p>Don&rsquo;t include global Terraform variables (<code>var.VARIABLE_NAME</code>).</p><div class="alert alert-primary" role=alert><h4 class=alert-heading>Explanation</h4><pre><code>&lt;p&gt;Global variables become part of the API exposed via Terraform.
-</code></pre><p>Therefore, global variables help enable users to use Terraform samples
+those products in Terraform samples.</p><h4 id=no-global-variables>No global variables</h4><p>Don&rsquo;t include global Terraform variables (<code>var.VARIABLE_NAME</code>).</p><div class="alert alert-primary" role=alert><div class=alert-heading>Explanation</div><p>Global variables become part of the API exposed via Terraform.
+Therefore, global variables help enable users to use Terraform samples
 not as snippets but as direct module references.
 By disallowing global variables, we disable this avenue of customization.
 This reduces the risk of users developing code that is
-accidentally dependent on our samples.</p></p><p>Instead of including global variables, hard code the resource names and
+accidentally dependent on our samples.</p><p>Instead of including global variables, hard code the resource names and
 parameter values.</p><p>Local variables are allowed in Terraform samples
 because local variables are an internal implementation and therefore aren&rsquo;t
 part of the API exposed via Terraform. See <a href=#locals>local variables</a>.</p></div><h4 id=locals>Local variables</h4><p>Use local variables to reuse a common string 3 or more times that is not

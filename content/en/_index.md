@@ -983,10 +983,11 @@ Examples of portable practices include:
 Code snippets should have reasonable test coverage and all critical code paths
 should have integration tests that test against the production service.
 
-### 1-to-1 test cases to snippets
+### Dedicated testing per sample {#dedicated-testing-per-sample}
 
-Each individual sample method or snippet should have a single dedicated test
-case (test method or function).
+Each test case should cover a single sample.
+
+Multiple related samples may be placed in a shared file with common setup and teardown steps.
 
 ## Language-specific practices {#language-specific}
 

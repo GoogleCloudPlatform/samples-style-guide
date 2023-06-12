@@ -933,6 +933,12 @@ We prefer to enforce style using standard linters that are popular in
 the community.
 
 {{< content-tabpane >}}
+{{< content-tab header="Java" >}}
+
+Follow the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html).
+Tooling available at [google/google-java-format](https://github.com/google/google-java-format).
+
+{{< /content-tab >}}
 {{< content-tab header="PHP" >}}
 
 We follow the [PSR-1][psr-1] and [PSR-2][psr-2] community coding standards, with

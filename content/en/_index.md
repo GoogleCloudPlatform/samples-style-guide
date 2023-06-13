@@ -939,6 +939,15 @@ Follow the [Google Java Style Guide](https://google.github.io/styleguide/javagui
 Tooling available at [google/google-java-format](https://github.com/google/google-java-format).
 
 {{< /content-tab >}}
+   
+{{< content-tab header="Go" >}}
+Follow the [Google Go Style Guide](https://google.github.io/styleguide/go/)
+{{< /content-tab >}}
+
+{{< content-tab header="Python" >}}
+Follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide).
+{{< /content-tab >}}
+
 {{< content-tab header="PHP" >}}
 
 We follow the [PSR-1][psr-1] and [PSR-2][psr-2] community coding standards, with

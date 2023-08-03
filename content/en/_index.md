@@ -7,7 +7,8 @@ weight: 20
 
 ## Introduction {#introduction}
 
-This document defines samples standards for "standalone" code snippets.
+This document defines samples standards for the code samples of Google Cloud.
+
 It encourages recommended practices for authoring code intended to teach others.
 By consistently applying these practices, the collection of samples as a whole
 becomes more approachable.
@@ -40,27 +41,50 @@ These principles apply in descending order of priority:
 6. **Maintainability**: The code is written such that it can be easily
    maintained
 
-Code snippets should use preferred code patterns that are idiomatic to the
+{{% alert title="Considering idiomatic code vs. consistent samples across languages" %}}
+Code samples should use preferred code patterns that are idiomatic to the
 particular language (e.g., promises, futures, static API calls from singletons,
-builders, etc). This may result in code snippets that are radically different
+builders). This may result in samples that are radically different
 from language-to-language. Err on the side of what is idiomatic to the language,
 though cross-language consistency does not hurt. Generally, do things
 "the way the community does it."
+{{% /alert %}}
 
-## Structure {#structure}
+### Sample Categories
+
+There are two categories of samples covered in this guide:
+
+* **Snippets ✂︎:** A snippet is a standalone slice of code that demonstrates
+  a specific Cloud operation.
+* **Patterns 🧩:** A pattern is a sample application or otherwise demonstrates
+  a use case using multiple slices of code. Individual slices should follow
+  [snippet structure guidelines](#structure) where it makes sense.
+
+## Metadata {#metadata}
 
 ### Region tags {#region-tags}
 
-Each code snippet should have a region tag to define which parts of the snippet
-are displayed from the documentation. Each region tag should:
+Region tags define a slice of code as a snippet and which parts of the code are
+displayed from the documentation.
+
+#### Each region identifier
 
 * Be globally unique
 * Be consistent across the same snippets in different languages
 * Begin with the product's region tag prefix
 * Use snake case (`snake_case`)
 
-Region tags should show as much of the sample as possible, so that a user can
+#### When to use region tags
+
+* **Snippets ✂︎:** Region tags should contain as much of the sample as possible, so that a user can
 easily copy and paste the sample into their own environment to run it.
+* **Patterns 🧩:** Region tags should contain those slices of code that are shown in documentation.
+
+#### Changing region tags
+
+Region tags and the scope of code they contain are a documentation dependency.
+
+## Snippet Structure {#structure}
 
 ### Imports {#imports}
 
@@ -76,7 +100,7 @@ the [one sample per file](#one-per-file) guideline.
 {{< tab header="Python" >}}
 {{% include "examples/python/imports.py" %}}
 {{< /tab >}}
-{{<tab header="Go">}}
+{{< tab header="Go" >}}
 {{% include "examples/go/imports.go" %}}
 {{< /tab >}}
 {{< tab header="Node.js" >}}
@@ -97,16 +121,16 @@ the [one sample per file](#one-per-file) guideline.
 {{< /tab >}}
 {{< /tabpane >}}
 
-### One sample per file {#one-per-file}
+### One snippet per file {#one-per-file}
 
-A single file should only include one sample. This keeps the end-to-end
+A single file should only include one snippet. This keeps the end-to-end
 code relevant to the reader's current learning need.
 
 For languages that have import statements, this shows the minimal
 set of dependencies via import statements and helps reviewers validate the
 [imports](#imports) guideline.
 
-### Sample description {#description}
+### Snippet description {#description}
 
 Each code snippet file should have a top-level comment that succinctly describes
 what the snippet does, including any setup (such as resources) required to make
@@ -837,6 +861,9 @@ examples of code that increases cyclomatic complexity.
 Code snippets should have a single path demonstrating their purpose with no
 extra code.
 
+Patterns should minimize cyclomatic complexity in implementing
+[clear and simple](#principles) code.
+
 ### Error Handling {#errors}
 
 Samples should include examples and details of how to catch and handle common
@@ -995,11 +1022,12 @@ Examples of portable practices include:
 Code snippets should have reasonable test coverage and all critical code paths
 should have integration tests that test against the production service.
 
-### Dedicated testing per sample {#dedicated-testing-per-sample}
+### Dedicated testing per snippet {#dedicated-testing-per-sample}
+* **Applies to:** Snippets
 
-Each test case should cover a single sample.
+Each test case should cover a single snippet.
 
-Multiple related samples may be placed in a shared file with common setup and teardown steps.
+Multiple related snippets may be placed in a shared file with common setup and teardown steps.
 
 ## Language-specific practices {#language-specific}
 
@@ -1007,6 +1035,8 @@ Multiple related samples may be placed in a shared file with common setup and te
 {{< content-tab header="Java" >}}
 
 ### Easy run function {#run-function}
+
+* **Applies to:** Snippets
 
 Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the
@@ -1054,6 +1084,8 @@ public static void exampleSnippet(String projectId, String filePath) {
 
 ### Easy run function
 
+* **Applies to:** Snippets
+
 Samples with function parameters should show how to prepare parameter values
 and call the function. Do this from a `callSample()` function below the main
 sample code. Do not include significant logic in the `callSample()` function,
@@ -1095,6 +1127,8 @@ function callSample(): void
 
 ### Named entrypoint
 
+* **Applies to:** Snippets
+
 Each Ruby sample should include an entrypoint method with the same name as the
 sample file. (It may include helper methods if appropriate for readability.) The
 entrypoint method should appear at the top level of the file rather than within
@@ -1115,6 +1149,8 @@ end
 {{< /highlight >}}
 
 ### Testing practices
+
+* **Applies to:** Snippets
 
 Each Ruby sample should have its own separate test file. Sample tests should
 use the [Minitest][minitest] framework, and should be located in a file named

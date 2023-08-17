@@ -1,5 +1,5 @@
 baseURL = 'https://googlecloudplatform.github.io/samples-style-guide/'
-title = 'Samples Guide | Google Cloud'
+title = 'Samples Style Guide | Google Cloud'
 theme = ["docsy"]
 languageCode = 'en-us'
 enableGitInfo = true

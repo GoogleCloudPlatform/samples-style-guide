@@ -56,13 +56,15 @@ There are two categories of samples covered in this guide:
 
 * **Snippets ✂︎:** A snippet is a standalone slice of code that demonstrates
   a specific Cloud operation.
-* **Patterns 🧩:** A pattern is a sample application or otherwise demonstrates
-  a use case using multiple slices of code. Individual slices should follow
-  [snippet structure guidelines](#structure) where it makes sense.
+* **Patterns 🧩:** A pattern demonstrates a use case through multiple slices of
+  code, such as a sample application. Individual slices should follow
+  [snippet structure guidelines](#structure) where it improves code clarity.
 
 ## Metadata {#metadata}
 
 ### Region tags {#region-tags}
+
+**Applies to:** Snippets ✂︎, Patterns 🧩
 
 Region tags define a slice of code as a snippet and which parts of the code are
 displayed from the documentation.
@@ -87,6 +89,8 @@ Region tags and the scope of code they contain are a documentation dependency.
 ## Snippet Structure {#structure}
 
 ### Imports {#imports}
+
+**Applies to:** Snippets ✂︎
 
 Samples should include any import statements that the code depends on.
 
@@ -131,6 +135,8 @@ set of dependencies via import statements and helps reviewers validate the
 [imports](#imports) guideline.
 
 ### Snippet description {#description}
+
+**Applies to:** Snippets ✂︎
 
 Each code snippet file should have a top-level comment that succinctly describes
 what the snippet does, including any setup (such as resources) required to make
@@ -191,6 +197,8 @@ before running the code snippet.
 {{< /tabpane >}}
 
 ### Minimal arguments {#minimal-arguments}
+
+**Applies to:** Snippets ✂︎
 
 Arguments should be limited to requirements for testing. In some cases, this
 is project-specific information (`projectID`) or the path to an external file (`filePath`).
@@ -293,6 +301,8 @@ resource "google_project_iam_policy" "project" {
 
 ### Process the result {#result}
 
+**Applies to:** Snippets ✂︎
+
 Methods should avoid a return type whenever possible. Instead, show the user how
 to interact with a returned object programmatically by printing example
 attributes to the console. Tests should use the output of the function to ensure
@@ -371,6 +381,8 @@ output "certificate_map" {
 {{< /tabpane >}}
 
 ### Arrange, Act, Assert {#pattern}
+
+**Applies to:** Snippets ✂︎
 
 Most samples should follow the "Arrange, Act, Assert" pattern as closely as
 possible. Composing samples into these discrete steps makes them more
@@ -651,6 +663,8 @@ output "project_id" {
 
 ### No CLIs {#no-cli}
 
+**Applies to:** Snippets ✂︎
+
 Do not include CLIs for running your sample. We expect developers
 to copy and paste code directly from cloud.google.com into their
 own environment.
@@ -662,10 +676,14 @@ from the purpose of the snippet.
 
 ### Language compatibility {#lang-compat}
 
+**Applies to:** Snippets ✂︎, Patterns 🧩
+
 Use features that work in all Google Cloud-supported versions of a 
 language. Use language idioms that the community understands.
 
 ### Useful comments {#comments}
+
+**Applies to:** Snippets ✂︎, Patterns 🧩
 
 Comments should be used as needed with the following guidelines:
 
@@ -751,6 +769,8 @@ $storage = new StorageClient($config);
  {{< /tabpane >}}
 
 ### Initializing Clients {#clients}
+
+**Applies to:** Snippets ✂︎, Patterns 🧩
 
 Code snippets should show users how to initialize (and clean up, if necessary)
 clients used by the user. Additionally, clients should contain a comment
@@ -853,6 +873,8 @@ $dlp = new DlpServiceClient();
 
 ### Cyclomatic Complexity {#complexity}
 
+**Applies to:** Snippets ✂︎, Patterns 🧩
+
 Cyclomatic complexity is the measure of possible code paths. The more code
 paths, the more complex the code snippet, and the harder to understand and test.
 Flow control statements like conditionals (if/else), switches, and loops are
@@ -865,6 +887,8 @@ Patterns should minimize cyclomatic complexity in implementing
 [clear and simple](#principles) code.
 
 ### Error Handling {#errors}
+
+**Applies to:** Snippets ✂︎, Patterns 🧩
 
 Samples should include examples and details of how to catch and handle common
 errors that are the result of improper interactions between the client and service.
@@ -955,6 +979,8 @@ try {
 
 ### Linting {#linting}
 
+**Applies to:** Snippets ✂︎, Patterns 🧩
+
 Our code snippets should adhere to a style used by the language communities.
 We prefer to enforce style using standard linters that are popular in
 the community.
@@ -988,6 +1014,8 @@ one notable exception:
 
 ### Portability {#portability}
 
+**Applies to:** Snippets ✂︎, Patterns 🧩
+
 Each of the major operating systems are well-represented among GCP users. To
 provide a good user experience, our code snippets need to work on multiple
 operating systems.
@@ -1019,11 +1047,14 @@ Examples of portable practices include:
 
 ### Coverage {#coverage}
 
+**Applies to:** Snippets ✂︎, Patterns 🧩
+
 Code snippets should have reasonable test coverage and all critical code paths
 should have integration tests that test against the production service.
 
 ### Dedicated testing per snippet {#dedicated-testing-per-sample}
-* **Applies to:** Snippets
+
+**Applies to:** Snippets ✂︎
 
 Each test case should cover a single snippet.
 
@@ -1036,7 +1067,7 @@ Multiple related snippets may be placed in a shared file with common setup and t
 
 ### Easy run function {#run-function}
 
-* **Applies to:** Snippets
+**Applies to:** Snippets ✂︎
 
 Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the
@@ -1084,7 +1115,7 @@ public static void exampleSnippet(String projectId, String filePath) {
 
 ### Easy run function
 
-* **Applies to:** Snippets
+**Applies to:** Snippets
 
 Samples with function parameters should show how to prepare parameter values
 and call the function. Do this from a `callSample()` function below the main
@@ -1127,7 +1158,7 @@ function callSample(): void
 
 ### Named entrypoint
 
-* **Applies to:** Snippets
+**Applies to:** Snippets ✂︎
 
 Each Ruby sample should include an entrypoint method with the same name as the
 sample file. (It may include helper methods if appropriate for readability.) The
@@ -1150,7 +1181,7 @@ end
 
 ### Testing practices
 
-* **Applies to:** Snippets
+**Applies to:** Snippets ✂︎
 
 Each Ruby sample should have its own separate test file. Sample tests should
 use the [Minitest][minitest] framework, and should be located in a file named
@@ -1194,6 +1225,8 @@ end
 {{< content-tab header="Terraform" >}}
 #### Don't use `null_resource`
 
+**Applies to:** Snippets ✂︎
+
 Do not include CLI commands (such as gcloud or kubectl) inside
 of your sample via the [`null_resource`](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) resource.
 
@@ -1201,6 +1234,8 @@ There are some products without Terraform support. Do not include
 those products in Terraform samples.
 
 #### No global variables
+
+**Applies to:** Snippets ✂︎
 
 Don't include global Terraform variables (`var.VARIABLE_NAME`).
 
@@ -1222,12 +1257,16 @@ part of the API exposed via Terraform. See [local variables](#locals).
 
 #### Local variables {#locals}
 
+**Applies to:** Snippets ✂︎
+
 Use local variables to reuse a common string 3 or more times that is not
 accessible as a resource reference.
 
 See [No Global Variables](#no-global-variables) for further explanation.
 
 #### Resource references
+
+**Applies to:** Snippets ✂︎, Patterns 🧩
 
 Instead of duplicating know values, refer to already-defined resources.
 
@@ -1244,6 +1283,8 @@ resource "google_compute_global_forwarding_rule" "default" {
 {{< /highlight >}}
 
 #### Terraform Google Provider version
+
+**Applies to:** Snippets ✂︎, Patterns 🧩
 
 When your sample contains a new resource, add the required minimum
 Terraform Google Provider version corresponding to which 
@@ -1268,6 +1309,8 @@ To determine when a resource was added, see the following pages:
 * https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md
 
 #### Provider argument
+
+**Applies to:** Snippets ✂︎, Patterns 🧩
 
 Add the provider argument if the resource is from provider google-beta.
    

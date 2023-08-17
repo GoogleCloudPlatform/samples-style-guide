@@ -933,8 +933,20 @@ We prefer to enforce style using standard linters that are popular in
 the community.
 
 {{< content-tabpane >}}
-{{< content-tab header="PHP" >}}
 
+{{< content-tab header="Node.js" >}}
+Follow the [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
+and the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+
+Tooling available at [google/gts](https://github.com/google/gts).
+{{< /content-tab >}}
+
+{{< content-tab header="Java" >}}
+Follow the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html).
+Tooling available at [google/google-java-format](https://github.com/google/google-java-format).
+{{< /content-tab >}}
+
+{{< content-tab header="PHP" >}}
 We follow the [PSR-1][psr-1] and [PSR-2][psr-2] community coding standards, with
 one notable exception:
 
@@ -943,8 +955,8 @@ one notable exception:
 
 [psr-1]: https://www.php-fig.org/psr/psr-1/
 [psr-2]: https://www.php-fig.org/psr/psr-2/#1-overview
-
 {{< /content-tab >}}
+
 {{< /content-tabpane >}}
 
 ### Portability {#portability}
@@ -982,6 +994,12 @@ Examples of portable practices include:
 
 Code snippets should have reasonable test coverage and all critical code paths
 should have integration tests that test against the production service.
+
+### Dedicated testing per sample {#dedicated-testing-per-sample}
+
+Each test case should cover a single sample.
+
+Multiple related samples may be placed in a shared file with common setup and teardown steps.
 
 ## Language-specific practices {#language-specific}
 

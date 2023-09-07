@@ -768,64 +768,25 @@ how to intialize a client with other than ADC.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
-// Most clients use ADC by default. However, if your application needs to showcase a specific
-// credential source, show users how to do that explicitly.
-GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
+Please refer to Java documentation on initializing clients with other than ADC credentials.
 {{< /tab >}}
 {{< tab header="Go" >}}
-// Most clients use ADC by default. However, if your application needs to
-// showcase a specific Go credential source, show users how to do that
-// explicitly.
-ctx := context.Background()
-foo.NewClient(ctx, option.WithCredentialsFile("/path/to/credentials.json"))
+Please refer to Go documentation on initializing clients with other than ADC credentials.
 {{< /tab >}}
 {{< tab header="Python" >}}
-# Most clients use ADC by default. However, if your application needs to
-# showcase a specific credential source, show users how to do that explicitly.
-from google.oauth2 import service_account
-
-credentials = service_account.Credentials.from_service_account_file(
-  "/path/to/credentials.json"
-)
+Please refer to Python documentation on initializing clients with other than ADC credentials.
 {{< /tab >}}
 {{< tab header="Node.js" >}}
-// Most clients use ADC by default. However, if your application needs to showcase a specific
-// credential source, show users how to do that explicitly.
-const keyFile = '/path/to/credentials.json';
-const auth = new GoogleAuth({
-  keyFile: keyFile,
-  scopes: 'https://www.googleapis.com/auth/cloud-platform',
-});
+Please refer to Node.js documentation on initializing clients with other than ADC credentials.
 {{< /tab >}}
 {{< tab header="C#" >}}
-// All clients use ADC by default. However, if your application needs to use specific
-// credentials, show users how to initialize a client with other than ADC.
-GoogleCredentials specificCredentials = // show how to obtain these
-var client = new ServiceClientBuilder
-{
-   GoogleCredentials = specificCredentials
-}.Build();
+Please refer to the [Specifying credentials](https://cloud.google.com/dotnet/docs/reference/help/client-configuration#specifying-credentials) documentation for .NET client libraries.
 {{< /tab >}}
 {{< tab header="Ruby" >}}
-require "google/cloud/spanner"
-
-# Most clients use ADC by default. However, if your application needs to showcase a specific
-# credential source, show users how to do that explicitly.
-Google::Cloud::Spanner.configure do |config|
-  config.project_id  = "my-project-id"
-  config.credentials = "path/to/keyfile.json"
-end
-
-client = Google::Cloud::Spanner.new
+Please refer to Ruby documentation on initializing clients with other than ADC credentials.
 {{< /tab >}}
 {{< tab header="PHP" >}}
-// Most clients use ADC by default. However, if your application needs to showcase a specific
-// credential source, show users how to do that explicitly.
-$config = [
-    'keyFilePath' => '/path/to/credentials.json',
-    'projectId' => $projectId,
-];
-$storage = new StorageClient($config);
+Please refer to PHP documentation on initializing clients with other than ADC credentials.
 {{< /tab >}}
 {{< /tabpane >}}
 

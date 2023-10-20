@@ -26,13 +26,13 @@ jobs:
     # If run from a fork, GitHub write operations will fail.
     # See https://github.com/GoogleCloudPlatform/samples-style-guide/issues/56
     if: ${{ !github.event.pull_request.head.repo.fork }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     concurrency:
       # Shared concurrency group wih preview staging.
       group: "preview-${{ github.event.number }}"
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: gh-pages
 

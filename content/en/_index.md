@@ -932,27 +932,33 @@ Our code snippets should adhere to a style used by the language communities.
 We prefer to enforce style using standard linters that are popular in
 the community.
 
-{{< content-tabpane >}}
-{{< content-tab header="Java" >}}
+{{< tabpane >}}
 
+{{% tab header="Node.js" text=true %}}
+Follow the [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
+and the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html).
+
+Tooling available at [google/gts](https://github.com/google/gts).
+{{% /tab %}}
+
+{{% tab header="Java" text=true %}}
 Follow the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html).
 Tooling available at [google/google-java-format](https://github.com/google/google-java-format).
+{{% /tab %}}
 
-{{< /content-tab >}}
-
-{{< content-tab header="Go" >}}
+{{% tab header="Go" text=true %}}
 Follow the [Google Go Style Guide](https://google.github.io/styleguide/go/) and [Effective Go](https://go.dev/doc/effective_go).
 
 The official linters for go are [gofmt](https://pkg.go.dev/cmd/gofmt), [go vet](https://pkg.go.dev/cmd/vet), and [go lint](https://github.com/golang/lint).
-{{< /content-tab >}}
+{{% /tab %}}
 
-{{< content-tab header="Python" >}}
+{{% tab header="Python" text=true %}}
 All Python samples should follow the best practices defined in the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide and the [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html).
 
 The automated linting process for Python samples uses [flake8](http://flake8.pycqa.org/en/latest/).
-{{< /content-tab >}}
+{{% /tab %}}
 
-{{< content-tab header="PHP" >}}
+{{% tab header="PHP" text=true %}}
 
 We follow the [PSR-1][psr-1] and [PSR-2][psr-2] community coding standards, with
 one notable exception:
@@ -962,9 +968,9 @@ one notable exception:
 
 [psr-1]: https://www.php-fig.org/psr/psr-1/
 [psr-2]: https://www.php-fig.org/psr/psr-2/#1-overview
+{{% /tab %}}
 
-{{< /content-tab >}}
-{{< /content-tabpane >}}
+{{< /tabpane >}}
 
 ### Portability {#portability}
 
@@ -1010,8 +1016,8 @@ Multiple related samples may be placed in a shared file with common setup and te
 
 ## Language-specific practices {#language-specific}
 
-{{< content-tabpane >}}
-{{< content-tab header="Java" >}}
+{{< tabpane >}}
+{{% tab header="Java" text=true %}}
 
 ### Easy run function {#run-function}
 
@@ -1039,25 +1045,25 @@ public static void exampleSnippet(String projectId, String filePath) {
 // [END product_example]
 {{< / highlight >}}
 
-{{< /content-tab >}}
+{{% /tab %}}
 
-{{< content-tab header="Python" >}}
+{{% tab header="Python" text=true %}}
 // TODO
-{{< /content-tab >}}
+{{< /tab >}}
 
-{{< content-tab header="Go" >}}
+{{% tab header="Go" text=true %}}
 // TODO
-{{< /content-tab >}}
+{{% /tab %}}
 
-{{< content-tab header="Nodejs" >}}
+{{% tab header="Nodejs" text=true %}}
 // TODO
-{{< /content-tab >}}
+{{% /tab %}}
 
-{{< content-tab header="C#" >}}
+{{% tab header="C#" text=true %}}
 // TODO
-{{< /content-tab >}}
+{{% /tab %}}
 
-{{< content-tab header="PHP" >}}
+{{% tab header="PHP" text=true %}}
 
 ### Easy run function
 
@@ -1096,9 +1102,9 @@ function callSample(): void
 // [END product_example]
 {{< / highlight >}}
 
-{{< /content-tab >}}
+{{% /tab %}}
 
-{{< content-tab header="Ruby" >}}
+{{% tab header="Ruby" text=true %}}
 
 ### Named entrypoint
 
@@ -1160,9 +1166,9 @@ end
 
 [minitest]: https://github.com/minitest/minitest
 
-{{< /content-tab >}}
+{{< /tab >}}
 
-{{< content-tab header="Terraform" >}}
+{{% tab header="Terraform" text=true %}}
 #### Don't use `null_resource`
 
 Do not include CLI commands (such as gcloud or kubectl) inside
@@ -1252,6 +1258,6 @@ resource "google_<resource_name>" "default" {
 
 Fields and resources that are only present in google-beta are clearly marked in
 the provider documentation.
-{{< /content-tab >}}
+{{% /tab %}}
 
-{{< /content-tabpane >}}
+{{< /tabpane >}}

@@ -90,7 +90,7 @@ Region tags and the scope of code they contain are a documentation dependency.
 
 ### Imports {#imports}
 
-**Applies to:** ✂︎ Snippets
+**Applies to:** ✂︎ Snippets, 🧩 Patterns (best effort)
 
 Samples should include any import statements that the code depends on.
 
@@ -683,6 +683,8 @@ from the purpose of the snippet.
 Use features that work in all Google Cloud-supported versions of a 
 language. Use language idioms that the community understands.
 
+Exceptions to this should be capturing in code comments.
+
 ### Useful comments {#comments}
 
 **Applies to:** ✂︎ Snippets, 🧩 Patterns
@@ -1037,6 +1039,8 @@ Examples of portable practices include:
 * Do not directly rely on POSIX system calls
 * Handle case-sensitivity differences
 * Avoid platform-specific APIs
+
+Exceptions to this are for samples illustrating platform-specific functionality.
 
 [gae]: https://cloud.google.com/appengine
 [gcf]: https://cloud.google.com/functions

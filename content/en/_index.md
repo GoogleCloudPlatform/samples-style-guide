@@ -939,13 +939,15 @@ Follow the [Google Java Style Guide](https://google.github.io/styleguide/javagui
 Tooling available at [google/google-java-format](https://github.com/google/google-java-format).
 
 {{< /content-tab >}}
-   
+
 {{< content-tab header="Go" >}}
-Follow the [Google Go Style Guide](https://google.github.io/styleguide/go/)
+Follow the [Google Go Style Guide](https://google.github.io/styleguide/go/) and [Effective Go](https://go.dev/doc/effective_go).
+
+The official linters for go are [gofmt](https://pkg.go.dev/cmd/gofmt), [go vet](https://pkg.go.dev/cmd/vet), and [go lint](https://github.com/golang/lint).
 {{< /content-tab >}}
 
 {{< content-tab header="Python" >}}
-Follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide).
+Follow the guidance as per the Python style guide on linting https://google.github.io/styleguide/pyguide#21-lint with the recommended lint configuration https://google.github.io/styleguide/pylintrc.
 {{< /content-tab >}}
 
 {{< content-tab header="PHP" >}}

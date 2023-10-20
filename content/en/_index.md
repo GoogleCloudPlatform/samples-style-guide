@@ -947,7 +947,9 @@ The official linters for go are [gofmt](https://pkg.go.dev/cmd/gofmt), [go vet](
 {{< /content-tab >}}
 
 {{< content-tab header="Python" >}}
-Follow the guidance as per the Python style guide on linting https://google.github.io/styleguide/pyguide#21-lint with the recommended lint configuration https://google.github.io/styleguide/pylintrc.
+All Python samples should follow the best practices defined in the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide and the [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html).
+
+The automated linting process for Python samples uses [flake8](http://flake8.pycqa.org/en/latest/).
 {{< /content-tab >}}
 
 {{< content-tab header="PHP" >}}

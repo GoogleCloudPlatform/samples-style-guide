@@ -953,7 +953,7 @@ The official linters for go are [gofmt](https://pkg.go.dev/cmd/gofmt), [go vet](
 {{% /tab %}}
 
 {{% tab header="Python" text=true %}}
-All Python samples should follow the best practices defined in the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide and the [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html).
+All Python samples should follow the best practices defined in the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide.
 
 The automated linting process for Python samples uses [flake8](http://flake8.pycqa.org/en/latest/).
 {{% /tab %}}

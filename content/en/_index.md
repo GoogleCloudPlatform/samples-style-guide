@@ -650,82 +650,6 @@ Comments should be used as needed with the following guidelines:
 * For values that the user may wish to configure, provide links to
   documentation that lists available options (and when to use them).
 
-### Authentication {#authentication}
-
-Samples should always authenticate using [Application Default Credentials][ADC].
-Most clients do this automatically, and no special steps are required.
-
-If the code snippet is platform specific, explicitly show how to use that
-platform's credentials.
-
-[ADC]:https://cloud.google.com/docs/authentication/production#automatically
-
-{{< tabpane langEqualsHeader=true >}}
-{{< tab header="Java" >}}
-// Most clients use ADC by default. However, if your application needs to showcase a specific
-// credential source, show users how to do that explicitly.
-GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("/path/to/credentials.json"));
-{{< /tab >}}
-{{< tab header="Go" >}}
-// Most clients use ADC by default. However, if your application needs to
-// showcase a specific Go credential source, show users how to do that
-// explicitly.
-ctx := context.Background()
-foo.NewClient(ctx, option.WithCredentialsFile("/path/to/credentials.json"))
-{{< /tab >}}
-{{< tab header="Python" >}}
-# Most clients use ADC by default. However, if your application needs to
-# showcase a specific credential source, show users how to do that explicitly.
-from google.oauth2 import service_account
-
-credentials = service_account.Credentials.from_service_account_file(
-  "/path/to/credentials.json"
-)
-{{< /tab >}}
-{{< tab header="Node.js" >}}
-// Most clients use ADC by default. However, if your application needs to showcase a specific
-// credential source, show users how to do that explicitly.
-const keyFile = '/path/to/credentials.json';
-const auth = new GoogleAuth({
-  keyFile: keyFile,
-  scopes: 'https://www.googleapis.com/auth/cloud-platform',
-});
-{{< /tab >}}
-{{< tab header="C#" >}}
-// All clients use ADC by default. However, if your application needs to showcase a specific
-// credential source, show users how to do that explicitly.
-var credentials = GoogleCredential.FromFile("/path/to/credentials.json");
-{{< /tab >}}
-{{< tab header="Ruby" >}}
-require "google/cloud/spanner"
-
-# Most clients use ADC by default. However, if your application needs to showcase a specific
-# credential source, show users how to do that explicitly.
-Google::Cloud::Spanner.configure do |config|
-  config.project_id  = "my-project-id"
-  config.credentials = "path/to/keyfile.json"
-end
-
-client = Google::Cloud::Spanner.new
-{{< /tab >}}
-{{< tab header="PHP" >}}
-// Most clients use ADC by default. However, if your application needs to showcase a specific
-// credential source, show users how to do that explicitly.
-$config = [
-    'keyFilePath' => '/path/to/credentials.json',
-    'projectId' => $projectId,
-];
-$storage = new StorageClient($config);
-{{< /tab >}}
-{{< tab header="Terraform" >}}
-# Use application default credentials when running locally.
-# When developers are locally iterating on Terraform configuration,
-# they should authenticate by running `gcloud auth application-default login`
-# to generate application default credentials. Don't download service account keys,
-# because downloaded keys are harder to manage and secure.
-{{< /tab >}}
- {{< /tabpane >}}
-
 ### Initializing Clients {#clients}
 
 Code snippets should show users how to initialize (and clean up, if necessary)
@@ -786,14 +710,14 @@ const dlpClientInstance = new DlpServiceClient();
 // Initialize the client that will be used to send requests. This client only needs to be created
 // once, and can be reused for multiple requests across your entire application.
 
-var client = Server.CreateClient();
+var client = ServiceClient.CreateClient();
 // make a request with the client.
 
 // If for any reason the client lifetime needs to be scoped to a single method,
 // you can use a "using" statement or a "using" declaration.
 
 // Example "using" statement.
-using (var client = Server.CreateClient())
+using (var client = ServiceClient.CreateClient())
 {
     // make a request with the client.
 }
@@ -802,7 +726,7 @@ using (var client = Server.CreateClient())
 // when execution falls outside the enclosing statement block.
 public void ExampleMethod()
 {
-    using var client = Server.CreateClient();
+    using var client = ServiceClient.CreateClient();
     // make a request with the client.
 }
 {{< /tab >}}
@@ -824,6 +748,41 @@ $dlp = new DlpServiceClient();
 {{< /tab >}}
 {{< tab header="Terraform" >}}
 # N/A
+{{< /tab >}}
+{{< /tabpane >}}
+
+#### Authentication {#authentication}
+
+Samples should always authenticate using [Application Default Credentials][ADC].
+Most clients do this automatically, and no special steps are required.
+
+If, for whatever reason, the code snippet requires specific credentials,
+then, apart from showing how to obtain such credentials, it should show
+how to intialize a client with other than ADC.
+
+[ADC]:https://cloud.google.com/docs/authentication/external/about-adc
+
+{{< tabpane langEqualsHeader=true >}}
+{{< tab header="Java" >}}
+Please refer to Java documentation on initializing clients with other than ADC credentials.
+{{< /tab >}}
+{{< tab header="Go" >}}
+Please refer to Go documentation on initializing clients with other than ADC credentials.
+{{< /tab >}}
+{{< tab header="Python" >}}
+Please refer to Python documentation on initializing clients with other than ADC credentials.
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+Please refer to Node.js documentation on initializing clients with other than ADC credentials.
+{{< /tab >}}
+{{< tab header="C#" >}}
+Please refer to the [Specifying credentials](https://cloud.google.com/dotnet/docs/reference/help/client-configuration#specifying-credentials) documentation for .NET client libraries.
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+Please refer to Ruby documentation on initializing clients with other than ADC credentials.
+{{< /tab >}}
+{{< tab header="PHP" >}}
+Please refer to PHP documentation on initializing clients with other than ADC credentials.
 {{< /tab >}}
 {{< /tabpane >}}
 

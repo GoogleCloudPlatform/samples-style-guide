@@ -905,7 +905,20 @@ Follow the [Google Java Style Guide](https://google.github.io/styleguide/javagui
 Tooling available at [google/google-java-format](https://github.com/google/google-java-format).
 {{% /tab %}}
 
+{{% tab header="Go" text=true %}}
+Follow the [Google Go Style Guide](https://google.github.io/styleguide/go/) and [Effective Go](https://go.dev/doc/effective_go).
+
+The official linters for go are [gofmt](https://pkg.go.dev/cmd/gofmt), [go vet](https://pkg.go.dev/cmd/vet), and [go lint](https://github.com/golang/lint).
+{{% /tab %}}
+
+{{% tab header="Python" text=true %}}
+All Python samples should follow the best practices defined in the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide.
+
+The automated linting process for Python samples uses [flake8](http://flake8.pycqa.org/en/latest/).
+{{% /tab %}}
+
 {{% tab header="PHP" text=true %}}
+
 We follow the [PSR-1][psr-1] and [PSR-2][psr-2] community coding standards, with
 one notable exception:
 

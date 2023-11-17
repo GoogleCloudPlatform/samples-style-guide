@@ -23,9 +23,6 @@
 - name: 'type: cleanup'
   color: c5def5
   description: An internal cleanup or hygiene concern.
-- name: 'type: docs'
-  color: 0000A0
-  description: Improvement to the documentation for an API.
 - name: 'type: feature request'
   color: c5def5
   description: ‘Nice-to-have’ improvement, new feature or different behavior or design.

@@ -31,6 +31,10 @@ jobs:
       # Shared concurrency group wih preview staging.
       group: "preview-${{ github.event.number }}"
       cancel-in-progress: true
+    permissions:
+      checks: write
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:

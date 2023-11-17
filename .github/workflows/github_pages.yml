@@ -33,6 +33,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
@@ -67,7 +69,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
           publish_dir: ./public
           # Do not delete previews on each production deploy.
           # CSS or JS changes will require manual clean-up.

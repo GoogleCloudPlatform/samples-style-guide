@@ -33,5 +33,7 @@ jobs:
   # https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write  # limit permissions to writing PR checks
     steps:
       - run: 'echo "No build required"'

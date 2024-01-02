@@ -68,13 +68,17 @@
 - name: 'good first issue'
   color: 520b77
   description: 'This issue is a good place to started contributing to this repository.'
-  
+
+# Release Process
 - name: 'autorelease: pending'
   color: ededed
   description: Release please needs to do its work on this.
 - name: 'autorelease: tagged'
   color: ededed
   description: Release please has completed a release for this.
+- name: 'release-please:force-run'
+  color: ededed
+  description: Run or re-run release-please.
 
 # Proposal Workflow
 - name: 'guideline: request'

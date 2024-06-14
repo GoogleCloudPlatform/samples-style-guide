@@ -269,16 +269,19 @@ resource "google_project_iam_policy" "project" {
 
 ### Process the result {#result}
 
-Methods should avoid a return type whenever possible. Instead, show the user how
-to interact with a returned object programmatically by printing example
-attributes to the console. Tests should use the output of the function to ensure
-that it works.
+Depending upon the language, methods either return objects or print the value
+to the console. Refer to the specific language for information.
+If returning an object from a method, use it in the testcases to assert the
+result. Else, if printing to the console, tests should use the output of the 
+function to ensure that it works.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
 // This is an example snippet for showing best practices.
-public static void exampleSnippet(String projectId, StringfilePath) {
+public static Object exampleSnippet(String projectId, StringfilePath) {
     // Snippet content ...
+    System.out.println(some_result);
+    return some_result;
 }
 {{< /tab >}}
 {{< tab header="Go" >}}
@@ -358,15 +361,25 @@ approachable to beginners:
 2. **Act** - Send the request to the service and receive a response.
 3. **Assert** - Verify that the call was successful and that the expected
  response was returned. This is typically done by [printing some of the
- response to stdout](#result).
+ response to stdout](#result) or retuning the response.
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
+public static void main(String[] args) {
+   List<InfoTypeDescription> infoTypeList = listInfoTypes();
+   
+   // Parse the response and process the results
+   System.out.println("Info types found:");
+   for (InfoTypeDescription infoTypeDescription : infoTypeList) {
+      System.out.println("Name : " + infoTypeDescription.getName());
+      System.out.println("Display name : " + infoTypeDescription.getDisplayName());
+   }
+}
+
 // Lists the types of sensitive information the DLP API supports.
-public static void listInfoTypes() throws IOException {
-  // Initialize client that will be used to send requests. This client only needs to be created
-  // once, and can be reused for multiple requests. After completing all of your requests, call
-  // the "close" method on the client to safely clean up any remaining background resources.
+public static List<InfoTypeDescription> listInfoTypes() throws IOException {
+  // Initialize client that will be used to send requests. This client is 
+  // created once, and reused for multiple requests.
   try (DlpServiceClient dlpClient = DlpServiceClient.create()) {
 
     // Construct the request to be sent by the client
@@ -383,13 +396,9 @@ public static void listInfoTypes() throws IOException {
 
     // Use the client to send the API request.
     ListInfoTypesResponse response = dlpClient.listInfoTypes(listInfoTypesRequest);
-
-    // Parse the response and process the results
-    System.out.println("Info types found:");
-    for (InfoTypeDescription infoTypeDescription : response.getInfoTypesList()) {
-      System.out.println("Name : " + infoTypeDescription.getName());
-      System.out.println("Display name : " + infoTypeDescription.getDisplayName());
-    }
+    
+    // Return the response.
+    return response.getInfoTypesList();
   }
 }
 {{< /tab >}}
@@ -659,10 +668,8 @@ requests or if they are thread-safe).
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Java" >}}
-// Initialize client that will be used to send requests. This client only needs to be created
-// once, and can be reused for multiple requests. After completing all of your requests, call
-// the "close" method on the client to safely clean up any remaining background resources,
-// or use "try-with-close" statement to do this automatically.
+// Initialize client that will be used to send requests. This client is created 
+// once, and reused for multiple requests.
 try (CloudClient dlp = CloudClient.create()) {
   // make a request with the client
 }
@@ -810,8 +817,9 @@ developer should do.
 // Always catch the most specific type of Exception, instead of a more general one.
 try {
   // Do something
-} catch (IllegalArgumentException ok) {
-  // IllegalArgumentException's are thrown when an invalid argument has been passed to a function. Ok to ignore.
+} catch (APISpecificException ok) {
+  // Catch the exception if they are API specific, and show how to handle them.
+  // If it's a general Java exception, throw it.
 }
 {{< /tab >}}
 {{< tab header="Go" >}}
@@ -994,12 +1002,14 @@ public static void main(String[] args) {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "my-project-id";
     String filePath = "path/to/image.png";
-    exampleSnippet(projectId, filePath);
+    Object some_result = exampleSnippet(projectId, filePath);
+    System.out.println(some_result);
 }
 
 // This is an example snippet for showing best practices.
-public static void exampleSnippet(String projectId, String filePath) {
+public static Object exampleSnippet(String projectId, String filePath) {
     // Snippet content ...
+    return some_result;
 }
 // [END product_example]
 {{< / highlight >}}

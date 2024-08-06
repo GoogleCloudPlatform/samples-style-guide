@@ -5,7 +5,7 @@
   "private": "true",
   "dependencies": {
     "autoprefixer": "10.4.16",
-    "postcss": "8.4.38",
+    "postcss": "8.4.41",
     "postcss-cli": "11.0.0"
   },
   "scripts": {

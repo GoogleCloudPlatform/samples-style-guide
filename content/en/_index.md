@@ -1017,19 +1017,19 @@ public static Object exampleSnippet(String projectId, String filePath) {
 {{% /tab %}}
 
 {{% tab header="Python" text=true %}}
-// TODO
+// There are no language-specific guidelines for Python.
 {{< /tab >}}
 
 {{% tab header="Go" text=true %}}
-// TODO
+// There are no language-specific guidelines for Go.
 {{% /tab %}}
 
 {{% tab header="Nodejs" text=true %}}
-// TODO
+// There are no language-specific guidelines for Node.js.
 {{% /tab %}}
 
 {{% tab header="C#" text=true %}}
-// TODO
+// There are no language-specific guidelines for C#.
 {{% /tab %}}
 
 {{% tab header="PHP" text=true %}}

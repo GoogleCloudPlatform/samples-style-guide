@@ -39,7 +39,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: recursive # Fetch the Docsy theme
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo

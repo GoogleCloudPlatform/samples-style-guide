@@ -20,10 +20,10 @@ path.
     npm install
     ```
 
-4. Install the site theme as git submodules:
+4. Install the hugo dependencies:
 
     ```sh
-    git submodule update --init --recursive
+    hugo TODO
     ```
 
 5. Run the local development server with the hugo CLI from the repository's root directory:

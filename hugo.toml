@@ -1,10 +1,11 @@
 baseURL = 'https://googlecloudplatform.github.io/samples-style-guide/'
 title = 'Samples Style Guide | Google Cloud'
-theme = ["docsy"]
+
 languageCode = 'en-us'
 enableGitInfo = true
 enableRobotsTXT = true
 googleAnalytics = 'G-WJFDXY846K'
+
 
 [Params]
   copyright = 'Google LLC'
@@ -20,6 +21,9 @@ googleAnalytics = 'G-WJFDXY846K'
 [[module.mounts]]
   source = 'content/en'
   target = 'content'
+
+[[module.imports]]
+path = "github.com/google/docsy"
 
 [markup]
   [markup.goldmark]

@@ -7,7 +7,8 @@ weight: 20
 
 ## Introduction {#introduction}
 
-This document defines samples standards for "standalone" code snippets.
+This document defines samples standards for the code samples of Google Cloud.
+
 It encourages recommended practices for authoring code intended to teach others.
 By consistently applying these practices, the collection of samples as a whole
 becomes more approachable.
@@ -40,29 +41,56 @@ These principles apply in descending order of priority:
 6. **Maintainability**: The code is written such that it can be easily
    maintained
 
-Code snippets should use preferred code patterns that are idiomatic to the
+{{% alert title="Considering idiomatic code vs. consistent samples across languages" %}}
+Code samples should use preferred code patterns that are idiomatic to the
 particular language (e.g., promises, futures, static API calls from singletons,
-builders, etc). This may result in code snippets that are radically different
+builders). This may result in samples that are radically different
 from language-to-language. Err on the side of what is idiomatic to the language,
 though cross-language consistency does not hurt. Generally, do things
 "the way the community does it."
+{{% /alert %}}
 
-## Structure {#structure}
+### Sample Categories
+
+There are two categories of samples covered in this guide:
+
+* **✂︎ Snippets:** A snippet is a standalone slice of code that demonstrates
+  a specific Cloud operation.
+* **🧩 Patterns:** A pattern demonstrates a use case through multiple slices of
+  code, such as a sample application. Individual slices should follow
+  [snippet structure guidelines](#structure) where it improves code clarity.
+
+## Metadata {#metadata}
 
 ### Region tags {#region-tags}
 
-Each code snippet should have a region tag to define which parts of the snippet
-are displayed from the documentation. Each region tag should:
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
+
+Region tags define a slice of code as a snippet and which parts of the code are
+displayed from the documentation.
+
+#### Each region identifier
 
 * Be globally unique
 * Be consistent across the same snippets in different languages
 * Begin with the product's region tag prefix
 * Use snake case (`snake_case`)
 
-Region tags should show as much of the sample as possible, so that a user can
+#### When to use region tags
+
+* **✂︎ Snippets:** Region tags should contain as much of the sample as possible, so that a user can
 easily copy and paste the sample into their own environment to run it.
+* **🧩 Patterns:** Region tags should contain those slices of code that are shown in documentation.
+
+#### Changing region tags
+
+Region tags and the scope of code they contain are a documentation dependency.
+
+## Snippet Structure {#structure}
 
 ### Imports {#imports}
+
+**Applies to:** ✂︎ Snippets, 🧩 Patterns (best effort)
 
 Samples should include any import statements that the code depends on.
 
@@ -76,7 +104,7 @@ the [one sample per file](#one-per-file) guideline.
 {{< tab header="Python" >}}
 {{% include "examples/python/imports.py" %}}
 {{< /tab >}}
-{{<tab header="Go">}}
+{{< tab header="Go" >}}
 {{% include "examples/go/imports.go" %}}
 {{< /tab >}}
 {{< tab header="Node.js" >}}
@@ -97,16 +125,20 @@ the [one sample per file](#one-per-file) guideline.
 {{< /tab >}}
 {{< /tabpane >}}
 
-### One sample per file {#one-per-file}
+### One snippet per file {#one-per-file}
 
-A single file should only include one sample. This keeps the end-to-end
+**Applies to:** ✂︎ Snippets
+
+A single file should only include one snippet. This keeps the end-to-end
 code relevant to the reader's current learning need.
 
 For languages that have import statements, this shows the minimal
 set of dependencies via import statements and helps reviewers validate the
 [imports](#imports) guideline.
 
-### Sample description {#description}
+### Snippet description {#description}
+
+**Applies to:** ✂︎ Snippets
 
 Each code snippet file should have a top-level comment that succinctly describes
 what the snippet does, including any setup (such as resources) required to make
@@ -167,6 +199,8 @@ before running the code snippet.
 {{< /tabpane >}}
 
 ### Minimal arguments {#minimal-arguments}
+
+**Applies to:** ✂︎ Snippets
 
 Arguments should be limited to requirements for testing. In some cases, this
 is project-specific information (`projectID`) or the path to an external file (`filePath`).
@@ -269,6 +303,8 @@ resource "google_project_iam_policy" "project" {
 
 ### Process the result {#result}
 
+**Applies to:** ✂︎ Snippets
+
 Methods should avoid a return type whenever possible. Instead, show the user how
 to interact with a returned object programmatically by printing example
 attributes to the console. Tests should use the output of the function to ensure
@@ -350,6 +386,8 @@ output "certificate_map" {
 {{< /tabpane >}}
 
 ### Arrange, Act, Assert {#pattern}
+
+**Applies to:** ✂︎ Snippets
 
 Most samples should follow the "Arrange, Act, Assert" pattern as closely as
 possible. Composing samples into these discrete steps makes them more
@@ -630,6 +668,8 @@ output "project_id" {
 
 ### No CLIs {#no-cli}
 
+**Applies to:** ✂︎ Snippets
+
 Do not include CLIs for running your sample. We expect developers
 to copy and paste code directly from cloud.google.com into their
 own environment.
@@ -641,10 +681,16 @@ from the purpose of the snippet.
 
 ### Language compatibility {#lang-compat}
 
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
+
 Use features that work in all Google Cloud-supported versions of a 
 language. Use language idioms that the community understands.
 
+Exceptions to this should be capturing in code comments.
+
 ### Useful comments {#comments}
+
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
 
 Comments should be used as needed with the following guidelines:
 
@@ -654,6 +700,8 @@ Comments should be used as needed with the following guidelines:
   documentation that lists available options (and when to use them).
 
 ### Initializing Clients {#clients}
+
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
 
 Code snippets should show users how to initialize (and clean up, if necessary)
 clients used by the user. Additionally, clients should contain a comment
@@ -791,6 +839,8 @@ Please refer to PHP documentation on initializing clients with other than ADC cr
 
 ### Cyclomatic Complexity {#complexity}
 
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
+
 Cyclomatic complexity is the measure of possible code paths. The more code
 paths, the more complex the code snippet, and the harder to understand and test.
 Flow control statements like conditionals (if/else), switches, and loops are
@@ -799,7 +849,12 @@ examples of code that increases cyclomatic complexity.
 Code snippets should have a single path demonstrating their purpose with no
 extra code.
 
+Patterns should minimize cyclomatic complexity in implementing
+[clear and simple](#principles) code.
+
 ### Error Handling {#errors}
+
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
 
 Samples should include examples and details of how to catch and handle common
 errors that are the result of improper interactions between the client and service.
@@ -890,6 +945,8 @@ try {
 
 ### Linting {#linting}
 
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
+
 Our code snippets should adhere to a style used by the language communities.
 We prefer to enforce style using standard linters that are popular in
 the community.
@@ -936,6 +993,8 @@ one notable exception:
 
 ### Portability {#portability}
 
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
+
 Each of the major operating systems are well-represented among GCP users. To
 provide a good user experience, our code snippets need to work on multiple
 operating systems.
@@ -956,6 +1015,8 @@ Examples of portable practices include:
 * Handle case-sensitivity differences
 * Avoid platform-specific APIs
 
+Exceptions to this are for samples illustrating platform-specific functionality.
+
 [gae]: https://cloud.google.com/appengine
 [gcf]: https://cloud.google.com/functions
 [run]: https://cloud.google.com/run
@@ -967,14 +1028,18 @@ Examples of portable practices include:
 
 ### Coverage {#coverage}
 
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
+
 Code snippets should have reasonable test coverage and all critical code paths
 should have integration tests that test against the production service.
 
-### Dedicated testing per sample {#dedicated-testing-per-sample}
+### Dedicated testing per snippet {#dedicated-testing-per-sample}
 
-Each test case should cover a single sample.
+**Applies to:** ✂︎ Snippets
 
-Multiple related samples may be placed in a shared file with common setup and teardown steps.
+Each test case should cover a single snippet.
+
+Multiple related snippets may be placed in a shared file with common setup and teardown steps.
 
 ## Language-specific practices {#language-specific}
 
@@ -982,6 +1047,8 @@ Multiple related samples may be placed in a shared file with common setup and te
 {{% tab header="Java" text=true %}}
 
 ### Easy run function {#run-function}
+
+**Applies to:** ✂︎ Snippets
 
 Any declared function arguments should include a no-arg, main method with
 examples for how the user can initialize the method arguments and call the
@@ -1029,6 +1096,8 @@ public static void exampleSnippet(String projectId, String filePath) {
 
 ### Easy run function
 
+**Applies to:** Snippets
+
 Samples with function parameters should show how to prepare parameter values
 and call the function. Do this from a `callSample()` function below the main
 sample code. Do not include significant logic in the `callSample()` function,
@@ -1070,6 +1139,8 @@ function callSample(): void
 
 ### Named entrypoint
 
+**Applies to:** ✂︎ Snippets
+
 Each Ruby sample should include an entrypoint method with the same name as the
 sample file. (It may include helper methods if appropriate for readability.) The
 entrypoint method should appear at the top level of the file rather than within
@@ -1090,6 +1161,8 @@ end
 {{< /highlight >}}
 
 ### Testing practices
+
+**Applies to:** ✂︎ Snippets
 
 Each Ruby sample should have its own separate test file. Sample tests should
 use the [Minitest][minitest] framework, and should be located in a file named
@@ -1133,6 +1206,8 @@ end
 {{% tab header="Terraform" text=true %}}
 #### Don't use `null_resource`
 
+**Applies to:** ✂︎ Snippets
+
 Do not include CLI commands (such as gcloud or kubectl) inside
 of your sample via the [`null_resource`](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) resource.
 
@@ -1140,6 +1215,8 @@ There are some products without Terraform support. Do not include
 those products in Terraform samples.
 
 #### No global variables
+
+**Applies to:** ✂︎ Snippets
 
 Don't include global Terraform variables (`var.VARIABLE_NAME`).
 
@@ -1161,12 +1238,16 @@ part of the API exposed via Terraform. See [local variables](#locals).
 
 #### Local variables {#locals}
 
+**Applies to:** ✂︎ Snippets
+
 Use local variables to reuse a common string 3 or more times that is not
 accessible as a resource reference.
 
 See [No Global Variables](#no-global-variables) for further explanation.
 
 #### Resource references
+
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
 
 Instead of duplicating know values, refer to already-defined resources.
 
@@ -1183,6 +1264,8 @@ resource "google_compute_global_forwarding_rule" "default" {
 {{< /highlight >}}
 
 #### Terraform Google Provider version
+
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
 
 When your sample contains a new resource, add the required minimum
 Terraform Google Provider version corresponding to which 
@@ -1207,6 +1290,8 @@ To determine when a resource was added, see the following pages:
 * https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md
 
 #### Provider argument
+
+**Applies to:** ✂︎ Snippets, 🧩 Patterns
 
 Add the provider argument if the resource is from provider google-beta.
    

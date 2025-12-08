@@ -279,6 +279,7 @@ that it works.
 // This is an example snippet for showing best practices.
 public static void exampleSnippet(String projectId, StringfilePath) {
     // Snippet content ...
+    System.out.printf("Response: %s%n", response);
 }
 {{< /tab >}}
 {{< tab header="Go" >}}
@@ -295,11 +296,13 @@ func exampleSnippet(w io.Writer, projectID, filePath string) error {
 # This is an example snippet for showing best practices.
 def example_snippet(project_id: str, file_path: str) -> None:
     # Snippet content ...
+    response = client.example_action(example_action_request)
+    print(f"Got the following response {response}")
 {{< /tab >}}
 {{< tab header="Node.js" >}}
 const exampleSnippet = function(projectId, filePath) {
   // Snippet content ...
-  // (This snippet should not `return` anything.)
+  console.info(`Got the following response ${response}`);
 }
 {{< /tab >}}
 {{< tab header="Ruby" >}}

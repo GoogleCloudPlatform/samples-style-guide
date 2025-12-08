@@ -5,3 +5,4 @@ node_modules
 # hugo
 public/
 .hugo_build.lock
+resources/

@@ -97,6 +97,39 @@ the [one sample per file](#one-per-file) guideline.
 {{< /tab >}}
 {{< /tabpane >}}
 
+### Client Initialization {#client-initialization}
+
+Samples must initialize a client object to interact with the API.
+
+* Authentication: The client must use Application Default Credentials (ADC) unless the sample specifically demonstrates a different authentication mechanism.
+* Reuse: The client object should be reusable where idiomatic, allowing the client library to optimize performance for repeated API calls.
+
+{{< tabpane langEqualsHeader=true >}}
+{{< tab header="Java" >}}
+{{< /tab >}}
+{{< tab header="Python" >}}
+Initialize the client inline within the sample function (JIT initialization). This creates the client within the scope of the operation.
+
+Use **direct instantiation** (for example, client = SecretManagerServiceClient()) rather than **context managers** (with ... as client) for standard RPC samples.
+{{< /tab >}}
+{{<tab header="Go">}}
+Initialize the client inline within the sample function (JIT initialization). This creates the client within the scope of the operation. 
+{{< /tab >}}
+{{< tab header="Node.js" >}}
+Initialize the client in the global scope, immediately after the imports and before the sample function definition. This promotes reuse patterns consistent with the language runtime.
+{{< /tab >}}
+{{< tab header="C#" >}}
+{{< /tab >}}
+{{< tab header="Ruby" >}}
+{{< /tab >}}
+{{< tab header="PHP" >}}
+{{< /tab >}}
+
+{{< tab header="Terraform" >}}
+# N/A
+{{< /tab >}}
+{{< /tabpane >}}
+
 ### One sample per file {#one-per-file}
 
 A single file should only include one sample. This keeps the end-to-end
